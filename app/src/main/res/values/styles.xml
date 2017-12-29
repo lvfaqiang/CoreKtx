@@ -1,0 +1,65 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!--启动页主题样式，解决启动白屏效果-->
+    <style name="StartTheme" parent="AppTheme">
+        <item name="android:windowBackground">@color/red</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <!--主界面 选项卡 样式-->
+    <style name="main_tab_text">
+        <item name="android:textSize">@dimen/sp_12</item>
+        <item name="android:textColor">@color/color_main_tab_text</item>
+        <item name="android:drawablePadding">@dimen/dp_3</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <!--主界面 选项卡 单元样式-->
+    <style name="main_tab_frame">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <!--未读消息数量公共样式-->
+    <style name="unread_msg_style">
+        <item name="android:background">@drawable/img_unread_count_bg</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/sp_11</item>
+    </style>
+
+    <!--主界面 选项卡 未读消息样式-->
+    <style name="main_tab_unread_msg_style" parent="unread_msg_style">
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_marginLeft">@dimen/dp_10</item>
+        <item name="android:layout_marginTop">@dimen/dp_3</item>
+    </style>
+
+    <!--水平线-->
+    <style name="line_hor_ee">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/px_1</item>
+        <item name="android:background">@color/color_ee</item>
+    </style>
+
+    <!--垂直线-->
+    <style name="line_ver_ee">
+        <item name="android:layout_width">@dimen/px_1</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/color_ee</item>
+    </style>
+
+</resources>

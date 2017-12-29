@@ -1,0 +1,126 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt' // kapt 插件
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+    defaultConfig {
+        applicationId rootProject.ext.android.applicationId
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        multiDexEnabled rootProject.ext.android.multiDexEnabled
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    flavorDimensions 'main'
+    productFlavors {
+
+        flavors_dev {
+            dimension 'main'
+            buildConfigField("String", "HttpUrl", '\" app.build.gradle 配置的请求地址\"')
+//            buildConfigField("String", "HttpUrl", rootProject.ext.contacts["HttpUrl"])
+        }
+
+        flavors_rel {
+            dimension 'main'
+            buildConfigField("String", "HttpUrl", rootProject.ext.contacts.HttpUrl)
+        }
+    }
+//    File file = file(rootProject.ext.signing.storeFile)
+//    signingConfigs {
+//        release {
+//            storeFile file
+//            storePassword rootProject.ext.signing.storePassword
+//            keyAlias rootProject.ext.signing.keyAlias
+//            keyPassword rootProject.ext.signing.keyPassword
+//        }
+//    }
+    buildTypes {
+        release {
+            buildConfigField("boolean", "LvLOG", "false")
+            minifyEnabled false
+            // 移除无用资源文件
+//            shrinkResources true
+//            if (file.exists()) {
+//                signingConfig signingConfigs.release
+//            }
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            buildConfigField("boolean", "LvLOG", "true")
+//            if (file.exists()) {
+//                signingConfig signingConfigs.release
+//            }
+        }
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+
+    // 过滤警告
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    dexOptions {
+        javaMaxHeapSize "2g"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation rootProject.ext.dependencies["appcompat-v7"]
+    implementation rootProject.ext.dependencies["constraint-layout"]
+    implementation rootProject.ext.dependencies["multidex"]
+
+    implementation rootProject.ext.dependencies["recyclerview-v7"]
+    implementation rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
+
+    //AndroidUtils
+    implementation rootProject.ext.dependencies["AndroidUtils"]
+
+    // Retrofit  And  RxJava
+    implementation rootProject.ext.dependencies["retrofit"]
+    implementation rootProject.ext.dependencies["converter-scalars"]
+    implementation rootProject.ext.dependencies["converter-gson"]
+    implementation rootProject.ext.dependencies["adapter-rxjava2"]
+    implementation rootProject.ext.dependencies["rxandroid"]
+
+    // RxPersmissions
+    implementation rootProject.ext.dependencies["rxpermissions"]
+
+    //Dagger2
+//    implementation rootProject.ext.dependencies["dagger"]
+//    kapt rootProject.ext.dependencies["dagger-compiler"]
+
+    // Dagger.android
+    implementation rootProject.ext.dependencies["dagger-android"]
+    implementation rootProject.ext.dependencies["dagger-android-support"]   // 如果使用 support library
+    kapt rootProject.ext.dependencies["dagger-android-processor"]
+
+    // Glide
+    implementation rootProject.ext.dependencies["glide"]
+
+    // EventBus
+    implementation rootProject.ext.dependencies["eventbus"]
+
+    // 检测内存泄漏
+    debugCompile rootProject.ext.dependencies["leakcanary-android"]
+    releaseCompile rootProject.ext.dependencies["leakcanary-android-no-op"]
+
+}
