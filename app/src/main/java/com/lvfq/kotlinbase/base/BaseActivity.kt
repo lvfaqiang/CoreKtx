@@ -8,8 +8,6 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.WindowManager
 import com.lvfq.kotlinbase.base.IBaseUI
-import com.lvfq.kotlinbase.base.IMvpPresenter
-import com.lvfq.kotlinbase.base.IMvpView
 import com.lvfq.library.utils.AppManager
 import com.lvfq.library.utils.FragmentUtil
 import com.lvfq.library.utils.ToastUtil
@@ -25,16 +23,12 @@ import org.greenrobot.eventbus.EventBus
  * @desc :
  *
  */
-abstract class BaseMvpActivity<P : IMvpPresenter> : AppCompatActivity(), IBaseUI {
+abstract class BaseActivity : AppCompatActivity(), IBaseUI {
     // 获取当前界面 LayoutId
     abstract fun getLayoutId(): Int
 
     // 初始化相关操作
     abstract fun create(savedInstanceState: Bundle?)
-
-    // 利用依赖导致原则，这里传入的至少是 BaseMvpPresenter
-//    @Inject
-    protected var mPresenter: P? = null
 
     // 用于控制界面显示 隐藏 Fragment
     private var fragmentUtil: FragmentUtil? = null
@@ -75,10 +69,6 @@ abstract class BaseMvpActivity<P : IMvpPresenter> : AppCompatActivity(), IBaseUI
                 // Need to go to the settings
 
             }
-        }
-
-        if (mPresenter != null && this is IMvpView) {
-            mPresenter?.attachView(this as IMvpView)
         }
 
         if (useEventBus()) EventBus.getDefault().register(this)
@@ -124,7 +114,6 @@ abstract class BaseMvpActivity<P : IMvpPresenter> : AppCompatActivity(), IBaseUI
 
     override fun onDestroy() {
         super.onDestroy()
-        mPresenter?.detachView()
         AppManager.getAppManager().finishActivity(this)
     }
 }

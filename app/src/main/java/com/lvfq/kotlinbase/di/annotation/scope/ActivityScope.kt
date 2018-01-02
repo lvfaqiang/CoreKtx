@@ -1,4 +1,4 @@
-package com.lvfq.kotlinbase.di.scope
+package com.lvfq.kotlinbase.di.annotation.scope
 
 import javax.inject.Scope
 

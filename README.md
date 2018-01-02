@@ -7,7 +7,7 @@
  - Rxandroid - 2.0.1
  
 **依赖注入框架**
- - Dagger2 - 2.13
+ - dagger.android - 2.13
  
 **强大的 RecyclerView适配器**
  - BaseRecyclerViewAdapterHelper - 2.9.34 [相关介绍](http://www.jianshu.com/p/b343fcff51b0)
@@ -23,8 +23,13 @@
 
 **自己整理的常用的工具类库**
  - AndroidUtils - 2.0.2，[相关介绍](https://github.com/lvfaqiang/AndroidUtils) 
- 
+
+**Other**
+ - LiveData、ViewModel   -  [示例代码](https://github.com/lvfaqiang/AndroidTestCode/tree/master/app/src/main/java/com/lvfq/code/architectureComponents)
+
  
 ### 基本配置
  依赖导入信息在 config.gradle 文件中，
- 请求地址(HttpUrl)在 app-build.gradle 中 通过 productFlavors 来进行配置，避免打包时，不停的来切换请求地址。
+##### 配置请求地址 
+  请求地址(HttpUrl)在 app-build.gradle 中 通过 productFlavors 来进行配置，避免打包时，不停的来切换请求地址。
+

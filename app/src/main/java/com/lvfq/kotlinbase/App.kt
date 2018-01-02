@@ -45,6 +45,6 @@ class App : MultiDexApplication(), HasActivityInjector {
     @Inject
     lateinit var activityInject: DispatchingAndroidInjector<Activity>
 
-
     override fun activityInjector(): AndroidInjector<Activity> = activityInject
+
 }

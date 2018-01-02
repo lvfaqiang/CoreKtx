@@ -1,6 +1,9 @@
 package com.ekoo.haidaicrm.base
 
+import android.app.Activity
 import android.app.ProgressDialog
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.support.annotation.UiThread
 import android.support.v4.app.Fragment
@@ -9,9 +12,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.lvfq.kotlinbase.App
 import com.lvfq.kotlinbase.base.IBaseUI
-import com.lvfq.kotlinbase.base.IMvpPresenter
 import com.lvfq.library.utils.FragmentUtil
 import com.lvfq.library.utils.ToastUtil
+import dagger.android.support.AndroidSupportInjection
 import org.greenrobot.eventbus.EventBus
 
 
@@ -24,7 +27,7 @@ import org.greenrobot.eventbus.EventBus
  * @desc :
  *
  */
-abstract class BaseMvpFragment<P : IMvpPresenter> : Fragment(), IBaseUI {
+abstract class BaseFragment : Fragment(), IBaseUI {
 
     /* -----------------抽象方法------------------*/
 
@@ -34,15 +37,36 @@ abstract class BaseMvpFragment<P : IMvpPresenter> : Fragment(), IBaseUI {
     // 初始化相关操作
     abstract fun onCreateView(savedInstanceState: Bundle?)
 
-    //-------------------------
+    /**
+     * 是否使用 dagger
+     */
+    protected open fun isUseDagger(): Boolean = true
 
-    // 利用依赖导致原则，这里传入的至少是 BaseMvpPresenter
-    protected var mPresenter: P? = null
+    //-------------------------
 
     // 用于控制界面显示 隐藏 Fragment
     private var fragmentUtil: FragmentUtil? = null
 
     protected var mProgress: ProgressDialog? = null
+
+
+    override fun onAttach(activity: Activity?) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            // Perform injection here before M, L (API 22) and below because onAttach(Context)
+            // is not yet available at L.
+            if (isUseDagger()) AndroidSupportInjection.inject(this)
+        }
+        super.onAttach(activity)
+    }
+
+    override fun onAttach(context: Context?) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            // Perform injection here for M (API 23) due to deprecation of onAttach(Activity).
+            if (isUseDagger()) AndroidSupportInjection.inject(this)
+        }
+        super.onAttach(context)
+    }
+
 
     /**
      * 创建视图，布局中的控件在 onCreateView 之后的生命周期方法中可直接使用 id
@@ -59,6 +83,7 @@ abstract class BaseMvpFragment<P : IMvpPresenter> : Fragment(), IBaseUI {
         super.onViewCreated(view, savedInstanceState)
         // 注册 EventBus ，如果需要把此方法返回值改为 true
         if (useEventBus()) EventBus.getDefault().register(this)
+        fragmentUtil = FragmentUtil(childFragmentManager)
 
         onCreateView(savedInstanceState)
     }
@@ -100,7 +125,6 @@ abstract class BaseMvpFragment<P : IMvpPresenter> : Fragment(), IBaseUI {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        mPresenter?.detachView()
     }
 
 

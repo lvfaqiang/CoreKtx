@@ -113,6 +113,11 @@ dependencies {
     implementation rootProject.ext.dependencies["dagger-android-support"]   // 如果使用 support library
     kapt rootProject.ext.dependencies["dagger-android-processor"]
 
+    // android.arch.lifecycle 库 ，liveData、ViewModel..
+    implementation rootProject.ext.dependencies["extensions"]
+    kapt rootProject.ext.dependencies["compiler"]
+    implementation rootProject.ext.dependencies["common-java8"]
+
     // Glide
     implementation rootProject.ext.dependencies["glide"]
 

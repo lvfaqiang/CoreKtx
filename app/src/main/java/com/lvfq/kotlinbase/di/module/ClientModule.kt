@@ -1,5 +1,6 @@
 package com.lvfq.kotlinbase.di.module
 
+import com.lvfq.kotlinbase.http.ApiService
 import dagger.Module
 import dagger.Provides
 import okhttp3.HttpUrl
@@ -20,6 +21,12 @@ import javax.inject.Singleton
  */
 @Module(includes = [ClientConfig::class])
 class ClientModule {
+
+    @Singleton
+    @Provides
+    fun providesService(retrofit: Retrofit): ApiService {
+        return retrofit.create(ApiService::class.java)
+    }
 
     @Singleton
     @Provides

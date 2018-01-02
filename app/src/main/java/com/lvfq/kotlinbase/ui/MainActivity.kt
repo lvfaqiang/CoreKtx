@@ -1,17 +1,15 @@
 package com.lvfq.kotlinbase.ui
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import com.lvfq.kotlinbase.R
-import dagger.android.AndroidInjection
+import com.lvfq.kotlinbase.base.BaseHasChildActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseHasChildActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    override fun getLayoutId(): Int = R.layout.activity_main
 
 
+    override fun create(savedInstanceState: Bundle?) {
     }
+
 }
