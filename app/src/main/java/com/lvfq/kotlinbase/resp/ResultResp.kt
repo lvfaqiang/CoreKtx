@@ -1,19 +1,16 @@
-package com.lvfq.kotlinbase.bean
+package com.lvfq.kotlinbase.resp
 
 import android.annotation.SuppressLint
 import com.lvfq.kotlinbase.base.BaseBean
 
-
 /**
- * UserBean
+ * ResultResp
  * @author lvfq
  * @Github: https://github.com/lvfaqiang
  * @Blog: http://blog.csdn.net/lv_fq
- * @date 2017/12/20 下午2:14
+ * @date 2017/11/7 下午2:04
  * @desc :
  *
  */
-
 @SuppressLint("ParcelCreator")
-data class UserBean(var name: String = "") : BaseBean() {
-}
+data class ResultResp<out T : BaseBean>(val resultData: T) : BaseResp()

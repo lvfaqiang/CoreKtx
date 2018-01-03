@@ -22,6 +22,7 @@ import android.support.annotation.MainThread
 import android.support.annotation.WorkerThread
 import android.text.TextUtils
 import android.util.Log
+import com.lvfq.kotlinbase.resp.BaseResp
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableObserver
@@ -34,9 +35,9 @@ import io.reactivex.schedulers.Schedulers
  * *
  * @param <RequestType>
 </RequestType></ResultType> */
-abstract class NetworkBoundResource<ResultType, RequestType> @MainThread constructor() {
+abstract class NetworkBoundResource<ResultType : BaseResp, RequestType> @MainThread constructor() {
 
-    private val result = MediatorLiveData<ResultType>()
+    private val result = MediatorLiveData<Resource<ResultType>>()
 
     init {
         fetchFromNetwork()
@@ -68,13 +69,18 @@ abstract class NetworkBoundResource<ResultType, RequestType> @MainThread constru
                     }
 
                     override fun onNext(res: ResultType?) {
-                        result.value = res
+                        if (res?.success == true) {// 服务器返回的用于判断结果是否正确的标识
+                            result.value = Resource.success(res)
+                        } else {
+                            result.value = Resource.error("", null, null)
+                        }
                     }
 
                     override fun onError(t: Throwable?) {
                         if (t != null && !TextUtils.isEmpty(t.message)) {
                             Log.d("onError", t.message)
                         }
+                        result.value = Resource.error("", null, t)
 
                         onFetchFailed()
                         onFinally()
@@ -83,7 +89,7 @@ abstract class NetworkBoundResource<ResultType, RequestType> @MainThread constru
 
     }
 
-    fun asLiveData(): LiveData<ResultType> {
+    fun asLiveData(): LiveData<Resource<ResultType>> {
         return result
     }
 

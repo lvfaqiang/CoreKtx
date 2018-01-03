@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CusToolBar">
+        <attr name="leftImg" format="reference" />
+        <attr name="titleText" format="string" />
+        <attr name="titleSize" format="integer" />
+        <attr name="titleColor" format="color" />
+        <attr name="rightText" format="string" />
+        <attr name="rightTextSize" format="integer" />
+        <attr name="rightTextColor" format="color" />
+    </declare-styleable>
+</resources>

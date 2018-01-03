@@ -1,4 +1,4 @@
-package com.lvfq.kotlinbase.bean
+package com.lvfq.kotlinbase.base
 
 import android.annotation.SuppressLint
 import android.os.Parcelable
@@ -15,6 +15,4 @@ import kotlinx.android.parcel.Parcelize
  */
 @SuppressLint("ParcelCreator")
 @Parcelize
-open class BaseBean : Parcelable {
-
-}
+open class BaseBean : Parcelable
