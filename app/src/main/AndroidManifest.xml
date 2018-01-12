@@ -28,6 +28,8 @@
         </activity>
         <!--主界面-->
         <activity android:name=".ui.MainActivity" />
+        <!-- H5 界面-->
+        <activity android:name=".base.BaseH5Activity" />
     </application>
 
 </manifest>

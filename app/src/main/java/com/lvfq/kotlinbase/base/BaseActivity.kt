@@ -47,8 +47,9 @@ abstract class BaseActivity : AppCompatActivity(), IBaseUI {
         // 维护一个 Activity 栈
         AppManager.getAppManager().addActivity(this)
 
-        setContentView(getLayoutId())
-
+        if (getLayoutId() != 0) {
+            setContentView(getLayoutId())
+        }
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
