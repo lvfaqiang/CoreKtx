@@ -1,7 +1,6 @@
 package com.lvfq.kotlinbase.resp
 
 import android.annotation.SuppressLint
-import com.lvfq.kotlinbase.base.BaseBean
 
 /**
  * ResultResp
@@ -13,4 +12,4 @@ import com.lvfq.kotlinbase.base.BaseBean
  *
  */
 @SuppressLint("ParcelCreator")
-data class ResultResp<out T : BaseBean>(val resultData: T) : BaseResp()
+data class ResultResp<out T : Any>(val resultData: T) : BaseResp()

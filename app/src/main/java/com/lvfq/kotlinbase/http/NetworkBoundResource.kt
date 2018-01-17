@@ -22,7 +22,7 @@ import android.support.annotation.MainThread
 import android.support.annotation.WorkerThread
 import android.text.TextUtils
 import android.util.Log
-import com.lvfq.kotlinbase.resp.BaseResp
+import com.lvfq.kotlinbase.resp.ResultResp
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableObserver
@@ -35,7 +35,7 @@ import io.reactivex.schedulers.Schedulers
  * *
  * @param <RequestType>
 </RequestType></ResultType> */
-abstract class NetworkBoundResource<ResultType : BaseResp, RequestType> @MainThread constructor() {
+abstract class NetworkBoundResource<ResultType : Any> @MainThread constructor() {
 
     private val result = MediatorLiveData<Resource<ResultType>>()
 
@@ -45,34 +45,40 @@ abstract class NetworkBoundResource<ResultType : BaseResp, RequestType> @MainThr
 
     private fun fetchFromNetwork() {
 
-        val requestObs: Observable<RequestType> = createCall()
+        val requestObs: Observable<ResultResp<ResultType>> = createCall()
+
+        result.value = Resource.loading(null)
 
         requestObs
                 .subscribeOn(Schedulers.io())
                 .flatMap { it ->
                     val rt: ResultType? = processResponse(it)
-                    if (null == rt) {
-                        Observable.empty<ResultType>()
-                    } else {
-                        // 执行保存操作
+//                    if (null == rt) {
+//                        Observable.empty<ResultType>()
+//                    } else {
+//                         执行保存操作
+//                        saveCallResult(rt)
+//
+//                    }
+                    // 执行保存操作
+                    if (it.success && null != rt) {
                         saveCallResult(rt)
-
-                        Observable.just(rt)
                     }
 
+                    Observable.just(it)
                 }
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object : DisposableObserver<ResultType>() {
+                .subscribeWith(object : DisposableObserver<ResultResp<ResultType>>() {
 
                     override fun onComplete() {
                         onFinally()
                     }
 
-                    override fun onNext(res: ResultType?) {
+                    override fun onNext(res: ResultResp<ResultType>?) {
                         if (res?.success == true) {// 服务器返回的用于判断结果是否正确的标识
-                            result.value = Resource.success(res)
+                            result.value = Resource.success(res.resultData)
                         } else {
-                            result.value = Resource.error("", null, null)
+                            result.value = Resource.error(res?.message, null, null)
                         }
                     }
 
@@ -80,7 +86,7 @@ abstract class NetworkBoundResource<ResultType : BaseResp, RequestType> @MainThr
                         if (t != null && !TextUtils.isEmpty(t.message)) {
                             Log.d("onError", t.message)
                         }
-                        result.value = Resource.error("", null, t)
+                        result.value = Resource.error("服务异常", null, t)
 
                         onFetchFailed()
                         onFinally()
@@ -94,23 +100,16 @@ abstract class NetworkBoundResource<ResultType : BaseResp, RequestType> @MainThr
     }
 
     /**
-     * 请求结束时执行；不管正常结束还是出错，总会执行一次
-     */
-    protected open fun onFinally() {
-
-    }
-
-    /**
      * 创建网络请求
      */
     @MainThread
-    protected abstract fun createCall(): Observable<RequestType>
+    protected abstract fun createCall(): Observable<ResultResp<ResultType>>
 
     /**
      * 将RequestType转换为ResultType
      */
     @WorkerThread
-    protected abstract fun processResponse(response: RequestType): ResultType?
+    protected abstract fun processResponse(response: ResultResp<ResultType>): ResultType?
 
 
     /**
@@ -124,5 +123,13 @@ abstract class NetworkBoundResource<ResultType : BaseResp, RequestType> @MainThr
      * 请求错误处理
      */
     @MainThread
-    protected abstract fun onFetchFailed()
+    protected open fun onFetchFailed() {
+    }
+
+    /**
+     * 请求结束时执行；不管正常结束还是出错，总会执行一次
+     */
+    protected open fun onFinally() {
+        result.value = Resource.finally()
+    }
 }

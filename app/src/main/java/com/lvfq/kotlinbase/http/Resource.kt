@@ -12,7 +12,7 @@ class Resource<T> constructor(val status: Status, val data: T?, message: String?
 
     companion object {
         enum class Status {
-            LOADING, ERROR, SUCCESS
+            LOADING, ERROR, SUCCESS, FINALLY
         }
 
         fun <T> success(data: T?): Resource<T> {
@@ -26,6 +26,11 @@ class Resource<T> constructor(val status: Status, val data: T?, message: String?
         fun <T> loading(data: T?): Resource<T> {
             return Resource<T>(Status.LOADING, data, "", null)
         }
+
+        fun <T> finally(): Resource<T> {
+            return Resource<T>(Status.FINALLY, null, "", null)
+        }
+
     }
 
 }
