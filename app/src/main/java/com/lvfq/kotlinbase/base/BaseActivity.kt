@@ -40,8 +40,8 @@ abstract class BaseActivity : AppCompatActivity(), IBaseUI {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // 禁止页面自动弹出输入法
-        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+        // 禁止页面自动弹出输入法, or 禁止输入法顶起布局
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN or WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         // 设置页面始终竖屏展示
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         // 维护一个 Activity 栈
