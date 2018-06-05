@@ -37,6 +37,25 @@ ext {
             // RxPermissions 运行时权限处理, 依赖于 RxJava2
             "rxpermissions"                : 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar',
 
+            //   Rxlifecycle
+            "rxlifecycle"                  : 'com.trello.rxlifecycle2:rxlifecycle:2.2.1',
+            "rxlifecycle-components"       : 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.1',
+
+            // local Storage
+            "hawk"                         : 'com.orhanobut:hawk:2.0.1',
+
+            // Adapter
+            "BaseRecyclerViewAdapterHelper": 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34',
+
+            // RecyclerView
+            "recyclerview-v7"              : 'com.android.support:recyclerview-v7:27.0.2',
+
+            // Glide
+            "glide"                        : 'com.github.bumptech.glide:glide:4.3.0',
+
+            // EventBus
+            "eventbus"                     : 'org.greenrobot:eventbus:3.1.1',
+
             // Dagger.Android
             "dagger-android"               : 'com.google.dagger:dagger-android:2.13',
             "dagger-android-support"       : 'com.google.dagger:dagger-android-support:2.13',   // 如果使用 support library
@@ -52,17 +71,6 @@ ext {
             "compiler"                     : 'android.arch.lifecycle:compiler:1.0.0',
             "common-java8"                 : 'android.arch.lifecycle:common-java8:1.0.0',
 
-            // Adapter
-            "BaseRecyclerViewAdapterHelper": 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34',
-
-            // RecyclerView
-            "recyclerview-v7"              : 'com.android.support:recyclerview-v7:27.0.2',
-
-            // Glide
-            "glide"                        : 'com.github.bumptech.glide:glide:4.3.0',
-
-            // EventBus
-            "eventbus"                     : 'org.greenrobot:eventbus:3.1.1',
 
             // 检测内存泄漏 LeakCanary
             "leakcanary-android"           : 'com.squareup.leakcanary:leakcanary-android:1.5.4',

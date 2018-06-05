@@ -7,7 +7,6 @@ apply plugin: 'kotlin-kapt' // kapt 插件
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
-    buildToolsVersion rootProject.ext.android.buildToolsVersion
     defaultConfig {
         applicationId rootProject.ext.android.applicationId
         minSdkVersion rootProject.ext.android.minSdkVersion
@@ -74,6 +73,7 @@ android {
     dexOptions {
         javaMaxHeapSize "2g"
     }
+    buildToolsVersion '27.0.3'
 }
 
 dependencies {
@@ -103,6 +103,13 @@ dependencies {
 
     // RxPersmissions
     implementation rootProject.ext.dependencies["rxpermissions"]
+
+    //   Rxlifecycle
+    implementation rootProject.ext.dependencies["rxlifecycle"]
+    implementation rootProject.ext.dependencies["rxlifecycle-components"]
+
+    // local Storage
+    implementation rootProject.ext.dependencies["hawk"]
 
     //Dagger2
 //    implementation rootProject.ext.dependencies["dagger"]
