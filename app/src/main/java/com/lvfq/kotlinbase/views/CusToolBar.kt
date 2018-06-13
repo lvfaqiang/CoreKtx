@@ -2,11 +2,9 @@ package com.lvfq.kotlinbase.views
 
 import android.app.Activity
 import android.content.Context
-import android.os.Build
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.View
-import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
@@ -100,17 +98,19 @@ class CusToolBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Re
         addView(leftImageView)
         addView(titleTextView)
         addView(rightTextView)
-
-        viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
-            override fun onGlobalLayout() {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    viewTreeObserver.removeOnGlobalLayoutListener(this)
-                } else {
-                    viewTreeObserver.removeGlobalOnLayoutListener(this)
-                }
-                layoutParams.height = DPUtil.dip2px(45f)
-            }
-        })
+        this.layoutParams.apply {
+            height = DPUtil.dip2px(44f)
+        }
+//        viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+//            override fun onGlobalLayout() {
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+//                    viewTreeObserver.removeOnGlobalLayoutListener(this)
+//                } else {
+//                    viewTreeObserver.removeGlobalOnLayoutListener(this)
+//                }
+//                layoutParams.height = DPUtil.dip2px(45f)
+//            }
+//        })
     }
 
     /**

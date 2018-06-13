@@ -9,4 +9,16 @@
         <attr name="rightTextSize" format="integer" />
         <attr name="rightTextColor" format="color" />
     </declare-styleable>
+
+
+    <declare-styleable name="InputEditText">
+        <attr name="android:textSize" />
+        <attr name="editPaddingLeft" format="dimension" />
+        <attr name="android:textColor" />
+        <attr name="android:textColorHint" />
+        <attr name="android:hint" />
+        <attr name="android:singleLine" />
+        <attr name="android:inputType" />
+        <attr name="android:maxLength" />
+    </declare-styleable>
 </resources>

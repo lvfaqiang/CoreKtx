@@ -5,13 +5,13 @@ import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.support.annotation.UiThread
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.view.WindowManager
-import com.lvfq.kotlinbase.base.IBaseUI
+import com.lvfq.kotlinbase.base.IBase
 import com.lvfq.library.utils.AppManager
 import com.lvfq.library.utils.FragmentUtil
 import com.lvfq.library.utils.ToastUtil
 import com.tbruyelle.rxpermissions2.RxPermissions
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import org.greenrobot.eventbus.EventBus
 
 /**
@@ -23,12 +23,22 @@ import org.greenrobot.eventbus.EventBus
  * @desc :
  *
  */
-abstract class BaseActivity : AppCompatActivity(), IBaseUI {
-    // 获取当前界面 LayoutId
-    abstract fun getLayoutId(): Int
+open class BaseActivity : RxAppCompatActivity(), IBase {
+    override fun getLayoutId(): Int {
+        return 0
+    }
 
-    // 初始化相关操作
-    abstract fun create(savedInstanceState: Bundle?)
+    override fun init(savedInstanceState: Bundle?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun toastSuccess(string: String) {
+    }
+
+    override fun toastError(string: String) {
+
+    }
+
 
     // 用于控制界面显示 隐藏 Fragment
     private var fragmentUtil: FragmentUtil? = null
@@ -74,7 +84,14 @@ abstract class BaseActivity : AppCompatActivity(), IBaseUI {
 
         if (useEventBus()) EventBus.getDefault().register(this)
 
-        create(savedInstanceState)
+
+        mProgress = ProgressDialog(this)
+        mProgress?.setCanceledOnTouchOutside(false)
+        mProgress?.setCancelable(true)
+        mProgress?.setMessage("加载中...")
+
+        init(savedInstanceState)
+
     }
 
     /**
@@ -98,23 +115,30 @@ abstract class BaseActivity : AppCompatActivity(), IBaseUI {
     }
 
     /* -------------- 加载框 --------------*/
-    @UiThread
-    override fun showProgress() {
-        if (mProgress != null && !(mProgress!!.isShowing)) {
-            mProgress?.show()
+
+    override fun showLoading() {
+        mProgress?.let {
+            if (!it.isShowing) {
+                it.show()
+            }
         }
     }
 
-    @UiThread
-    override fun dismissProgress() {
-        if (mProgress != null && mProgress!!.isShowing) {
-            mProgress?.dismiss()
+    override fun disLoading() {
+        mProgress?.let {
+            if (it.isShowing) {
+                it.dismiss()
+            }
         }
     }
 
 
     override fun onDestroy() {
-        super.onDestroy()
+        if (useEventBus()) EventBus.getDefault().unregister(this)
+
         AppManager.getAppManager().finishActivity(this)
+
+        disLoading()
+        super.onDestroy()
     }
 }

@@ -11,9 +11,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.lvfq.kotlinbase.App
-import com.lvfq.kotlinbase.base.IBaseUI
+import com.lvfq.kotlinbase.base.IBase
 import com.lvfq.library.utils.FragmentUtil
 import com.lvfq.library.utils.ToastUtil
+import com.trello.rxlifecycle2.components.support.RxFragment
 import dagger.android.support.AndroidSupportInjection
 import org.greenrobot.eventbus.EventBus
 
@@ -27,15 +28,19 @@ import org.greenrobot.eventbus.EventBus
  * @desc :
  *
  */
-abstract class BaseFragment : Fragment(), IBaseUI {
+abstract class BaseFragment : RxFragment(), IBase {
+
+
+    override fun toastSuccess(string: String) {
+    }
+
+    override fun toastError(string: String) {
+
+    }
+
 
     /* -----------------抽象方法------------------*/
 
-    // 获取当前界面 LayoutId
-    abstract fun getLayoutId(): Int
-
-    // 初始化相关操作
-    abstract fun onCreateView(savedInstanceState: Bundle?)
 
     /**
      * 是否使用 dagger
@@ -79,13 +84,13 @@ abstract class BaseFragment : Fragment(), IBaseUI {
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // 注册 EventBus ，如果需要把此方法返回值改为 true
         if (useEventBus()) EventBus.getDefault().register(this)
         fragmentUtil = FragmentUtil(childFragmentManager)
 
-        onCreateView(savedInstanceState)
     }
 
 
@@ -102,17 +107,19 @@ abstract class BaseFragment : Fragment(), IBaseUI {
         ToastUtil.showToast(activity, message)
     }
 
-    @UiThread
-    override fun showProgress() {
-        if (mProgress != null && !(mProgress!!.isShowing)) {
-            mProgress!!.show()
+    override fun showLoading() {
+        mProgress?.let {
+            if (!it.isShowing) {
+                it.show()
+            }
         }
     }
 
-    @UiThread
-    override fun dismissProgress() {
-        if (mProgress != null && mProgress!!.isShowing) {
-            mProgress!!.dismiss()
+    override fun disLoading() {
+        mProgress?.let {
+            if (it.isShowing) {
+                it.dismiss()
+            }
         }
     }
 

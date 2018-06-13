@@ -135,4 +135,7 @@ dependencies {
     debugCompile rootProject.ext.dependencies["leakcanary-android"]
     releaseCompile rootProject.ext.dependencies["leakcanary-android-no-op"]
 
+    // localStorage
+    implementation 'com.orhanobut:hawk:2.0.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
 }
