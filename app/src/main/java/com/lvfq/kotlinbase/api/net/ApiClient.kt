@@ -1,5 +1,6 @@
 package com.lvfq.kotlinbase.api.net
 
+import com.lvfq.kotlinbase.BuildConfig
 import com.lvfq.kotlinbase.api.ApiService
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -17,7 +18,7 @@ object ApiClient {
 
     private val mRetrofit by lazy {
         Retrofit.Builder()
-//                .baseUrl(Const.BASE_URL)
+                .baseUrl(BuildConfig.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(ApiConfig().configOkHttp())

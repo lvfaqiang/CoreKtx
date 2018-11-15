@@ -33,6 +33,7 @@
         </activity>
         <!--主界面-->
         <activity android:name=".feature.MainActivity" />
+        <activity android:name=".feature.h5.H5Activity" />
         <!-- H5 界面-->
     </application>
 

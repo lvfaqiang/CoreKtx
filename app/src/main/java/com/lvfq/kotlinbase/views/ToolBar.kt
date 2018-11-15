@@ -9,7 +9,7 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.lvfq.kotlinbase.R
-import com.lvfq.library.utils.DPUtil
+import com.lvfq.kotlinbase.ext.content.dp2px
 
 /**
  * TopBar
@@ -19,7 +19,7 @@ import com.lvfq.library.utils.DPUtil
  * @desc :
  *
  */
-class CusToolBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : RelativeLayout(context, attrs, defStyleAttr) {
+class ToolBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : RelativeLayout(context, attrs, defStyleAttr) {
 
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 
@@ -37,11 +37,11 @@ class CusToolBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Re
     val leftImageView by lazy {
         ImageView(context).apply {
             layoutParams = RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply {
-                setMargins(DPUtil.dip2px(5f), 0, 0, 0)
+                setMargins(context.dp2px(5f), 0, 0, 0)
                 addRule(ALIGN_PARENT_LEFT)
                 addRule(CENTER_VERTICAL)
             }
-            setPadding(DPUtil.dip2px(10f), 0, DPUtil.dip2px(10f), 0)
+            setPadding(context.dp2px(10f), 0, context.dp2px(10f), 0)
             visibility = View.GONE
         }
     }
@@ -65,7 +65,7 @@ class CusToolBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Re
             text = rightText
             setTextColor(rightTextColor)
             layoutParams = RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply {
-                setMargins(0, 0, DPUtil.dip2px(15f), 0)
+                setMargins(0, 0, context.dp2px(15f), 0)
                 addRule(ALIGN_PARENT_RIGHT)
                 addRule(CENTER_VERTICAL)
             }
@@ -98,14 +98,14 @@ class CusToolBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Re
         addView(titleTextView)
         addView(rightTextView)
         this.layoutParams.apply {
-            height = DPUtil.dip2px(44f)
+            height = context.dp2px(44f)
         }
     }
 
     /**
      * 设置当前界面返回
      */
-    fun setBack(activity: Activity): CusToolBar {
+    fun setBack(activity: Activity): ToolBar {
         visible(leftImageView)
         leftImageView.setImageResource(leftImg)
         leftImageView.setOnClickListener {
@@ -117,7 +117,7 @@ class CusToolBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Re
     /**
      * 设置标题
      */
-    fun setTitle(title: String): CusToolBar {
+    fun setTitle(title: String): ToolBar {
         visible(titleTextView)
         titleTextView.text = title
         return this
