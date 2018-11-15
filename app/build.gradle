@@ -43,7 +43,7 @@ android {
 
             dimension 'main'
         }
-        // 生成环境
+        // 生产环境
         product {
             buildConfigField("String", "BASE_URL", '"https://www.product.com/"')
 

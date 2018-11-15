@@ -12,6 +12,7 @@ import android.net.NetworkInfo
 import android.os.Bundle
 import android.os.Process
 import android.support.multidex.MultiDexApplication
+import com.lvfq.kotlinbase.config.HawkConfig
 import java.util.*
 
 /**
@@ -49,7 +50,7 @@ class App : MultiDexApplication() {
     }
 
     private fun initGlobalConfig() {
-//        HawkConfig.init(this)
+        HawkConfig.init(this)
     }
 
 

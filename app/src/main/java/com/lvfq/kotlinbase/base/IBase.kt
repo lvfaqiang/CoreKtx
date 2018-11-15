@@ -18,7 +18,7 @@ import android.support.annotation.StringRes
  *
  */
 
-interface IHxBase : IBase {
+interface ISimpleBase : IBase {
 
     fun useEventBus(): Boolean = false  // EventBus 配置
 

@@ -3,14 +3,14 @@ package com.lvfq.kotlinbase.base
 import android.view.View
 
 /**
- * HxBaseObserver
+ * SimpleObserver
  * @author FaQiang on 2018/9/27 下午7:00
  * @Github: <a href="https://github.com/lvfaqiang"/>
  * @Blog: <a href="http://blog.csdn.net/lv_fq"/>
  * @desc :
  *
  */
-abstract class HxObserver<T> : BaseObserver<ApiBaseRsp<T>> {
+abstract class SimpleObserver<T> : BaseObserver<ApiBaseRsp<T>> {
 
     // -------------   构造函数     -----------
     constructor(iBase: IBase?, errorMsg: String, view: View?) : super(iBase, errorMsg, view)

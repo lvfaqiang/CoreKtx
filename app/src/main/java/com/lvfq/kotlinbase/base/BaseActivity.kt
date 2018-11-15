@@ -24,7 +24,7 @@ import org.greenrobot.eventbus.EventBus
  * @desc :
  *
  */
-abstract class BaseActivity : AppCompatActivity(), IHxBase {
+abstract class BaseActivity : AppCompatActivity(), ISimpleBase {
 
     var isCreated = false
         private set

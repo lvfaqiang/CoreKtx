@@ -18,15 +18,15 @@ object HawkConfig {
 
     fun init(context: Context) {
         Hawk.init(context)
-                .setStorage(HawkStorage(context, "HashOption"))
+                .setStorage(HawkStorage(context, "SpCacheFile"))
                 .build()
     }
 }
 
 
-private class HawkStorage(context: Context, tag: String) : Storage {
+private class HawkStorage(context: Context, spName: String) : Storage {
 
-    private var preferences: SharedPreferences = context.getSharedPreferences(tag, Context.MODE_PRIVATE)
+    private var preferences: SharedPreferences = context.getSharedPreferences(spName, Context.MODE_PRIVATE)
 
     override fun <T> put(key: String, value: T?): Boolean {
         return value?.let { getEditor().putString(key, value.toString()).commit() } ?: false

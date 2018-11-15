@@ -23,7 +23,7 @@ import org.greenrobot.eventbus.EventBus
  * @desc :
  *
  */
-abstract class BaseFragment : Fragment(), IHxBase {
+abstract class BaseFragment : Fragment(), ISimpleBase {
 
     protected val mPerissions: RxPermissions by lazy {
         RxPermissions(this)
