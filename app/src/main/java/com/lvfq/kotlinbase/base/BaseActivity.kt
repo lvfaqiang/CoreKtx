@@ -1,61 +1,75 @@
-package com.ekoo.haidaicrm.base
+package com.lvfq.kotlinbase.base
 
-import android.app.ProgressDialog
+import android.arch.lifecycle.LifecycleOwner
+import android.content.Context
+import android.content.DialogInterface
 import android.content.pm.ActivityInfo
 import android.os.Bundle
-import android.support.annotation.UiThread
-import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.view.WindowManager
-import com.lvfq.kotlinbase.base.IBase
-import com.lvfq.library.utils.AppManager
-import com.lvfq.library.utils.FragmentUtil
-import com.lvfq.library.utils.ToastUtil
+import com.lvfq.kotlinbase.ext.activity.fullScreen
+import com.lvfq.kotlinbase.utils.basic.FragmentUtil
+import com.lvfq.kotlinbase.utils.basic.LogUtil
+import com.lvfq.kotlinbase.utils.basic.ToastUtil
+import com.lvfq.kotlinbase.views.ILoading
+import com.lvfq.kotlinbase.views.LoadingView
 import com.tbruyelle.rxpermissions2.RxPermissions
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import org.greenrobot.eventbus.EventBus
 
 /**
  * BaseActivity
- * @author lvfq
- * @Github: https://github.com/lvfaqiang
- * @Blog: http://blog.csdn.net/lv_fq
- * @date 2017/10/25 下午2:38
+ * @author FaQiang on 2018/9/25 下午3:05
+ * @Github: <a href="https://github.com/lvfaqiang"/>
+ * @Blog: <a href="http://blog.csdn.net/lv_fq"/>
  * @desc :
  *
  */
-open class BaseActivity : RxAppCompatActivity(), IBase {
-    override fun getLayoutId(): Int {
-        return 0
+abstract class BaseActivity : AppCompatActivity(), IHxBase {
+
+    var isCreated = false
+        private set
+
+    var isStoped = false
+        private set
+
+    var isFirst = true
+        private set
+
+    protected val mPermissions: RxPermissions by lazy {
+        RxPermissions(this)
     }
 
-    override fun init(savedInstanceState: Bundle?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    protected val mFragmentUtil: FragmentUtil by lazy {
+        FragmentUtil(supportFragmentManager)
     }
 
-    override fun toastSuccess(string: String) {
-    }
+    private var mLoadingView: ILoading? = null
+    private var loadingCount: Int = 0
 
-    override fun toastError(string: String) {
-
-    }
-
-
-    // 用于控制界面显示 隐藏 Fragment
-    private var fragmentUtil: FragmentUtil? = null
-    // 用于显示加载进度弹框
-    protected var mProgress: ProgressDialog? = null
-    // 用于申请权限
-    protected var mPermissions: RxPermissions? = null
+    /**
+     *  横屏 or 竖屏  ， default 竖屏
+     */
+    protected open fun isLandScape(): Boolean = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         // 禁止页面自动弹出输入法, or 禁止输入法顶起布局
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN or WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         // 设置页面始终竖屏展示
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-        // 维护一个 Activity 栈
-        AppManager.getAppManager().addActivity(this)
+        requestedOrientation = if (isLandScape()) {
+            fullScreen()
+            ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        } else {
+            ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        }
+        super.onCreate(savedInstanceState)
+
+        mLoadingView = LoadingView(this)
+        mLoadingView?.setOnDismissListener(DialogInterface.OnDismissListener {
+            if (loadingCount != 0) {
+                loadingCount = 0
+            }
+        })
 
         if (getLayoutId() != 0) {
             setContentView(getLayoutId())
@@ -64,81 +78,97 @@ open class BaseActivity : RxAppCompatActivity(), IBase {
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        // 初始化 Fragment 操作工具类
-        fragmentUtil = FragmentUtil(supportFragmentManager)
-
-        // 初始化权限控制类
-        mPermissions = RxPermissions(this)
-        mPermissions?.requestEach(android.Manifest.permission.ACCESS_CHECKIN_PROPERTIES)?.subscribe {
-            if (it.granted) {
-                // `permission.name` is granted ! - 允许
-            } else if (it.shouldShowRequestPermissionRationale) {
-                // Denied permission without ask never again    拒绝此次
-
-            } else {
-                // Denied permission with ask never again  - 拒绝，并且下次不再询问
-                // Need to go to the settings
-
-            }
-        }
+        isCreated = true
 
         if (useEventBus()) EventBus.getDefault().register(this)
 
+        initUI(savedInstanceState)
 
-        mProgress = ProgressDialog(this)
-        mProgress?.setCanceledOnTouchOutside(false)
-        mProgress?.setCancelable(true)
-        mProgress?.setMessage("加载中...")
+        initListener()
 
-        init(savedInstanceState)
-
+        initData(savedInstanceState)
     }
 
-    /**
-     * 是否使用 EventBus
-     */
-    override fun useEventBus(): Boolean = false
-
-    /**
-     * Toast 提示
-     */
-    @UiThread
-    override fun toast(message: String) {
-        ToastUtil.showToast(this, message)
+    override fun onResume() {
+        isStoped = false
+        if (isFirst) {
+            isFirst = false
+        }
+        super.onResume()
     }
 
-    /**
-     * 显示当前 Fragmnet
-     */
-    override fun showFragment(fragment: Fragment, id: Int) {
-        fragmentUtil?.showFragment(fragment, id)
+    override fun onStop() {
+        super.onStop()
+        isStoped = true
     }
 
-    /* -------------- 加载框 --------------*/
-
+    // -------------
     override fun showLoading() {
-        mProgress?.let {
-            if (!it.isShowing) {
-                it.show()
+        LogUtil.i("loading", "showloading -------")
+        mLoadingView?.let { loading ->
+            loadingCount++
+            loading.takeIf {
+                !loading.isShowing() && isCreated && !isStoped
+            }?.let {
+                loading.show()
             }
         }
     }
 
     override fun disLoading() {
-        mProgress?.let {
-            if (it.isShowing) {
-                it.dismiss()
+        LogUtil.i("loading", "disLoading -------")
+        if (mLoadingView != null) {
+            if (loadingCount > 0) {
+                loadingCount--
             }
+            takeIf {
+                mLoadingView?.isShowing() == true
+            }?.let {
+                if (loadingCount == 0) {
+                    mLoadingView?.dismiss()
+                }
+            }
+        } else {
+            loadingCount = 0
         }
     }
 
-
-    override fun onDestroy() {
-        if (useEventBus()) EventBus.getDefault().unregister(this)
-
-        AppManager.getAppManager().finishActivity(this)
-
-        disLoading()
-        super.onDestroy()
+    override fun toastSuc(message: String) {
+        if (isCreated && !isStoped) {
+            ToastUtil.showToast(this, message)
+        }
     }
+
+    override fun toastSuc(strId: Int) {
+        if (isCreated && !isStoped) {
+            ToastUtil.showToast(this, getString(strId))
+        }
+    }
+
+    override fun toastFailed(message: String) {
+        if (isCreated && !isStoped) {
+            ToastUtil.showToast(this, message)
+        }
+    }
+
+    override fun toastFailed(strId: Int) {
+        if (isCreated && !isStoped) {
+            ToastUtil.showToast(this, getString(strId))
+        }
+    }
+
+    override fun getContext(): Context? = this
+
+    override fun getLifecycleOwner(): LifecycleOwner = this
+
+// -------------
+
+    abstract fun getLayoutId(): Int
+
+    abstract fun initUI(savedInstanceState: Bundle?)
+
+    abstract fun initData(savedInstanceState: Bundle?)
+
+    abstract fun initListener()
+
 }

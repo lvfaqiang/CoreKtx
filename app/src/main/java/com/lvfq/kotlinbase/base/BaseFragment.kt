@@ -1,150 +1,163 @@
-package com.ekoo.haidaicrm.base
+package com.lvfq.kotlinbase.base
 
-import android.app.Activity
-import android.app.ProgressDialog
+import android.arch.lifecycle.LifecycleOwner
 import android.content.Context
-import android.os.Build
+import android.content.DialogInterface
 import android.os.Bundle
-import android.support.annotation.UiThread
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.lvfq.kotlinbase.App
-import com.lvfq.kotlinbase.base.IBase
-import com.lvfq.library.utils.FragmentUtil
-import com.lvfq.library.utils.ToastUtil
-import com.trello.rxlifecycle2.components.support.RxFragment
-import dagger.android.support.AndroidSupportInjection
+import com.lvfq.kotlinbase.utils.basic.FragmentUtil
+import com.lvfq.kotlinbase.utils.basic.ToastUtil
+import com.lvfq.kotlinbase.views.ILoading
+import com.lvfq.kotlinbase.views.LoadingView
+import com.tbruyelle.rxpermissions2.RxPermissions
 import org.greenrobot.eventbus.EventBus
-
 
 /**
  * BaseFragment
- * @author lvfq
- * @Github: https://github.com/lvfaqiang
- * @Blog: http://blog.csdn.net/lv_fq
- * @date 2017/10/25 下午3:16
+ * @author FaQiang on 2018/8/28 下午3:40
+ * @Github: <a href="https://github.com/lvfaqiang"/>
+ * @Blog: <a href="http://blog.csdn.net/lv_fq"/>
  * @desc :
  *
  */
-abstract class BaseFragment : RxFragment(), IBase {
+abstract class BaseFragment : Fragment(), IHxBase {
 
-
-    override fun toastSuccess(string: String) {
+    protected val mPerissions: RxPermissions by lazy {
+        RxPermissions(this)
     }
 
-    override fun toastError(string: String) {
-
+    protected val mFragmentUtil: FragmentUtil by lazy {
+        FragmentUtil(childFragmentManager)
     }
 
+    var isCreated = false
+        private set
 
-    /* -----------------抽象方法------------------*/
+    var isStoped = false
+        private set
 
+    private var mLoadingView: ILoading? = null
+    private var loadingCount: Int = 0
 
-    /**
-     * 是否使用 dagger
-     */
-    protected open fun isUseDagger(): Boolean = true
+    protected var mContentView: View? = null
 
-    //-------------------------
-
-    // 用于控制界面显示 隐藏 Fragment
-    private var fragmentUtil: FragmentUtil? = null
-
-    protected var mProgress: ProgressDialog? = null
-
-
-    override fun onAttach(activity: Activity?) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            // Perform injection here before M, L (API 22) and below because onAttach(Context)
-            // is not yet available at L.
-            if (isUseDagger()) AndroidSupportInjection.inject(this)
-        }
-        super.onAttach(activity)
-    }
-
-    override fun onAttach(context: Context?) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            // Perform injection here for M (API 23) due to deprecation of onAttach(Activity).
-            if (isUseDagger()) AndroidSupportInjection.inject(this)
-        }
-        super.onAttach(context)
-    }
-
-
-    /**
-     * 创建视图，布局中的控件在 onCreateView 之后的生命周期方法中可直接使用 id
-     */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val layoutId = getLayoutId()
-        if (layoutId > 0) {
-            return inflater.inflate(layoutId, container, false)
+
+        mLoadingView = LoadingView(this.requireContext())
+        mLoadingView?.setOnDismissListener(DialogInterface.OnDismissListener {
+            if (loadingCount != 0) {
+                loadingCount = 0
+            }
+        })
+
+        if (getLayoutId() != 0) {
+            mContentView = inflater.inflate(getLayoutId(), container, false)
+            return mContentView
         }
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // 注册 EventBus ，如果需要把此方法返回值改为 true
-        if (useEventBus()) EventBus.getDefault().register(this)
-        fragmentUtil = FragmentUtil(childFragmentManager)
+        if (useEventBus()) {
+            EventBus.getDefault().register(this)
+        }
+        isCreated = true
 
+        initUI(savedInstanceState)
+        initListener()
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        initData(savedInstanceState)
+    }
 
-    /**
-     * 是否使用 EventBus
-     */
-    override fun useEventBus(): Boolean = false
+    override fun onResume() {
+        isStoped = false
+        super.onResume()
+    }
 
-    /**
-     * Toast 提示
-     */
-    @UiThread
-    override fun toast(message: String) {
-        ToastUtil.showToast(activity, message)
+    override fun onStop() {
+        super.onStop()
+        isStoped = true
+    }
+
+    override fun onDestroyView() {
+        if (useEventBus()) {
+            EventBus.getDefault().unregister(this)
+        }
+        super.onDestroyView()
     }
 
     override fun showLoading() {
-        mProgress?.let {
-            if (!it.isShowing) {
-                it.show()
+        mLoadingView?.let { loading ->
+            loadingCount++
+            loading.takeIf {
+                !loading.isShowing() && isCreated && !isStoped
+            }?.let {
+                loading.show()
             }
         }
     }
 
     override fun disLoading() {
-        mProgress?.let {
-            if (it.isShowing) {
-                it.dismiss()
+        if (mLoadingView != null) {
+            if (loadingCount > 0) {
+                loadingCount--
             }
+            takeIf {
+                mLoadingView?.isShowing() == true
+            }?.let {
+                if (loadingCount == 0) {
+                    mLoadingView?.dismiss()
+                }
+            }
+        } else {
+            loadingCount = 0
         }
     }
 
-    /**
-     * 显示 Fragment
-     */
-    override fun showFragment(fragment: Fragment, id: Int) {
-        fragmentUtil?.showFragment(fragment, id)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-    }
-
-
-    override fun onDestroy() {
-
-        if (useEventBus())
-            EventBus.getDefault().unregister(this)
-
-        // 监测内存泄漏
-        if (activity != null) {
-            val refWatcher = App.getRefWatcher(activity!!)
-            refWatcher.watch(this)
+    override fun toastSuc(message: String) {
+        if (isCreated && !isStoped) {
+            ToastUtil.showToast(context, message)
         }
-        super.onDestroy()
     }
+
+    override fun toastSuc(strId: Int) {
+        if (isCreated && !isStoped) {
+            ToastUtil.showToast(context, getString(strId))
+        }
+    }
+
+    override fun toastFailed(message: String) {
+        if (isCreated && !isStoped) {
+            ToastUtil.showToast(context, message)
+        }
+    }
+
+    override fun toastFailed(strId: Int) {
+        if (isCreated && !isStoped) {
+            ToastUtil.showToast(context, getString(strId))
+        }
+    }
+
+    override fun getLifecycleOwner(): LifecycleOwner = this
+
+
+    override fun getContext(): Context? = super.getContext()
+
+
+    abstract fun getLayoutId(): Int
+
+    abstract fun initUI(savedInstanceState: Bundle?)
+
+    abstract fun initData(savedInstanceState: Bundle?)
+
+    abstract fun initListener()
+
+
 }

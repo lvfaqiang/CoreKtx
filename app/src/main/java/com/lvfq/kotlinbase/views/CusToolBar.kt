@@ -73,7 +73,6 @@ class CusToolBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Re
     }
 
     init {
-
         val types = context.obtainStyledAttributes(attrs, R.styleable.CusToolBar)
 
         leftImg = types.getResourceId(R.styleable.CusToolBar_leftImg, leftImg)
@@ -101,16 +100,6 @@ class CusToolBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Re
         this.layoutParams.apply {
             height = DPUtil.dip2px(44f)
         }
-//        viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
-//            override fun onGlobalLayout() {
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-//                    viewTreeObserver.removeOnGlobalLayoutListener(this)
-//                } else {
-//                    viewTreeObserver.removeGlobalOnLayoutListener(this)
-//                }
-//                layoutParams.height = DPUtil.dip2px(45f)
-//            }
-//        })
     }
 
     /**

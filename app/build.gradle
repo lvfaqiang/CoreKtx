@@ -3,65 +3,52 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
-apply plugin: 'kotlin-kapt' // kapt 插件
-
 android {
-    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    compileSdkVersion 27
     defaultConfig {
-        applicationId rootProject.ext.android.applicationId
-        minSdkVersion rootProject.ext.android.minSdkVersion
-        targetSdkVersion rootProject.ext.android.targetSdkVersion
-        versionCode rootProject.ext.android.versionCode
-        versionName rootProject.ext.android.versionName
-        multiDexEnabled rootProject.ext.android.multiDexEnabled
+        applicationId "com.lvfq.kotlinbase"
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            zipAlignEnabled true
+            // 移除无用资源文件
+//            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "${variant.productFlavors[0].name}_v${defaultConfig.versionName}.apk"
+                }
+            }
+        }
+
+        debug {
+            minifyEnabled false
+        }
     }
 
     flavorDimensions 'main'
     productFlavors {
+        // 测试环境
+        staging {
+            buildConfigField("String", "BASE_URL", '"https://www.test.com/"')
 
-        flavors_dev {
             dimension 'main'
-            buildConfigField("String", "HttpUrl", '\" app.build.gradle 配置的请求地址\"')
-//            buildConfigField("String", "HttpUrl", rootProject.ext.contacts["HttpUrl"])
         }
+        // 生成环境
+        product {
+            buildConfigField("String", "BASE_URL", '"https://www.product.com/"')
 
-        flavors_rel {
             dimension 'main'
-            buildConfigField("String", "HttpUrl", rootProject.ext.contacts.HttpUrl)
         }
-    }
-//    File file = file(rootProject.ext.signing.storeFile)
-//    signingConfigs {
-//        release {
-//            storeFile file
-//            storePassword rootProject.ext.signing.storePassword
-//            keyAlias rootProject.ext.signing.keyAlias
-//            keyPassword rootProject.ext.signing.keyPassword
-//        }
-//    }
-    buildTypes {
-        release {
-            buildConfigField("boolean", "LvLOG", "false")
-            minifyEnabled false
-            // 移除无用资源文件
-//            shrinkResources true
-//            if (file.exists()) {
-//                signingConfig signingConfigs.release
-//            }
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-
-        debug {
-            buildConfigField("boolean", "LvLOG", "true")
-//            if (file.exists()) {
-//                signingConfig signingConfigs.release
-//            }
-        }
-    }
-
-    androidExtensions {
-        experimental = true
     }
 
     // 过滤警告
@@ -73,69 +60,68 @@ android {
     dexOptions {
         javaMaxHeapSize "2g"
     }
-    buildToolsVersion '27.0.3'
+
+    // 开启一些试验性功能 ，Parceable 注解，协程等。
+    androidExtensions {
+        experimental = true
+    }
+}
+
+kotlin {             //开始协程实验性功能
+    experimental {
+        coroutines 'enable'
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation rootProject.ext.dependencies["appcompat-v7"]
-    implementation rootProject.ext.dependencies["constraint-layout"]
-    implementation rootProject.ext.dependencies["multidex"]
+    // Kotlin 协程
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:0.22.5'
 
-    implementation rootProject.ext.dependencies["recyclerview-v7"]
-    implementation rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 
-    //AndroidUtils
-    implementation rootProject.ext.dependencies["AndroidUtils"]
+    // RecyclerView
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
 
-    // Retrofit  And  RxJava
-    implementation rootProject.ext.dependencies["retrofit"]
-    implementation rootProject.ext.dependencies["converter-scalars"]
-    implementation rootProject.ext.dependencies["converter-gson"]
-    implementation rootProject.ext.dependencies["adapter-rxjava2"]
-    implementation rootProject.ext.dependencies["rxandroid"]
-
-    // RxPersmissions
-    implementation rootProject.ext.dependencies["rxpermissions"]
-
-    //   Rxlifecycle
-    implementation rootProject.ext.dependencies["rxlifecycle"]
-    implementation rootProject.ext.dependencies["rxlifecycle-components"]
-
-    // local Storage
-    implementation rootProject.ext.dependencies["hawk"]
-
-    //Dagger2
-//    implementation rootProject.ext.dependencies["dagger"]
-//    kapt rootProject.ext.dependencies["dagger-compiler"]
-
-    // Dagger.android
-    implementation rootProject.ext.dependencies["dagger-android"]
-    implementation rootProject.ext.dependencies["dagger-android-support"]   // 如果使用 support library
-    kapt rootProject.ext.dependencies["dagger-android-processor"]
-
-    // android.arch.lifecycle 库 ，liveData、ViewModel..
-    implementation rootProject.ext.dependencies["extensions"]
-    kapt rootProject.ext.dependencies["compiler"]
-    implementation rootProject.ext.dependencies["common-java8"]
-
-    // Glide
-    implementation rootProject.ext.dependencies["glide"]
+    // RecyclerView Adapter
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.41'
 
     // EventBus
-    implementation rootProject.ext.dependencies["eventbus"]
+    implementation 'org.greenrobot:eventbus:3.1.1'
 
-    // 检测内存泄漏
-    debugCompile rootProject.ext.dependencies["leakcanary-android"]
-    releaseCompile rootProject.ext.dependencies["leakcanary-android-no-op"]
+    // Retrofit2  、 RxJava 、RxAndroid
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.4.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
 
-    // localStorage
+    // RxPermissions
+    implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
+
+    //   Rxlifecycle
+    implementation 'com.trello.rxlifecycle2:rxlifecycle-android-lifecycle-kotlin:2.2.2'
+
+    // local Storage
     implementation 'com.orhanobut:hawk:2.0.1'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+
+    // 分包
+    implementation 'com.android.support:multidex:1.0.3'
+
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+
+    // 用于处理 arch.core:common 包下的 Function 冲突
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
+
+    //AndroidUtils
+    implementation 'com.lfq:AndroidUtils:2.0.5'
+
 }
