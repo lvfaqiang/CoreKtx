@@ -58,7 +58,7 @@ object TimeConverts {
         return gpsUTCDate?.time ?: 0
     }
 
-    fun getTimeLong(date: String?, format: String = DEFAULT_FORMAT): Long {
+    fun format(date: String?, format: String = DEFAULT_FORMAT): Long {
         if (date.isNullOrEmpty()) {
             return 0L
         }
@@ -69,5 +69,19 @@ object TimeConverts {
     fun format(date: Long, format: String): String? {
         val sdf = SimpleDateFormat(format, Locale.getDefault())
         return sdf.format(Date(date))
+    }
+
+    /**
+     * 获取当前年份
+     */
+    fun getCurYear(): Int {
+        return Calendar.getInstance().get(Calendar.YEAR)
+    }
+
+    /**
+     * 获取当前月份
+     */
+    fun getCurMonth(): Int {
+        return Calendar.getInstance().get(Calendar.MONTH) + 1
     }
 }
