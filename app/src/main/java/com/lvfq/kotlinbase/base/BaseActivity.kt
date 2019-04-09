@@ -7,7 +7,7 @@ import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.WindowManager
-import com.lvfq.kotlinbase.ext.activity.fullScreen
+import com.lvfq.kotlinbase.kotlinx.activity.fullScreen
 import com.lvfq.kotlinbase.utils.basic.FragmentUtil
 import com.lvfq.kotlinbase.utils.basic.LogUtil
 import com.lvfq.kotlinbase.utils.basic.ToastUtil

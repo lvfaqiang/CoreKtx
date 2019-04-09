@@ -1,4 +1,4 @@
-package com.lvfq.kotlinbase.ext.scheduler
+package com.lvfq.kotlinbase.kotlinx.scheduler
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleOwner

@@ -8,7 +8,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import com.lvfq.kotlinbase.R
-import com.lvfq.kotlinbase.ext.scheduler.applyScheduler
+import com.lvfq.kotlinbase.kotlinx.scheduler.applyScheduler
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import java.util.concurrent.TimeUnit

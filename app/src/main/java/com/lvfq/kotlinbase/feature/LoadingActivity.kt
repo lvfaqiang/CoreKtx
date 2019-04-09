@@ -3,8 +3,8 @@ package com.lvfq.kotlinbase.feature
 import android.arch.lifecycle.Lifecycle
 import android.os.Bundle
 import com.lvfq.kotlinbase.base.BaseActivity
-import com.lvfq.kotlinbase.ext.activity.startActivity
-import com.lvfq.kotlinbase.ext.scheduler.applyScheduler
+import com.lvfq.kotlinbase.kotlinx.activity.startActivity
+import com.lvfq.kotlinbase.kotlinx.scheduler.applyScheduler
 import io.reactivex.Observable
 import java.util.concurrent.TimeUnit
 

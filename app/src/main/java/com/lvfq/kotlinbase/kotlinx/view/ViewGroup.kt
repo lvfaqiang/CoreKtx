@@ -2,7 +2,7 @@
 
 // Aliases to other public API.
 
-package com.lvfq.kotlinbase.ext.view
+package com.lvfq.kotlinbase.kotlinx.view
 
 /*
  * Copyright (C) 2017 The Android Open Source Project

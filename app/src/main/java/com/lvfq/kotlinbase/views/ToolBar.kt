@@ -7,9 +7,9 @@ import android.view.View
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.lvfq.kotlinbase.R
-import com.lvfq.kotlinbase.ext.content.withStyledAttributes
-import com.lvfq.kotlinbase.ext.view.Position
-import com.lvfq.kotlinbase.ext.view.drawable
+import com.lvfq.kotlinbase.kotlinx.content.withStyledAttributes
+import com.lvfq.kotlinbase.kotlinx.view.Position
+import com.lvfq.kotlinbase.kotlinx.view.drawable
 import kotlinx.android.synthetic.main.layout_tool_bar.view.*
 
 /**

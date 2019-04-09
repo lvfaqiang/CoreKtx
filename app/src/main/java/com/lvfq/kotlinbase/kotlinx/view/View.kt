@@ -2,7 +2,7 @@
 
 // Aliases to other public API.
 
-package com.lvfq.kotlinbase.ext.view
+package com.lvfq.kotlinbase.kotlinx.view
 
 import android.support.annotation.DrawableRes
 import android.support.annotation.Px

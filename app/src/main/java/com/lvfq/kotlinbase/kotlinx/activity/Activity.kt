@@ -1,4 +1,4 @@
-package com.lvfq.kotlinbase.ext.activity
+package com.lvfq.kotlinbase.kotlinx.activity
 
 import android.app.Activity
 import android.content.Intent

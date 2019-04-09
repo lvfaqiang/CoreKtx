@@ -16,10 +16,10 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.lvfq.kotlinbase.R
-import com.lvfq.kotlinbase.ext.content.px2dp
-import com.lvfq.kotlinbase.ext.resource.getDraw
-import com.lvfq.kotlinbase.ext.view.gone
-import com.lvfq.kotlinbase.ext.view.visible
+import com.lvfq.kotlinbase.kotlinx.content.px2dp
+import com.lvfq.kotlinbase.kotlinx.resource.getDraw
+import com.lvfq.kotlinbase.kotlinx.view.gone
+import com.lvfq.kotlinbase.kotlinx.view.visible
 
 /**
  * InputEditText

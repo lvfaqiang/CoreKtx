@@ -1,4 +1,4 @@
-package com.lvfq.kotlinbase.ext.resource
+package com.lvfq.kotlinbase.kotlinx.resource
 
 import android.content.res.Resources
 import android.graphics.drawable.Drawable

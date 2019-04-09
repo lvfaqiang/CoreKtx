@@ -1,4 +1,4 @@
-package com.lvfq.kotlinbase.ext.fragment
+package com.lvfq.kotlinbase.kotlinx.fragment
 
 import android.app.Activity
 import android.content.Intent
