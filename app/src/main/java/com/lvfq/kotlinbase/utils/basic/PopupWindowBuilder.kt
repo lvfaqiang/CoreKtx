@@ -46,15 +46,14 @@ class PopupWindowBuilder {
     }
 
     private fun buildPopupWindow(view: View): PopupWindow {
-        val popupWindow = PopupWindow()
-
-        popupWindow.contentView = view
-        popupWindow.width = width
-        popupWindow.height = height
-        popupWindow.setBackgroundDrawable(BitmapDrawable())
-        popupWindow.isOutsideTouchable = mOutsideTouchable
-        popupWindow.isTouchable = mTouchable
-        popupWindow.isFocusable = true
-        return popupWindow
+        return PopupWindow().apply {
+            contentView = view
+            width = width
+            height = height
+            setBackgroundDrawable(BitmapDrawable())
+            isOutsideTouchable = mOutsideTouchable
+            isTouchable = mTouchable
+            isFocusable = true
+        }
     }
 }

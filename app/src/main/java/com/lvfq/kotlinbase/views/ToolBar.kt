@@ -73,16 +73,16 @@ class ToolBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Relat
     }
 
     init {
-        val types = context.obtainStyledAttributes(attrs, R.styleable.CusToolBar)
+        val types = context.obtainStyledAttributes(attrs, R.styleable.ToolBar)
 
-        leftImg = types.getResourceId(R.styleable.CusToolBar_leftImg, leftImg)
-        titleText = types.getString(R.styleable.CusToolBar_titleText) ?: titleText
-        titleSize = types.getInt(R.styleable.CusToolBar_titleSize, titleSize.toInt()).toFloat()
-        titleColor = types.getColor(R.styleable.CusToolBar_titleColor, titleColor)
+        leftImg = types.getResourceId(R.styleable.ToolBar_leftImg, leftImg)
+        titleText = types.getString(R.styleable.ToolBar_titleText) ?: titleText
+        titleSize = types.getInt(R.styleable.ToolBar_titleSize, titleSize.toInt()).toFloat()
+        titleColor = types.getColor(R.styleable.ToolBar_titleColor, titleColor)
 
-        rightText = types.getString(R.styleable.CusToolBar_rightText) ?: rightText
-        rightTextSize = types.getInt(R.styleable.CusToolBar_rightTextSize, rightTextSize.toInt()).toFloat()
-        rightTextColor = types.getColor(R.styleable.CusToolBar_rightTextColor, rightTextColor)
+        rightText = types.getString(R.styleable.ToolBar_rightText) ?: rightText
+        rightTextSize = types.getInt(R.styleable.ToolBar_rightTextSize, rightTextSize.toInt()).toFloat()
+        rightTextColor = types.getColor(R.styleable.ToolBar_rightTextColor, rightTextColor)
 
         types.recycle()
 

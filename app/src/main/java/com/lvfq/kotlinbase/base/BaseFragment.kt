@@ -33,12 +33,6 @@ abstract class BaseFragment : Fragment(), ISimpleBase {
         FragmentUtil(childFragmentManager)
     }
 
-    var isCreated = false
-        private set
-
-    var isStoped = false
-        private set
-
     private var mLoadingView: ILoading? = null
     private var loadingCount: Int = 0
 
@@ -65,8 +59,6 @@ abstract class BaseFragment : Fragment(), ISimpleBase {
         if (useEventBus()) {
             EventBus.getDefault().register(this)
         }
-        isCreated = true
-
         initUI(savedInstanceState)
         initListener()
     }
@@ -74,16 +66,6 @@ abstract class BaseFragment : Fragment(), ISimpleBase {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initData(savedInstanceState)
-    }
-
-    override fun onResume() {
-        isStoped = false
-        super.onResume()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        isStoped = true
     }
 
     override fun onDestroyView() {
@@ -97,7 +79,7 @@ abstract class BaseFragment : Fragment(), ISimpleBase {
         mLoadingView?.let { loading ->
             loadingCount++
             loading.takeIf {
-                !loading.isShowing() && isCreated && !isStoped
+                !loading.isShowing() && !isResumed
             }?.let {
                 loading.show()
             }
@@ -122,25 +104,25 @@ abstract class BaseFragment : Fragment(), ISimpleBase {
     }
 
     override fun toastSuc(message: String) {
-        if (isCreated && !isStoped) {
+        if (isResumed) {
             ToastUtil.showToast(context, message)
         }
     }
 
     override fun toastSuc(strId: Int) {
-        if (isCreated && !isStoped) {
+        if (isResumed) {
             ToastUtil.showToast(context, getString(strId))
         }
     }
 
     override fun toastFailed(message: String) {
-        if (isCreated && !isStoped) {
+        if (isResumed) {
             ToastUtil.showToast(context, message)
         }
     }
 
     override fun toastFailed(strId: Int) {
-        if (isCreated && !isStoped) {
+        if (isResumed) {
             ToastUtil.showToast(context, getString(strId))
         }
     }
