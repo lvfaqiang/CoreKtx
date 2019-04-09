@@ -26,10 +26,7 @@ import org.greenrobot.eventbus.EventBus
  */
 abstract class BaseActivity : AppCompatActivity(), ISimpleBase {
 
-    var isCreated = false
-        private set
-
-    var isStoped = false
+    var isResumed = false
         private set
 
     var isFirst = true
@@ -78,7 +75,6 @@ abstract class BaseActivity : AppCompatActivity(), ISimpleBase {
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        isCreated = true
 
         if (useEventBus()) EventBus.getDefault().register(this)
 
@@ -90,16 +86,20 @@ abstract class BaseActivity : AppCompatActivity(), ISimpleBase {
     }
 
     override fun onResume() {
-        isStoped = false
         if (isFirst) {
             isFirst = false
         }
         super.onResume()
+        isResumed = true
+    }
+
+    override fun onPause() {
+        super.onPause()
+        isResumed = false
     }
 
     override fun onStop() {
         super.onStop()
-        isStoped = true
     }
 
     // -------------
@@ -108,7 +108,7 @@ abstract class BaseActivity : AppCompatActivity(), ISimpleBase {
         mLoadingView?.let { loading ->
             loadingCount++
             loading.takeIf {
-                !loading.isShowing() && isCreated && !isStoped
+                !loading.isShowing() && !isResumed
             }?.let {
                 loading.show()
             }
@@ -134,25 +134,25 @@ abstract class BaseActivity : AppCompatActivity(), ISimpleBase {
     }
 
     override fun toastSuc(message: String) {
-        if (isCreated && !isStoped) {
+        if (isResumed) {
             ToastUtil.showToast(this, message)
         }
     }
 
     override fun toastSuc(strId: Int) {
-        if (isCreated && !isStoped) {
+        if (isResumed) {
             ToastUtil.showToast(this, getString(strId))
         }
     }
 
     override fun toastFailed(message: String) {
-        if (isCreated && !isStoped) {
+        if (isResumed) {
             ToastUtil.showToast(this, message)
         }
     }
 
     override fun toastFailed(strId: Int) {
-        if (isCreated && !isStoped) {
+        if (isResumed) {
             ToastUtil.showToast(this, getString(strId))
         }
     }

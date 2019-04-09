@@ -13,26 +13,27 @@ import io.reactivex.disposables.Disposable
  * @desc :
  *
  */
-abstract class BaseObserver<T> : Observer<T> {
+abstract class BaseObserver<T>
+@JvmOverloads constructor(open var iBase: IBase?,open var errorMsg: String = "",open var view: View?) : Observer<T> {
 
-    protected var iBase: IBase?
-    protected var errorMsg: String = ""
-    protected var view: View? = null
+//    protected var iBase: IBase?
+//    protected var errorMsg: String = ""
+//    protected var view: View? = null
 
     // -------------   构造函数     -----------
-    constructor(iBase: IBase?, errorMsg: String = "", view: View?) {
-        this.iBase = iBase
-        this.errorMsg = errorMsg
-        this.view = view
-    }
+//    @JvmOverloads constructor(iBase: IBase?, errorMsg: String = "", view: View?) {
+//        this.iBase = iBase
+//        this.errorMsg = errorMsg
+//        this.view = view
+//    }
 
-    constructor(iBase: IBase?, errorMsg: String) : this(iBase, errorMsg, null)
-
-    constructor(iBase: IBase?, view: View?) : this(iBase, "", view)
-
-    constructor(iBase: IBase?) : this(iBase, null)
-
-    constructor() : this(null)
+//    constructor(iBase: IBase?, errorMsg: String) : this(iBase, errorMsg, null)
+//
+//    constructor(iBase: IBase?, view: View?) : this(iBase, "", view)
+//
+//    constructor(iBase: IBase?) : this(iBase, null)
+//
+//    constructor() : this(null)
 
     // ---------------  End         ----------
 

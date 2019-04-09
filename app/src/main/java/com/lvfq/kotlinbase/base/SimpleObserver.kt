@@ -10,19 +10,23 @@ import android.view.View
  * @desc :
  *
  */
-abstract class SimpleObserver<T> : BaseObserver<ApiBaseRsp<T>> {
+abstract class SimpleObserver<T>
+@JvmOverloads constructor(override var iBase: IBase?,
+                          override var errorMsg: String = "",
+                          override var view: View?)
+    : BaseObserver<ApiBaseRsp<T>>(iBase, errorMsg, view) {
 
-    // -------------   构造函数     -----------
-    constructor(iBase: IBase?, errorMsg: String, view: View?) : super(iBase, errorMsg, view)
-
-    constructor(iBase: IBase?, errorMsg: String) : super(iBase, errorMsg, null)
-
-    constructor(iBase: IBase?, view: View?) : super(iBase, "", view)
-
-    constructor(iBase: IBase?) : super(iBase, "", null)
-
-    constructor() : super(null, "", null)
-    // ---------------  End         ----------
+//    // -------------   构造函数     -----------
+//    constructor(iBase: IBase?, errorMsg: String, view: View?) : super(iBase, errorMsg, view)
+//
+//    constructor(iBase: IBase?, errorMsg: String) : super(iBase, errorMsg, null)
+//
+//    constructor(iBase: IBase?, view: View?) : super(iBase, "", view)
+//
+//    constructor(iBase: IBase?) : super(iBase, "", null)
+//
+//    constructor() : super(null, "", null)
+//    // ---------------  End         ----------
 
 
     abstract fun onSuccess(t: T?, metaRsp: MetaRsp?)
