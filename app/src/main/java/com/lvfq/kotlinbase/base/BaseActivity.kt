@@ -14,7 +14,7 @@ import com.lvfq.kotlinbase.R
 import com.lvfq.kotlinbase.kotlinx.activity.fullScreen
 import com.lvfq.kotlinbase.utils.basic.FragmentUtil
 import com.lvfq.kotlinbase.utils.basic.LogUtil
-import com.lvfq.kotlinbase.utils.basic.Screen
+import com.lvfq.kotlinbase.utils.basic.ScreenUtil
 import com.lvfq.kotlinbase.utils.basic.ToastUtil
 import com.lvfq.kotlinbase.views.ILoading
 import com.lvfq.kotlinbase.views.LoadingView
@@ -85,7 +85,7 @@ abstract class BaseActivity : AppCompatActivity(), ISimpleBase {
                 val mRootLayout = LayoutInflater.from(this).inflate(R.layout.root_layout, null, false) as LinearLayout
                 val mStatusBarView = mRootLayout.getChildAt(0)
                 val statusBarLayoutParams = mStatusBarView.layoutParams
-                statusBarLayoutParams.height = Screen.getStatusBarHeight()
+                statusBarLayoutParams.height = ScreenUtil.getStatusBarHeight(this)
                 mStatusBarView.layoutParams = statusBarLayoutParams
 
                 LayoutInflater.from(this).inflate(getLayoutId(), mRootLayout, true)

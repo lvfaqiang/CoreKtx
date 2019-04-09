@@ -189,9 +189,3 @@ fun Context.px2sp(pxValue: Float): Int {
 }
 
 
-inline val Context.screenHeight
-    get() = this.resources.displayMetrics.heightPixels
-
-
-inline val Context.screenWidth
-    get() = this.resources.displayMetrics.widthPixels
