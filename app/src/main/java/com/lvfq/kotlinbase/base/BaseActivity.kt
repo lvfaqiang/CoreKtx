@@ -6,10 +6,15 @@ import android.content.DialogInterface
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
 import android.view.WindowManager
+import android.widget.LinearLayout
+import com.lvfq.kotlinbase.R
 import com.lvfq.kotlinbase.kotlinx.activity.fullScreen
 import com.lvfq.kotlinbase.utils.basic.FragmentUtil
 import com.lvfq.kotlinbase.utils.basic.LogUtil
+import com.lvfq.kotlinbase.utils.basic.Screen
 import com.lvfq.kotlinbase.utils.basic.ToastUtil
 import com.lvfq.kotlinbase.views.ILoading
 import com.lvfq.kotlinbase.views.LoadingView
@@ -68,8 +73,24 @@ abstract class BaseActivity : AppCompatActivity(), ISimpleBase {
             }
         })
 
-        if (getLayoutId() != 0) {
-            setContentView(getLayoutId())
+        initStatusBar()
+    }
+
+    private fun initStatusBar() {
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        if (getLayoutId() > 0) {
+            if (isFullScreen()) {
+                setContentView(getLayoutId())
+            } else {
+                val mRootLayout = LayoutInflater.from(this).inflate(R.layout.root_layout, null, false) as LinearLayout
+                val mStatusBarView = mRootLayout.getChildAt(0)
+                val statusBarLayoutParams = mStatusBarView.layoutParams
+                statusBarLayoutParams.height = Screen.getStatusBarHeight()
+                mStatusBarView.layoutParams = statusBarLayoutParams
+
+                LayoutInflater.from(this).inflate(getLayoutId(), mRootLayout, true)
+                setContentView(mRootLayout)
+            }
         }
     }
 
@@ -170,5 +191,9 @@ abstract class BaseActivity : AppCompatActivity(), ISimpleBase {
     abstract fun initData(savedInstanceState: Bundle?)
 
     abstract fun initListener()
+
+    fun isFullScreen(): Boolean {
+        return false
+    }
 
 }
