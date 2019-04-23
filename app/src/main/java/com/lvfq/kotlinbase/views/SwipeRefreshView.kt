@@ -18,9 +18,9 @@ import com.lvfq.kotlinbase.R
  * @desc :
  *
  */
-class SwipeRefreshView(context: Context, attrs: AttributeSet?) : SwipeRefreshLayout(context, attrs), BaseQuickAdapter.RequestLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
-
-    constructor(context: Context) : this(context, null)
+class SwipeRefreshView
+@JvmOverloads constructor(context: Context, attrs: AttributeSet? = null)
+    : SwipeRefreshLayout(context, attrs), BaseQuickAdapter.RequestLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
 
     private val DEFAULT_PAGE = AppConst.PAGE
 

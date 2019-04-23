@@ -29,11 +29,9 @@ import com.lvfq.kotlinbase.kotlinx.view.visible
  * @desc :
  *
  */
-class InputEditText(context: Context, attributeSet: AttributeSet? = null, defStyleAttr: Int = 0) : RelativeLayout(context, attributeSet, defStyleAttr) {
-
-    constructor(context: Context, attributeSet: AttributeSet?) : this(context, attributeSet, 0)
-    constructor(context: Context) : this(context, null)
-
+class InputEditText
+@JvmOverloads constructor(context: Context, attributeSet: AttributeSet? = null, defStyleAttr: Int = 0)
+    : RelativeLayout(context, attributeSet, defStyleAttr) {
 
     private var singleLine = true
     private var textSize = 14f

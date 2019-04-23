@@ -52,9 +52,13 @@ class DrawableBuilder(val context: Context) {
 
     fun build(): Drawable {
         val drawable = GradientDrawable().apply {
-            setColor(solidColor)
-            setStroke(TypedValue.applyDimension(strokeUnit, strokeWidth, context.resources.displayMetrics).toInt(),
-                    strokColor)
+            if (solidColor != 0) {
+                setColor(solidColor)
+            }
+            if (strokColor != 0 && strokeWidth != 0f) {
+                setStroke(TypedValue.applyDimension(strokeUnit, strokeWidth, context.resources.displayMetrics).toInt(),
+                        strokColor)
+            }
             cornerRadius = TypedValue.applyDimension(radiusUnit, radius, context.resources.displayMetrics)
         }
         return drawable

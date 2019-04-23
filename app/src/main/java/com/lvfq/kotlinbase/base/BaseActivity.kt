@@ -31,7 +31,7 @@ import org.greenrobot.eventbus.EventBus
  */
 abstract class BaseActivity : AppCompatActivity(), ISimpleBase {
 
-    var isResumed = false
+    var isOnResumed = false
         private set
 
     var isFirst = true
@@ -111,12 +111,12 @@ abstract class BaseActivity : AppCompatActivity(), ISimpleBase {
             isFirst = false
         }
         super.onResume()
-        isResumed = true
+        isOnResumed = true
     }
 
     override fun onPause() {
         super.onPause()
-        isResumed = false
+        isOnResumed = false
     }
 
     override fun onStop() {
@@ -129,7 +129,7 @@ abstract class BaseActivity : AppCompatActivity(), ISimpleBase {
         mLoadingView?.let { loading ->
             loadingCount++
             loading.takeIf {
-                !loading.isShowing() && !isResumed
+                !loading.isShowing() && !isOnResumed
             }?.let {
                 loading.show()
             }
@@ -155,25 +155,25 @@ abstract class BaseActivity : AppCompatActivity(), ISimpleBase {
     }
 
     override fun toastSuc(message: String) {
-        if (isResumed) {
+        if (isOnResumed) {
             ToastUtil.showToast(this, message)
         }
     }
 
     override fun toastSuc(strId: Int) {
-        if (isResumed) {
+        if (isOnResumed) {
             ToastUtil.showToast(this, getString(strId))
         }
     }
 
     override fun toastFailed(message: String) {
-        if (isResumed) {
+        if (isOnResumed) {
             ToastUtil.showToast(this, message)
         }
     }
 
     override fun toastFailed(strId: Int) {
-        if (isResumed) {
+        if (isOnResumed) {
             ToastUtil.showToast(this, getString(strId))
         }
     }

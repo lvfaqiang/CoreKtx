@@ -20,11 +20,9 @@ import kotlinx.android.synthetic.main.layout_tool_bar.view.*
  * @desc :
  *
  */
-class ToolBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : RelativeLayout(context, attrs, defStyleAttr) {
-
-    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
-
-    constructor(context: Context) : this(context, null)
+class ToolBar
+@JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
+    : RelativeLayout(context, attrs, defStyleAttr) {
 
     private var leftImg: Int = 0
     private var titleText: String = ""
@@ -51,11 +49,16 @@ class ToolBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Relat
             rightTextColor = getColor(R.styleable.ToolBar_rightTextColor, rightTextColor)
         }
 
-
-//        leftImageView.visibility = if (leftImg == 0) View.GONE else View.VISIBLE
-//        titleTextView.visibility = if (titleText.isEmpty()) View.GONE else View.VISIBLE
-//        rightTextView.visibility = if (TextUtils.isEmpty(rightText)) View.GONE else View.VISIBLE
-
+        toolBar_tv_title.apply {
+            setTextColor(titleColor)
+            textSize = titleSize
+            text = titleText
+        }
+        toolBar_tv_right.apply {
+            setTextColor(rightTextColor)
+            text = rightText
+            textSize = rightTextSize
+        }
 
     }
 
@@ -63,8 +66,9 @@ class ToolBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Relat
     fun setBack(activity: Activity?, drawId: Int = 0): ToolBar {
         if (drawId == 0) {
 //            toolBar_tv_left.drawable(R.drawable.icon_back, Position.LEFT)
+        } else {
+            toolBar_tv_left.drawable(drawId, Position.LEFT)
         }
-        toolBar_tv_left.drawable(drawId, Position.LEFT)
         toolBar_tv_left.setOnClickListener {
             activity?.finish()
         }
