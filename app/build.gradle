@@ -4,13 +4,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     defaultConfig {
-        applicationId "com.lvfq.kotlinbase"
         minSdkVersion 15
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0.0"
+        targetSdkVersion 28
+
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -39,13 +37,27 @@ android {
     productFlavors {
         // 测试环境
         staging {
-            buildConfigField("String", "BASE_URL", '"https://www.test.com/"')
+            applicationId "com.lvfq.kotlinbase"
+            versionCode 1
+            versionName "1.0.0"
 
+            buildConfigField("String", "BASE_URL", '"https://www.test.com/"')
+            buildConfigField("String", "SP_CACHE_NAME", '"Staging"')
+            /**
+             * manifest 中的占位符写法。
+             */
+//            manifestPlaceholders = [app_name: ""]
             dimension 'main'
         }
         // 生产环境
         product {
+
+            applicationId "com.lvfq.kotlinbase"
+            versionCode 1
+            versionName "1.0.0"
+
             buildConfigField("String", "BASE_URL", '"https://www.product.com/"')
+            buildConfigField("String", "SP_CACHE_NAME", '"Prod"')
 
             dimension 'main'
         }
@@ -81,14 +93,14 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     // Kotlin 协程
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:0.22.5'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.2.1'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 
     // RecyclerView
-    implementation 'com.android.support:recyclerview-v7:27.1.1'
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
 
     // RecyclerView Adapter
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.41'
@@ -97,11 +109,11 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.1.1'
 
     // Retrofit2  、 RxJava 、RxAndroid
-    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
-    implementation 'com.squareup.retrofit2:converter-scalars:2.4.0'
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.5.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
 
     // RxPermissions
     implementation 'com.github.tbruyelle:rxpermissions:0.10.2'

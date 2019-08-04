@@ -2,6 +2,7 @@ package com.lvfq.kotlinbase.config
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.lvfq.kotlinbase.BuildConfig
 import com.orhanobut.hawk.Hawk
 import com.orhanobut.hawk.Storage
 
@@ -18,7 +19,7 @@ object HawkConfig {
 
     fun init(context: Context) {
         Hawk.init(context)
-                .setStorage(HawkStorage(context, "SpCacheFile"))
+                .setStorage(HawkStorage(context, BuildConfig.SP_CACHE_NAME))
                 .build()
     }
 }
