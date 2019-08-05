@@ -2,7 +2,6 @@ package com.lvfq.kotlinbase.base
 
 import android.arch.lifecycle.LifecycleOwner
 import android.content.Context
-import android.content.DialogInterface
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -46,7 +45,6 @@ abstract class BaseActivity : AppCompatActivity(), ISimpleBase {
     }
 
     private var mLoadingView: ILoading? = null
-    private var loadingCount: Int = 0
 
     /**
      *  横屏 or 竖屏  ， default 竖屏
@@ -67,11 +65,6 @@ abstract class BaseActivity : AppCompatActivity(), ISimpleBase {
         super.onCreate(savedInstanceState)
 
         mLoadingView = LoadingView(this)
-        mLoadingView?.setOnDismissListener(DialogInterface.OnDismissListener {
-            if (loadingCount != 0) {
-                loadingCount = 0
-            }
-        })
 
         initStatusBar()
     }
@@ -127,7 +120,6 @@ abstract class BaseActivity : AppCompatActivity(), ISimpleBase {
     override fun showLoading() {
         LogUtil.i("loading", "showloading -------")
         mLoadingView?.let { loading ->
-            loadingCount++
             loading.takeIf {
                 !loading.isShowing() && !isOnResumed
             }?.let {
@@ -138,20 +130,7 @@ abstract class BaseActivity : AppCompatActivity(), ISimpleBase {
 
     override fun disLoading() {
         LogUtil.i("loading", "disLoading -------")
-        if (mLoadingView != null) {
-            if (loadingCount > 0) {
-                loadingCount--
-            }
-            takeIf {
-                mLoadingView?.isShowing() == true
-            }?.let {
-                if (loadingCount == 0) {
-                    mLoadingView?.dismiss()
-                }
-            }
-        } else {
-            loadingCount = 0
-        }
+        mLoadingView?.dismiss()
     }
 
     override fun toastSuc(message: String) {

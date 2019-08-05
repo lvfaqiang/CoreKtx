@@ -34,7 +34,6 @@ abstract class BaseFragment : Fragment(), ISimpleBase {
     }
 
     private var mLoadingView: ILoading? = null
-    private var loadingCount: Int = 0
 
     protected var mContentView: View? = null
 
@@ -42,12 +41,9 @@ abstract class BaseFragment : Fragment(), ISimpleBase {
 
         mLoadingView = LoadingView(this.requireContext())
         mLoadingView?.setOnDismissListener(DialogInterface.OnDismissListener {
-            if (loadingCount != 0) {
-                loadingCount = 0
-            }
         })
 
-        if (getLayoutId() != 0) {
+        if (getLayoutId() != 0 && mContentView == null) {
             mContentView = inflater.inflate(getLayoutId(), container, false)
             return mContentView
         }
@@ -77,7 +73,6 @@ abstract class BaseFragment : Fragment(), ISimpleBase {
 
     override fun showLoading() {
         mLoadingView?.let { loading ->
-            loadingCount++
             loading.takeIf {
                 !loading.isShowing() && !isResumed
             }?.let {
@@ -87,20 +82,7 @@ abstract class BaseFragment : Fragment(), ISimpleBase {
     }
 
     override fun disLoading() {
-        if (mLoadingView != null) {
-            if (loadingCount > 0) {
-                loadingCount--
-            }
-            takeIf {
-                mLoadingView?.isShowing() == true
-            }?.let {
-                if (loadingCount == 0) {
-                    mLoadingView?.dismiss()
-                }
-            }
-        } else {
-            loadingCount = 0
-        }
+        mLoadingView?.dismiss()
     }
 
     override fun toastSuc(message: String) {
