@@ -26,6 +26,8 @@ interface ISimpleBase : IBase {
 
 interface IBase {
 
+    fun isFirst(): Boolean
+
     fun showLoading()
 
     fun disLoading()

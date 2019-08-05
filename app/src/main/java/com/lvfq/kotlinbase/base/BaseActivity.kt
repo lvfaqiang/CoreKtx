@@ -33,7 +33,7 @@ abstract class BaseActivity : AppCompatActivity(), ISimpleBase {
     var isOnResumed = false
         private set
 
-    var isFirst = true
+    var mIsFirst = true
         private set
 
     protected val mPermissions: RxPermissions by lazy {
@@ -50,6 +50,10 @@ abstract class BaseActivity : AppCompatActivity(), ISimpleBase {
      *  横屏 or 竖屏  ， default 竖屏
      */
     protected open fun isLandScape(): Boolean = false
+
+    override fun isFirst(): Boolean {
+        return mIsFirst
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -100,8 +104,8 @@ abstract class BaseActivity : AppCompatActivity(), ISimpleBase {
     }
 
     override fun onResume() {
-        if (isFirst) {
-            isFirst = false
+        if (mIsFirst) {
+            mIsFirst = false
         }
         super.onResume()
         isOnResumed = true

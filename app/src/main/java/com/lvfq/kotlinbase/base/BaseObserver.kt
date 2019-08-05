@@ -14,28 +14,7 @@ import io.reactivex.disposables.Disposable
  *
  */
 abstract class BaseObserver<T>
-@JvmOverloads constructor(open var iBase: IBase?,open var errorMsg: String = "",open var view: View?) : Observer<T> {
-
-//    protected var iBase: IBase?
-//    protected var errorMsg: String = ""
-//    protected var view: View? = null
-
-    // -------------   构造函数     -----------
-//    @JvmOverloads constructor(iBase: IBase?, errorMsg: String = "", view: View?) {
-//        this.iBase = iBase
-//        this.errorMsg = errorMsg
-//        this.view = view
-//    }
-
-//    constructor(iBase: IBase?, errorMsg: String) : this(iBase, errorMsg, null)
-//
-//    constructor(iBase: IBase?, view: View?) : this(iBase, "", view)
-//
-//    constructor(iBase: IBase?) : this(iBase, null)
-//
-//    constructor() : this(null)
-
-    // ---------------  End         ----------
+@JvmOverloads constructor(open var iBase: IBase? = null, open var view: View? = null) : Observer<T> {
 
 
     override fun onSubscribe(d: Disposable) {
@@ -71,16 +50,11 @@ abstract class BaseObserver<T>
 
 
     open fun onError(apiException: ApiException) {
-        iBase?.toastFailed(
-                if (errorMsg.isEmpty())
-                    apiException.message
-                else
-                    errorMsg
-        )
+        iBase?.toastFailed(apiException.message)
     }
 
 
-    private fun showLoading() {
+    open fun showLoading() {
         iBase?.showLoading()
     }
 

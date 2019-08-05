@@ -36,6 +36,12 @@ abstract class BaseFragment : Fragment(), ISimpleBase {
     private var mLoadingView: ILoading? = null
 
     protected var mContentView: View? = null
+    private var mIsFirst = true
+        private set
+
+    override fun isFirst(): Boolean {
+        return mIsFirst
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -62,6 +68,9 @@ abstract class BaseFragment : Fragment(), ISimpleBase {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initData(savedInstanceState)
+        if (mIsFirst) {
+            mIsFirst = false
+        }
     }
 
     override fun onDestroyView() {
