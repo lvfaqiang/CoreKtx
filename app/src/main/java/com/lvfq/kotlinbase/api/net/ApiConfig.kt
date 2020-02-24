@@ -9,8 +9,6 @@ import java.util.concurrent.TimeUnit
 /**
  * ApiConfig
  * @author FaQiang on 2018/9/12 上午9:58
- * @Github: <a href="https://github.com/lvfaqiang"/>
- * @Blog: <a href="http://blog.csdn.net/lv_fq"/>
  * @desc :
  *
  */

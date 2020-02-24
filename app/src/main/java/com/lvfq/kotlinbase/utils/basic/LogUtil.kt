@@ -6,8 +6,6 @@ import com.lvfq.kotlinbase.BuildConfig
 /**
  * LogUtil
  * @author FaQiang on 2018/9/28 上午11:42
- * @Github: <a href="https://github.com/lvfaqiang"/>
- * @Blog: <a href="http://blog.csdn.net/lv_fq"/>
  * @desc :
  *
  */

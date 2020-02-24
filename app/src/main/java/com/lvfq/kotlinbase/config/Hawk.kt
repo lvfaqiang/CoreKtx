@@ -9,8 +9,6 @@ import com.orhanobut.hawk.Storage
 /**
  * HawkStorage
  * @author FaQiang on 2018/9/28 上午8:36
- * @Github: <a href="https://github.com/lvfaqiang"/>
- * @Blog: <a href="http://blog.csdn.net/lv_fq"/>
  * @desc :
  *
  */

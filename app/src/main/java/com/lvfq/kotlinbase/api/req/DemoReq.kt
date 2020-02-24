@@ -5,8 +5,6 @@ import com.lvfq.kotlinbase.api.net.ApiClient
 /**
  * DemoReq
  * @author FaQiang on 2018/11/14 下午3:53
- * @Github: <a href="https://github.com/lvfaqiang"/>
- * @Blog: <a href="http://blog.csdn.net/lv_fq"/>
  * @desc :
  *
  */

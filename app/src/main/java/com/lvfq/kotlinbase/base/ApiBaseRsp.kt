@@ -6,8 +6,6 @@ import kotlinx.android.parcel.Parcelize
 /**
  * ApiBaseRsp
  * @author FaQiang on 2018/9/27 下午6:51
- * @Github: <a href="https://github.com/lvfaqiang"/>
- * @Blog: <a href="http://blog.csdn.net/lv_fq"/>
  * @desc :
  *
  */

@@ -6,19 +6,17 @@ import android.webkit.WebChromeClient
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import com.fq.library.kotlin.ex.startActivity
 import com.lvfq.kotlinbase.AppLifecycle
-import com.lvfq.kotlinbase.base.BaseActivity
-import com.lvfq.kotlinbase.kotlinx.activity.startActivity
+import com.lvfq.kotlinbase.base.old.BaseActivity_old
 
 /**
  * H5Activity
  * @author FaQiang on 2018/11/8 下午2:44
- * @Github: <a href="https://github.com/lvfaqiang"/>
- * @Blog: <a href="http://blog.csdn.net/lv_fq"/>
  * @desc :
  *
  */
-class H5Activity : BaseActivity() {
+class H5Activity : BaseActivity_old() {
 
     override fun getLayoutId(): Int = 0
 

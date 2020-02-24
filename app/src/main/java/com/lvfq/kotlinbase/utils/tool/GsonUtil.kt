@@ -8,8 +8,6 @@ import java.lang.reflect.Type
 /**
  * GsonUtil
  * @author FaQiang on 2018/10/15 下午3:02
- * @Github: <a href="https://github.com/lvfaqiang"/>
- * @Blog: <a href="http://blog.csdn.net/lv_fq"/>
  * @desc :
  *
  */

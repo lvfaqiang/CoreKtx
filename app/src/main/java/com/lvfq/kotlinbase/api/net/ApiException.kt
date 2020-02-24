@@ -16,8 +16,6 @@ import java.net.SocketTimeoutException
 /**
  * ApiException
  * @author FaQiang on 2018/8/28 上午11:26
- * @Github: <a href="https://github.com/lvfaqiang"/>
- * @Blog: <a href="http://blog.csdn.net/lv_fq"/>
  * @desc :
  *
  */
@@ -36,7 +34,7 @@ class ApiException(e: Throwable) {
         when (e) {
             is HttpException -> {
                 httpCode = e.code()
-                val string = e.response().errorBody()?.string() ?: ""
+                val string = e.response()?.errorBody()?.string() ?: ""
                 try {
                     errorBody = Gson().fromJson(string, HttpErrorBody::class.java)
                 } catch (e: Exception) {

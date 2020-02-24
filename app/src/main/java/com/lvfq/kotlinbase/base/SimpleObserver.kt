@@ -5,8 +5,6 @@ import android.view.View
 /**
  * SimpleObserver
  * @author FaQiang on 2018/9/27 下午7:00
- * @Github: <a href="https://github.com/lvfaqiang"/>
- * @Blog: <a href="http://blog.csdn.net/lv_fq"/>
  * @desc :
  *
  */

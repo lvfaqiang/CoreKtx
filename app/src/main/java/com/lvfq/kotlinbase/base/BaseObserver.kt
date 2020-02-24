@@ -8,8 +8,6 @@ import io.reactivex.disposables.Disposable
 /**
  * BaseObserver
  * @author FaQiang on 2018/7/31 下午2:28
- * @Github: <a href="https://github.com/lvfaqiang"/>
- * @Blog: <a href="http://blog.csdn.net/lv_fq"/>
  * @desc :
  *
  */

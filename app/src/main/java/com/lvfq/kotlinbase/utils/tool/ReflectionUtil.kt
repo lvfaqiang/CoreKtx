@@ -5,8 +5,6 @@ import java.lang.reflect.Method
 /**
  * ReflectionUtil
  * @author FaQiang on 2018/9/11 下午6:22
- * @Github: <a href="https://github.com/lvfaqiang"/>
- * @Blog: <a href="http://blog.csdn.net/lv_fq"/>
  * @desc :
  *      反射工具类
  *

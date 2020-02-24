@@ -1,6 +1,6 @@
 package com.lvfq.kotlinbase.utils.basic
 
-import android.app.Activity
+import android.content.res.Resources
 
 
 /**
@@ -13,11 +13,11 @@ object ScreenUtil {
     /**
      * 获取状态栏高度
      */
-    fun getStatusBarHeight(activity: Activity): Int {
+    fun getStatusBarHeight(): Int {
         var result = 0
-        val resourceId = activity.resources.getIdentifier("status_bar_height", "dimen", "android")
+        val resourceId = Resources.getSystem().getIdentifier("status_bar_height", "dimen", "android")
         if (resourceId > 0) {
-            result = activity.resources.getDimensionPixelSize(resourceId)
+            result = Resources.getSystem().getDimensionPixelSize(resourceId)
         }
         return result
     }

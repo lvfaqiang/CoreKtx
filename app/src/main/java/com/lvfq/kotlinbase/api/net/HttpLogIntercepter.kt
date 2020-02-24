@@ -17,8 +17,6 @@ import java.util.concurrent.TimeUnit
 /**
  * HttpLogIntercepter
  * @author FaQiang on 2018/11/14 下午3:56
- * @Github: <a href="https://github.com/lvfaqiang"/>
- * @Blog: <a href="http://blog.csdn.net/lv_fq"/>
  * @desc :
  *
  */

@@ -8,8 +8,6 @@ import java.util.*
 /**
  * TimeConverts
  * @author FaQiang on 2018/9/30 上午10:17
- * @Github: <a href="https://github.com/lvfaqiang"/>
- * @Blog: <a href="http://blog.csdn.net/lv_fq"/>
  * @desc :
  *
  */

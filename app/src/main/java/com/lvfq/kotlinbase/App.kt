@@ -11,15 +11,13 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Bundle
 import android.os.Process
-import android.support.multidex.MultiDexApplication
+import androidx.multidex.MultiDexApplication
 import com.lvfq.kotlinbase.config.HawkConfig
 import java.util.*
 
 /**
  * App
  * @author FaQiang on 2018/8/28 上午11:29
- * @Github: <a href="https://github.com/lvfaqiang"/>
- * @Blog: <a href="http://blog.csdn.net/lv_fq"/>
  * @desc :
  *
  */
@@ -32,7 +30,7 @@ class App : MultiDexApplication() {
 
         fun exit() {
             AppLifecycle.finishAll()
-            android.os.Process.killProcess(Process.myPid())
+            Process.killProcess(Process.myPid())
         }
     }
 

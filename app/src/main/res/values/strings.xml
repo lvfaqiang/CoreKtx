@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">KotlinBase</string>
 
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 
     <!-- 异常信息-->
     <string name="str_exception_server">服务器异常</string>

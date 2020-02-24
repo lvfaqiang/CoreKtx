@@ -7,8 +7,6 @@ import android.content.DialogInterface
 /**
  * LoadingView
  * @author FaQiang on 2018/9/26 下午6:05
- * @Github: <a href="https://github.com/lvfaqiang"/>
- * @Blog: <a href="http://blog.csdn.net/lv_fq"/>
  * @desc :
  *
  */

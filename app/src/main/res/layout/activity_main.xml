@@ -1,102 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
 
-    <FrameLayout
-        android:id="@+id/main_fl_controler"
+    <fragment
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toTopOf="@id/nav_view"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/mobile_navigation" />
 
-    <View style="@style/line_hor_ee" />
-
-    <LinearLayout
-        android:id="@+id/main_ll_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
-        android:background="@color/white">
-
-        <FrameLayout
-            android:id="@+id/main_tab_fl_1"
-            style="@style/main_tab_frame">
-
-            <TextView
-                android:id="@+id/main_tab_tv_1"
-                style="@style/main_tab_text"
-                android:text="选项1" />
-
-            <TextView
-                android:id="@+id/main_tab_unread_tv_1"
-                style="@style/unread_msg_style"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:layout_marginTop="@dimen/dp_3"
-                android:visibility="gone" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/main_tab_fl_2"
-            style="@style/main_tab_frame">
-
-            <TextView
-                android:id="@+id/main_tab_tv_2"
-                style="@style/main_tab_text"
-                android:text="选项2" />
-
-            <TextView
-                android:id="@+id/main_tab_unread_tv_2"
-                style="@style/main_tab_unread_msg_style"
-                android:visibility="gone" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/main_tab_fl_3"
-            style="@style/main_tab_frame">
-
-            <TextView
-                android:id="@+id/main_tab_tv_3"
-                style="@style/main_tab_text"
-                android:text="选项3" />
-
-            <TextView
-                android:id="@+id/main_tab_unread_tv_3"
-                style="@style/main_tab_unread_msg_style"
-                android:visibility="gone" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/main_tab_fl_4"
-            style="@style/main_tab_frame">
-
-            <TextView
-                android:id="@+id/main_tab_tv_4"
-                style="@style/main_tab_text"
-                android:text="选项4" />
-
-            <TextView
-                android:id="@+id/main_tab_unread_tv_4"
-                style="@style/main_tab_unread_msg_style"
-                android:visibility="gone" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/main_tab_fl_5"
-            style="@style/main_tab_frame">
-
-            <TextView
-                android:id="@+id/main_tab_tv_5"
-                style="@style/main_tab_text"
-                android:text="选项5" />
-
-            <TextView
-                android:id="@+id/main_tab_unread_tv_5"
-                style="@style/main_tab_unread_msg_style"
-                android:visibility="gone" />
-        </FrameLayout>
-
-    </LinearLayout>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

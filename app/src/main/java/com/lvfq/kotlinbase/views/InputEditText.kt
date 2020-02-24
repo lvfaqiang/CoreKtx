@@ -15,17 +15,15 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import com.fq.library.kotlin.ex.getDraw
+import com.fq.library.kotlin.ex.px2dp
+import com.fq.library.kotlin.ex.view.gone
+import com.fq.library.kotlin.ex.view.visible
 import com.lvfq.kotlinbase.R
-import com.lvfq.kotlinbase.kotlinx.content.px2dp
-import com.lvfq.kotlinbase.kotlinx.resource.getDraw
-import com.lvfq.kotlinbase.kotlinx.view.gone
-import com.lvfq.kotlinbase.kotlinx.view.visible
 
 /**
  * InputEditText
  * @author FaQiang on 2018/6/5 下午6:42
- * @Github: <a href="https://github.com/lvfaqiang"/>
- * @Blog: <a href="http://blog.csdn.net/lv_fq"/>
  * @desc :
  *
  */

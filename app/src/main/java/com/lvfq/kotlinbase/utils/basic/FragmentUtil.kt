@@ -1,13 +1,12 @@
 package com.lvfq.kotlinbase.utils.basic
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+
 
 /**
  * FragmentUtil
  * @author FaQiang on 2018/9/27 下午12:12
- * @Github: <a href="https://github.com/lvfaqiang"/>
- * @Blog: <a href="http://blog.csdn.net/lv_fq"/>
  * @desc :
  *
  */
@@ -25,7 +24,7 @@ class FragmentUtil constructor(val manager: FragmentManager) {
     fun showFragment(fragment: Fragment, id: Int) {
         val ft = manager.beginTransaction()
         if (curFragment != null) {
-            ft.hide(curFragment)
+            ft.hide(curFragment!!)
         }
         if (fragment.isAdded) {
             ft.show(fragment)

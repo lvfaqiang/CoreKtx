@@ -6,17 +6,15 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.core.content.withStyledAttributes
+import com.fq.library.kotlin.ex.view.Position
+import com.fq.library.kotlin.ex.view.drawable
 import com.lvfq.kotlinbase.R
-import com.lvfq.kotlinbase.kotlinx.content.withStyledAttributes
-import com.lvfq.kotlinbase.kotlinx.view.Position
-import com.lvfq.kotlinbase.kotlinx.view.drawable
 import kotlinx.android.synthetic.main.layout_tool_bar.view.*
 
 /**
  * TopBar
  * @author FaQiang on 2018/1/3 上午10:19
- * @Github: <a href="https://github.com/lvfaqiang"/>
- * @Blog: <a href="http://blog.csdn.net/lv_fq"/>
  * @desc :
  *
  */
