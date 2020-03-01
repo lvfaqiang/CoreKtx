@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelStoreOwner
  */
 object VMFactory {
 
-    inline fun <T : ViewModel> findVM(owner: ViewModelStoreOwner, vmClass: Class<T>): T {
+    fun <T : ViewModel> findVM(owner: ViewModelStoreOwner, vmClass: Class<T>): T {
         return ViewModelProvider(owner).get(vmClass)
     }
 }

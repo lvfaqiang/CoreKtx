@@ -6,8 +6,12 @@ import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import androidx.lifecycle.LifecycleOwner
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.lvfq.kotlinbase.Const.AppConst
 import com.lvfq.kotlinbase.R
 import com.lvfq.kotlinbase.kotlinx.scheduler.applyScheduler
+import com.lvfq.kotlinbase.views.SwipeRefreshView
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import java.util.concurrent.TimeUnit
@@ -90,16 +94,20 @@ object ViewUtil {
             })
     }
 
-//    fun <T : Any> loadComplete(list: List<T>, swipeRefreshView: SwipeRefreshView, adapter: BaseQuickAdapter<T, BaseViewHolder>) {
-//        if (swipeRefreshView.pageNo == Const.PAGE) {
-//            adapter.setNewData(list)
-//        } else {
-//            adapter.addData(list)
-//        }
-//        if (list.size < Const.PAGE_SIZE) {
-//            swipeRefreshView.loadMoreEnd(true)
-//        } else {
-//            swipeRefreshView.loadMoreComplete()
-//        }
-//    }
+    fun <T : Any> loadComplete(
+        list: ArrayList<T>,
+        swipeRefreshView: SwipeRefreshView,
+        adapter: BaseQuickAdapter<T, BaseViewHolder>?
+    ) {
+        if (swipeRefreshView.pageNo == AppConst.PAGE) {
+            adapter?.setNewData(list)
+        } else {
+            adapter?.addData(list)
+        }
+        if (list.size < AppConst.PAGE_SIZE) {
+            swipeRefreshView.loadMoreEnd(true)
+        } else {
+            swipeRefreshView.loadMoreComplete()
+        }
+    }
 }

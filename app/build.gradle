@@ -39,7 +39,7 @@ android {
     productFlavors {
         // 测试环境
         staging {
-            applicationId "com.lvfq.kotlinbase"
+            applicationId "com.base.staging"
             versionCode 1
             versionName "1.0.0"
 
@@ -53,8 +53,7 @@ android {
         }
         // 生产环境
         product {
-
-            applicationId "com.lvfq.kotlinbase"
+            applicationId "com.base.prod"
             versionCode 1
             versionName "1.0.0"
 
@@ -131,7 +130,7 @@ dependencies {
      * https://github.com/CymChad/BaseRecyclerViewAdapterHelper
      * BaseAdapter
      */
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.0-beta5'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.0'
 
     /**
      * https://muyangmin.github.io/glide-docs-cn/doc/generatedapi.html
@@ -182,6 +181,7 @@ dependencies {
 
     // local Storage
     implementation 'com.orhanobut:hawk:2.0.1'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
 
 
 //     用于处理 arch.core:common 包下的 Function 冲突
