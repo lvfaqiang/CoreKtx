@@ -12,7 +12,15 @@ fun launchUI(block: suspend CoroutineScope.() -> Unit) {
     GlobalScope.launch(Dispatchers.Main, block = block)
 }
 
+fun launchUI(scope: CoroutineScope, block: suspend CoroutineScope.() -> Unit) {
+    scope.launch(Dispatchers.Main, block = block)
+}
+
 fun launchAsync(block: suspend CoroutineScope.() -> Unit) {
+    GlobalScope.launch(Dispatchers.IO, block = block)
+}
+
+fun launchAsync(scope: CoroutineScope, block: suspend CoroutineScope.() -> Unit) {
     GlobalScope.launch(Dispatchers.IO, block = block)
 }
 

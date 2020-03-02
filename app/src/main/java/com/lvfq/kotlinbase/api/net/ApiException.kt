@@ -79,6 +79,9 @@ class ApiException(e: Throwable) {
             is SocketTimeoutException -> {
                 message = App.mContext.getString(R.string.str_request_timeout)
             }
+            is CustomException -> {
+                message = e.message ?: ""
+            }
             else -> {
                 if (!NetUtil.hasNetWork()) {
                     message = App.mContext.getString(R.string.str_exception_network)

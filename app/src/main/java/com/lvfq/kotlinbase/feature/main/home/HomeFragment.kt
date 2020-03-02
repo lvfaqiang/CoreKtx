@@ -26,6 +26,12 @@ class HomeFragment : Fragment() {
         homeViewModel.text.observe(this, Observer {
             textView.text = it
         })
+
+//        homeViewModel.data.observe(this, Observer {
+//            textView.text = it.toString()
+//        })
+
+        homeViewModel.loadData()
         return root
     }
 }

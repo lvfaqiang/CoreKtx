@@ -3,7 +3,6 @@ package com.lvfq.kotlinbase.api.net
 import com.lvfq.kotlinbase.BuildConfig
 import com.lvfq.kotlinbase.api.ApiService
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 /**
@@ -14,13 +13,15 @@ import retrofit2.converter.gson.GsonConverterFactory
  */
 object ApiClient {
 
+    const val API_COMMON = BuildConfig.BASE_URL
+
     private val mRetrofit by lazy {
         Retrofit.Builder()
-                .baseUrl(BuildConfig.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(ApiConfig().configOkHttp())
-                .build()
+            .baseUrl(API_COMMON)
+            .addConverterFactory(GsonConverterFactory.create())
+//                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .client(ApiConfig().configOkHttp())
+            .build()
     }
 
     private val mApiService: ApiService by lazy {

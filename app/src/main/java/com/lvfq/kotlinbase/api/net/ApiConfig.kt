@@ -23,16 +23,16 @@ class ApiConfig {
             }
         }
     }).apply {
-        setLevel(HttpLogIntercepter.Level.BASIC)
+        setLevel(HttpLogIntercepter.Level.BODY)
     }
 
     // 添加公共请求头
     val headerInterceptor = Interceptor { chain ->
         val request = chain.request()
-                .newBuilder()
-                .addHeader("client", "android")
-                .addHeader("appVersion", BuildConfig.VERSION_NAME)
-                .build()
+            .newBuilder()
+            .addHeader("client", "android")
+            .addHeader("appVersion", BuildConfig.VERSION_NAME)
+            .build()
         chain.proceed(request)
     }
 
