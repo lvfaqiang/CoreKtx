@@ -12,7 +12,7 @@ import kotlinx.coroutines.withContext
  * @desc :
  *
  */
-abstract class BaseRepository<T>(scope: CoroutineScope = GlobalScope, call: suspend () -> T) {
+abstract class BaseRepository<T>(call: suspend () -> T) {
 
     open fun onStart() {}
 
@@ -32,8 +32,10 @@ abstract class BaseRepository<T>(scope: CoroutineScope = GlobalScope, call: susp
      */
     open fun failure(apiException: ApiException) {}
 
+    private lateinit var scope: CoroutineScope
+    private var call: suspend () -> T = call
 
-    init {
+    private fun start() {
         launchUI(scope) {
             onStart()
             try {
@@ -47,5 +49,11 @@ abstract class BaseRepository<T>(scope: CoroutineScope = GlobalScope, call: susp
                 onFinally()
             }
         }
+    }
+
+    fun bindScope(scope: CoroutineScope = GlobalScope): BaseRepository<T> {
+        this.scope = scope
+        start()
+        return this
     }
 }

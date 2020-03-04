@@ -26,7 +26,9 @@ abstract class BaseActivity : FragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(layoutRes)
+        if (layoutRes != 0) {
+            setContentView(layoutRes)
+        }
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {

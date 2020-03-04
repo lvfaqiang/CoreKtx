@@ -1,11 +1,11 @@
 package com.lvfq.kotlinbase.feature
 
 import android.os.Bundle
+import androidx.lifecycle.lifecycleScope
 import com.fq.library.kotlin.ex.startActivity
-import com.lvfq.kotlinbase.base.old.BaseActivity_old
-import com.lvfq.kotlinbase.kotlinx.scheduler.applyScheduler
-import io.reactivex.Observable
-import java.util.concurrent.TimeUnit
+import com.lvfq.kotlinbase.base.BaseActivity
+import com.lvfq.kotlinbase.kotlinx.coroutines.launchUI
+import kotlinx.coroutines.delay
 
 /**
  * LoadingActivity
@@ -13,33 +13,22 @@ import java.util.concurrent.TimeUnit
  * @desc :
  *
  */
-class LoadingActivity : BaseActivity_old() {
+class LoadingActivity : BaseActivity() {
+    override val layoutRes: Int
+        get() = 0
+
+    override fun init(savedInstanceState: Bundle?) {
+
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        Observable.interval(2, TimeUnit.SECONDS)
-                .take(1)
-                .applyScheduler()
-                .subscribe {
-//                     下一步操作
-                    startActivity<MainActivity>()
-                    finish()
-                }
-    }
-
-    override fun getLayoutId(): Int = 0
-
-    override fun initUI(savedInstanceState: Bundle?) {
-
-    }
-
-    override fun initData(savedInstanceState: Bundle?) {
-
-    }
-
-    override fun initListener() {
-
+        launchUI(lifecycleScope) {
+            delay(2000)
+            //                     下一步操作
+            startActivity<MainActivity>()
+            finish()
+        }
     }
 }

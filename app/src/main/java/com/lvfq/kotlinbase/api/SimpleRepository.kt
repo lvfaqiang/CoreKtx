@@ -22,7 +22,7 @@ object Request {
         failure: (ApiException) -> Unit = {},
         bindView: View? = null
     ): BaseRepository<T> {
-        return object : SimpleRepository<T>(scope, call) {
+        return object : SimpleRepository<T>(call) {
             override fun onStart() {
                 bindView?.apply {
                     isClickable = false
@@ -42,12 +42,12 @@ object Request {
                 }
                 failure.invoke(apiException)
             }
-        }
+        }.bindScope(scope)
     }
 }
 
-abstract class SimpleRepository<T : BaseEntity>(scope: CoroutineScope, call: suspend () -> T) :
-    BaseRepository<T>(scope, call) {
+abstract class SimpleRepository<T : BaseEntity>(call: suspend () -> T) :
+    BaseRepository<T>(call) {
 
     abstract fun response(t: T)
 
