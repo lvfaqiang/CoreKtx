@@ -5,16 +5,15 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
-import androidx.lifecycle.LifecycleOwner
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.lvfq.kotlinbase.Const.AppConst
 import com.lvfq.kotlinbase.R
-import com.lvfq.kotlinbase.kotlinx.scheduler.applyScheduler
 import com.lvfq.kotlinbase.views.SwipeRefreshView
-import io.reactivex.Observable
-import io.reactivex.disposables.Disposable
-import java.util.concurrent.TimeUnit
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 /**
  * ViewUtil
@@ -66,11 +65,11 @@ object ViewUtil {
 
     fun countDown(
         textView: TextView,
-        owner: LifecycleOwner,
+        coroutineContext: CoroutineContext,
         resetLabel: Int = 0,
         sendingLabel: Int = 0,
         seconds: Long = 60
-    ): Disposable? {
+    ) {
         val context = textView.context
 
         val resetStrId = if (resetLabel == 0) R.string.str_send_code_resend else resetLabel
@@ -81,17 +80,21 @@ object ViewUtil {
         textView.isSelected = false
 
         textView.text = context.getString(sendingStrId, seconds.toString())
-        return Observable.interval(1000, TimeUnit.MILLISECONDS)
-            .take(seconds)
-            .applyScheduler()
-            .subscribe({ it ->
-                val result = seconds - (it + 1)
-                textView.text = context.getString(sendingStrId, result.toString())
-            }, {}, {
+        val job = GlobalScope.launch(coroutineContext) {
+            var count = seconds
+            while (count > 0) {
+                delay(1000)
+                count--
+                textView.text = context.getString(sendingStrId, count.toString())
+            }
+        }
+        job.invokeOnCompletion {
+            if (it == null) {   //异常信息为 null 则表示是正常完成。
                 textView.isClickable = true
                 textView.isSelected = true
                 textView.text = context.getString(resetStrId)
-            })
+            }
+        }
     }
 
     fun <T : Any> loadComplete(

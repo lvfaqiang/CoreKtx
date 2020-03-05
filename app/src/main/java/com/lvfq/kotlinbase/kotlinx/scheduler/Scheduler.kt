@@ -1,20 +1,15 @@
 package com.lvfq.kotlinbase.kotlinx.scheduler
 
-import io.reactivex.Flowable
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-
 /**
  * scheduler
  * @author FaQiang on 2018/8/28 上午10:27
  * @desc :
  *
  */
-fun <T> Observable<T>.applyScheduler(): Observable<T> {
-    return this.subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-}
+//fun <T> Observable<T>.applyScheduler(): Observable<T> {
+//    return this.subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//}
 
 //fun <T> Observable<T>.applyScheduler(owner: LifecycleOwner): Observable<T> {
 //    return this.applyScheduler()
@@ -27,10 +22,10 @@ fun <T> Observable<T>.applyScheduler(): Observable<T> {
 //}
 
 
-fun <T> Flowable<T>.applyScheduler(): Flowable<T> {
-    return this.subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-}
+//fun <T> Flowable<T>.applyScheduler(): Flowable<T> {
+//    return this.subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//}
 
 //fun <T> Flowable<T>.applyScheduler(owner: LifecycleOwner): Flowable<T> {
 //    return this.applyScheduler().bindToLifecycle<T>(owner)
