@@ -28,8 +28,11 @@ import com.lvfq.kotlinbase.R
  *
  */
 class InputEditText
-@JvmOverloads constructor(context: Context, attributeSet: AttributeSet? = null, defStyleAttr: Int = 0)
-    : RelativeLayout(context, attributeSet, defStyleAttr) {
+@JvmOverloads constructor(
+    context: Context,
+    attributeSet: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : RelativeLayout(context, attributeSet, defStyleAttr) {
 
     private var singleLine = true
     private var textSize = 14f
@@ -52,12 +55,7 @@ class InputEditText
     private var showPasswordToggle = false
     private var enable = true
 
-    var textChangeListener: OnTextChangedListener? = null
-
-
-    interface OnTextChangedListener {
-        fun onTextChanged(s: CharSequence)
-    }
+    var onTextChanged: (CharSequence) -> Unit = {}
 
 
     private val rightIv by lazy {
@@ -67,39 +65,43 @@ class InputEditText
             } else {
                 id = 1111.toInt()
             }
-            layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT).apply {
-                addRule(ALIGN_PARENT_RIGHT)
-                addRule(CENTER_VERTICAL)
-            }
+            layoutParams =
+                LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT).apply {
+                    addRule(ALIGN_PARENT_RIGHT)
+                    addRule(CENTER_VERTICAL)
+                }
+            visibility = View.GONE
         }
     }
 
-    private val rightDelIv by lazy {
-        ImageView(context).apply {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                id = View.generateViewId()
-            } else {
-                id = 2222.toInt()
-            }
-            layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT).apply {
-                addRule(CENTER_VERTICAL)
-                if (showPasswordToggle) {
-                    addRule(LEFT_OF, rightIv.id)
-                } else {
-                    addRule(ALIGN_PARENT_RIGHT)
-                }
-            }
-            visibility = View.GONE
-            setImageDrawable(closeResource)
-        }
-    }
+//    private val rightDelIv by lazy {
+//        ImageView(context).apply {
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//                id = View.generateViewId()
+//            } else {
+//                id = 2222.toInt()
+//            }
+//            layoutParams =
+//                LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT).apply {
+//                    addRule(CENTER_VERTICAL)
+//                    if (showPasswordToggle) {
+//                        addRule(LEFT_OF, rightIv.id)
+//                    } else {
+//                        addRule(ALIGN_PARENT_RIGHT)
+//                    }
+//                }
+//            visibility = View.GONE
+//            setImageDrawable(closeResource)
+//        }
+//    }
 
     val editText by lazy {
         EditText(context).apply {
-            layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT).apply {
-                addRule(CENTER_VERTICAL)
-                addRule(LEFT_OF, rightDelIv.id)
-            }
+            layoutParams =
+                LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT).apply {
+                    addRule(CENTER_VERTICAL)
+                    addRule(LEFT_OF, rightIv.id)
+                }
             ellipsize = TextUtils.TruncateAt.END
             gravity = Gravity.CENTER_VERTICAL
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -117,7 +119,8 @@ class InputEditText
 
         val dm = resources.displayMetrics
         textSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, textSize, dm)
-        paddLeft = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, paddLeft.toFloat(), dm).toInt()
+        paddLeft =
+            TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, paddLeft.toFloat(), dm).toInt()
 
         val ta = context.obtainStyledAttributes(attributeSet, R.styleable.InputEditText)
         singleLine = ta.getBoolean(R.styleable.InputEditText_android_singleLine, singleLine)
@@ -126,14 +129,18 @@ class InputEditText
         paddLeft = ta.getDimensionPixelSize(R.styleable.InputEditText_editPaddingLeft, paddLeft)
 
         textColor = ta.getResourceId(R.styleable.InputEditText_android_textColor, textColor)
-        textColorHint = ta.getResourceId(R.styleable.InputEditText_android_textColorHint, textColorHint)
+        textColorHint =
+            ta.getResourceId(R.styleable.InputEditText_android_textColorHint, textColorHint)
         inputType = ta.getInt(R.styleable.InputEditText_android_inputType, inputType)
         hint = ta.getString(R.styleable.InputEditText_android_hint) ?: hint
         maxLength = ta.getInt(R.styleable.InputEditText_android_maxLength, maxLength)
         pointerLength = ta.getInt(R.styleable.InputEditText_pointerLength, pointerLength)
 
         drawableLeft = ta.getDrawable(R.styleable.InputEditText_android_drawableLeft)
-        drawablePadding = ta.getDimensionPixelSize(R.styleable.InputEditText_android_drawablePadding, drawablePadding)
+        drawablePadding = ta.getDimensionPixelSize(
+            R.styleable.InputEditText_android_drawablePadding,
+            drawablePadding
+        )
 
         showPasswordResource = ta.getDrawable(R.styleable.InputEditText_showPasswordResource)
         hidePasswordResource = ta.getDrawable(R.styleable.InputEditText_hidePasswordResource)
@@ -141,10 +148,12 @@ class InputEditText
         closeResource = ta.getDrawable(R.styleable.InputEditText_closeResource)
 
         showClose = ta.getBoolean(R.styleable.InputEditText_showClose, showClose)
-        showPasswordToggle = ta.getBoolean(R.styleable.InputEditText_showPasswordToggle, showPasswordToggle)
+        showPasswordToggle =
+            ta.getBoolean(R.styleable.InputEditText_showPasswordToggle, showPasswordToggle)
         enable = ta.getBoolean(R.styleable.InputEditText_canInput, enable)
 
-        cursorResId = ta.getResourceId(R.styleable.InputEditText_android_textCursorDrawable, cursorResId)
+        cursorResId =
+            ta.getResourceId(R.styleable.InputEditText_android_textCursorDrawable, cursorResId)
 
 
         ta.recycle()
@@ -153,10 +162,10 @@ class InputEditText
             closeResource = resources.getDraw(R.drawable.img_icon_input_close)
         }
         if (showPasswordResource == null) {
-//            showPasswordResource = resources.getDrawable(R.drawable.icon_input_eye_show)
+//            showPasswordResource = resources.getDrawable(R.drawable.img_icon_input_close)
         }
         if (hidePasswordResource == null) {
-//            hidePasswordResource = resources.getDrawable(R.drawable.icon_input_eye_hide)
+//            hidePasswordResource = resources.getDrawable(R.drawable.img_icon_input_close)
         }
 
         editText.textSize = context.px2dp(textSize).toFloat()
@@ -192,10 +201,10 @@ class InputEditText
                 rightIv.setOnClickListener {
                     it.isSelected = !it.isSelected
                     rightIv.setImageDrawable(
-                            if (it.isSelected)
-                                showPasswordResource
-                            else
-                                hidePasswordResource
+                        if (it.isSelected)
+                            showPasswordResource
+                        else
+                            hidePasswordResource
                     )
                     showPassEdit(editText, it.isSelected)
                     editText.setSelection(editText.text.toString().length)
@@ -207,19 +216,17 @@ class InputEditText
                 }
             }
             else -> {
-                rightDelIv.setOnClickListener { editText.setText("") }
+                rightIv.setImageDrawable(closeResource)
+                rightIv.setOnClickListener { editText.setText("") }
                 if (inputType == (InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL)) {
-                    editText.filters = arrayOf<InputFilter>(NumRangeInputFilter(Integer.MAX_VALUE, pointerLength))
+                    editText.filters =
+                        arrayOf<InputFilter>(NumRangeInputFilter(Integer.MAX_VALUE, pointerLength))
                 }
-                rightIv.gone()
             }
         }
 
-        rightDelIv.setOnClickListener { editText.setText("") }
-
         addTextChangedListener(TextChangedListener())
         addView(rightIv)
-        addView(rightDelIv)
         addView(editText)
     }
 
@@ -257,14 +264,14 @@ class InputEditText
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             s?.let {
-                if (showClose) {
+                if ((showPasswordToggle && (inputType == InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD)) || showClose) {
                     if (it.isNotEmpty()) {
-                        rightDelIv.visible()
+                        rightIv.visible()
                     } else {
-                        rightDelIv.gone()
+                        rightIv.gone()
                     }
                 }
-                textChangeListener?.onTextChanged(it)
+                onTextChanged.invoke(it)
             }
         }
     }
