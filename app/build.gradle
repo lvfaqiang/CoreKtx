@@ -185,6 +185,22 @@ dependencies {
     implementation 'com.orhanobut:hawk:2.0.1'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
 
+    /**
+     * https://github.com/HuanTanSheng/EasyPhotos
+     * 图片加载
+     */
+    implementation 'com.github.HuanTanSheng:EasyPhotos:3.0.4'
+
+    /**
+     * 图片压缩
+     */
+    implementation 'top.zibin:Luban:1.1.8'
+
+    /**
+     * https://github.com/hackware1993/MagicIndicator
+     * TabLayout
+     */
+    implementation 'com.github.hackware1993:MagicIndicator:1.6.0'
 
 //     用于处理 arch.core:common 包下的 Function 冲突
 //    implementation 'android.arch.lifecycle:extensions:1.1.1'
