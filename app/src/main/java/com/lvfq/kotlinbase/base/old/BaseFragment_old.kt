@@ -23,10 +23,6 @@ import org.greenrobot.eventbus.EventBus
 abstract class BaseFragment_old : Fragment(),
     ISimpleBase {
 
-//    protected val mPerissions: RxPermissions by lazy {
-//        RxPermissions(this)
-//    }
-
     protected val mFragmentUtil: FragmentUtil by lazy {
         FragmentUtil(childFragmentManager)
     }

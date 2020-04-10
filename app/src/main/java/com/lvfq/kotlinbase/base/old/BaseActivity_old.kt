@@ -30,10 +30,6 @@ abstract class BaseActivity_old : AppCompatActivity(),
     var mIsFirst = true
         private set
 
-//    protected val mPermissions: RxPermissions by lazy {
-//        RxPermissions(this)
-//    }
-
     protected val mFragmentUtil: FragmentUtil by lazy {
         FragmentUtil(supportFragmentManager)
     }
@@ -68,12 +64,17 @@ abstract class BaseActivity_old : AppCompatActivity(),
     }
 
     private fun initStatusBar() {
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        window.decorView.systemUiVisibility =
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         if (getLayoutId() > 0) {
             if (isFullScreen()) {
                 setContentView(getLayoutId())
             } else {
-                val mRootLayout = LayoutInflater.from(this).inflate(R.layout.root_layout, null, false) as LinearLayout
+                val mRootLayout = LayoutInflater.from(this).inflate(
+                    R.layout.root_layout,
+                    null,
+                    false
+                ) as LinearLayout
                 val mStatusBarView = mRootLayout.getChildAt(0)
                 val statusBarLayoutParams = mStatusBarView.layoutParams
 //                statusBarLayoutParams.height = ScreenUtil.getStatusBarHeight(this)

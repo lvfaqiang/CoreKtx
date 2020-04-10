@@ -3,7 +3,7 @@ package com.lvfq.kotlinbase.base
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.fragment.app.FragmentActivity
-import com.tbruyelle.rxpermissions2.RxPermissions
+import com.lvfq.kotlinbase.utils.tool.KeyBoardUtils
 import org.greenrobot.eventbus.EventBus
 
 /**
@@ -21,10 +21,6 @@ abstract class BaseActivity : FragmentActivity() {
         protected set
 
 
-    protected val mPerissions: RxPermissions by lazy {
-        RxPermissions(this)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         // 禁止页面自动弹出输入法, or 禁止输入法顶起布局
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN or WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
@@ -32,7 +28,20 @@ abstract class BaseActivity : FragmentActivity() {
         if (layoutRes != 0) {
             setContentView(layoutRes)
         }
+        KeyBoardUtils.setupUISoftKeyBoardHideSystem(
+            window.decorView,
+            viewGroupFocused()
+        ) //点击空白区域关闭软键盘
+
     }
+
+    /**
+     * 如果页面自动弹出软键盘，则重写该方法返回 true
+     */
+    open fun viewGroupFocused(): Boolean {
+        return false
+    }
+
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
