@@ -226,6 +226,12 @@ dependencies {
     implementation 'com.moos:Material-ProgressView:1.0.6'
 
 
+    /**
+     * https://github.com/bingoogolapple/BGAQRCode-Android
+     * 识别二维码
+     */
+//    implementation 'cn.bingoogolapple:bga-qrcode-zxing:1.3.7'
+
 //     用于处理 arch.core:common 包下的 Function 冲突
 //    implementation 'android.arch.lifecycle:extensions:1.1.1'
 }
