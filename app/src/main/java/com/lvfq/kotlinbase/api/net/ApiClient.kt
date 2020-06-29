@@ -18,6 +18,7 @@ object ApiClient {
     private val mRetrofit by lazy {
         Retrofit.Builder()
             .baseUrl(API_COMMON)
+            .addConverterFactory(NullOrEmptyConverterFactory())
             .addConverterFactory(GsonConverterFactory.create())
 //                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(ApiConfig().configOkHttp())

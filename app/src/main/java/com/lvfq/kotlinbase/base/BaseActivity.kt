@@ -50,6 +50,11 @@ abstract class BaseActivity : FragmentActivity() {
         }
 
         init(savedInstanceState)
+        
+        initListener()
+    }
+
+    open fun initListener() {
 
     }
 
