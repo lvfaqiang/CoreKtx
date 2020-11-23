@@ -65,7 +65,8 @@ class App : MultiDexApplication() {
         override fun onReceive(context: Context?, intent: Intent?) {
             when (intent?.action) {
                 ConnectivityManager.CONNECTIVITY_ACTION -> {
-                    val manager = this@App.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+                    val manager =
+                        this@App.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
                     val info: NetworkInfo? = manager.activeNetworkInfo
                     if (info != null) {
                         if (info.isConnected) {
@@ -93,15 +94,23 @@ class App : MultiDexApplication() {
 object AppLifecycle : Application.ActivityLifecycleCallbacks {
     private val activitys = LinkedList<Activity>()
 
+    /**
+     * 应用是否在前台显示
+     */
+    var isForeground = false
+        private set
+
+    private var activityCount = 0
+
     private fun add(activity: Activity?) = activity?.let { activitys.add(it) }
 
     private fun remove(activity: Activity?) = activity?.let { activitys.remove(it) }
 
     fun finishAll() {
         activitys.filter { !it.isFinishing }
-                .forEach {
-                    it.finish()
-                }
+            .forEach {
+                it.finish()
+            }
     }
 
     fun <T> contains(clazz: Class<T>): Boolean {
@@ -120,6 +129,10 @@ object AppLifecycle : Application.ActivityLifecycleCallbacks {
 
     override fun onActivityResumed(activity: Activity?) {
         //To change body of created functions use File | Settings | File Templates.
+        if (!isForeground) {
+            isForeground = true
+        }
+        activityCount++
     }
 
     override fun onActivityStarted(activity: Activity?) {
@@ -136,6 +149,10 @@ object AppLifecycle : Application.ActivityLifecycleCallbacks {
 
     override fun onActivityStopped(activity: Activity?) {
         //To change body of created functions use File | Settings | File Templates.
+        activityCount--
+        if (activityCount == 0) {
+            isForeground = false
+        }
     }
 
     override fun onActivityCreated(activity: Activity?, savedInstanceState: Bundle?) {
