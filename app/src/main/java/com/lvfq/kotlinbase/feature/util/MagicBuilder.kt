@@ -1,12 +1,13 @@
 package com.lvfq.kotlinbase.feature.util
 
 import android.content.Context
+import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.util.TypedValue
 import android.widget.LinearLayout
 import androidx.annotation.ColorRes
 import androidx.viewpager.widget.ViewPager
-import com.fq.library.kotlin.ex.getColorById
+import com.lvfq.kotlinbase.kotlinx.getColorById
 import net.lucode.hackware.magicindicator.MagicIndicator
 import net.lucode.hackware.magicindicator.ViewPagerHelper
 import net.lucode.hackware.magicindicator.buildins.UIUtil
@@ -27,11 +28,21 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.badge.
  *
  */
 
-class MagicBuilder(private val context: Context) {
+class MagicBuilder private constructor(private val context: Context) {
 
+    companion object {
+        fun get(context: Context): MagicBuilder {
+            return MagicBuilder(context)
+        }
+    }
+
+    /**
+     * ⚠️   颜色值需要传入 getResource.getColor 获取到的值，
+     */
     private var titleNorColor: Int = 0
     private var titleSelColor: Int = 0
     private var titleSize: Float = 15f
+    private var titleSelSize: Float = 15f
     private var indicatorColor: Int = 0 // 指示器颜色
     private var indicatorHeight: Float = 0f // 指示器高度
     private var indicatorWidth: Float = 20f  // 指示器宽度
@@ -41,6 +52,14 @@ class MagicBuilder(private val context: Context) {
     private var indicator: MagicIndicator? = null
 
     private var isAdjustMode: Boolean = false // 是否均分， 适用少量的 Tab 数量。
+
+    private var isTitleBold = false // 标题是否加粗
+
+    /**
+     * 不为空时，其他指示器的配置失效。
+     */
+    private var customIndicator: IPagerIndicator? = null    //自定义指示器
+
 
     fun setAdjustMode(isAdjustMode: Boolean): MagicBuilder {
         this.isAdjustMode = isAdjustMode
@@ -59,6 +78,11 @@ class MagicBuilder(private val context: Context) {
 
     fun setTitleSize(textSize: Float): MagicBuilder {
         titleSize = textSize
+        return this
+    }
+
+    fun setTitleSelSize(textSize: Float): MagicBuilder {
+        titleSelSize = textSize
         return this
     }
 
@@ -81,6 +105,18 @@ class MagicBuilder(private val context: Context) {
         intrinsicWidth = width
         return this
     }
+
+    /**
+     * 设置标题是否加粗
+     *
+     * @param titleBold
+     * @return
+     */
+    fun setTitleBold(titleBold: Boolean): MagicBuilder {
+        isTitleBold = titleBold
+        return this
+    }
+
 
     fun setDatas(datas: List<String>): MagicBuilder {
         this.datas.clear()
@@ -115,6 +151,10 @@ class MagicBuilder(private val context: Context) {
                     normalColor = titleNorColor
                     selectedColor = titleSelColor
                     text = datas[index]
+                    typeface =
+                        if (isTitleBold) Typeface.defaultFromStyle(Typeface.BOLD) else Typeface.defaultFromStyle(
+                            Typeface.NORMAL
+                        )
                     setTextSize(TypedValue.COMPLEX_UNIT_SP, titleSize)
                     setOnClickListener { viewPager?.currentItem = index }
                 }
@@ -124,6 +164,9 @@ class MagicBuilder(private val context: Context) {
             }
 
             override fun getIndicator(context: Context): IPagerIndicator {
+                customIndicator?.let {
+                    return it
+                }
                 val linePagerIndicator = LinePagerIndicator(context)
                 linePagerIndicator.setColors(indicatorColor)
                 linePagerIndicator.mode = LinePagerIndicator.MODE_EXACTLY

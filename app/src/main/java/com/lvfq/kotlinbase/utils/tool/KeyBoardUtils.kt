@@ -54,7 +54,7 @@ object KeyBoardUtils {
         if (mContext is Activity) {
             val activity = mContext
             if (activity.currentFocus != null) {
-                imm.hideSoftInputFromWindow(activity.currentFocus.windowToken, 0)
+                imm.hideSoftInputFromWindow(activity.currentFocus?.windowToken, 0)
                 activity.window
                     .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
             }

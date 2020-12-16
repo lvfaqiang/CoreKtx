@@ -6,7 +6,7 @@ import android.webkit.WebChromeClient
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import com.fq.library.kotlin.ex.startActivity
+import com.lvfq.kotlinbase.kotlinx.startActivity
 import com.lvfq.kotlinbase.AppLifecycle
 import com.lvfq.kotlinbase.base.old.BaseActivity_old
 

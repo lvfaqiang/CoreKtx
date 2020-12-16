@@ -3,7 +3,7 @@ package com.lvfq.kotlinbase.ext
 import android.os.Build
 import android.util.TypedValue
 import android.view.View
-import com.fq.library.kotlin.ex.getColorById
+import com.lvfq.kotlinbase.kotlinx.getColorById
 import com.lvfq.kotlinbase.utils.basic.DrawableBuilder
 
 /**

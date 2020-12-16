@@ -2,7 +2,7 @@ package com.lvfq.kotlinbase.feature
 
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
-import com.fq.library.kotlin.ex.startActivity
+import com.lvfq.kotlinbase.kotlinx.startActivity
 import com.lvfq.kotlinbase.base.BaseActivity
 import com.lvfq.kotlinbase.kotlinx.coroutines.launchUI
 import kotlinx.coroutines.delay

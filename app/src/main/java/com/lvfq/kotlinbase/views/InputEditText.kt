@@ -15,8 +15,8 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
-import com.fq.library.kotlin.ex.getDraw
-import com.fq.library.kotlin.ex.px2dp
+import com.lvfq.kotlinbase.kotlinx.getDraw
+import com.lvfq.kotlinbase.kotlinx.px2dp
 import com.fq.library.kotlin.ex.view.gone
 import com.fq.library.kotlin.ex.view.visible
 import com.lvfq.kotlinbase.R
