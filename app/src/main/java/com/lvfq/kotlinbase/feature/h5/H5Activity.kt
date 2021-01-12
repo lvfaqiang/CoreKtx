@@ -6,9 +6,9 @@ import android.webkit.WebChromeClient
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import com.lvfq.kotlinbase.kotlinx.startActivity
+import androidx.fragment.app.FragmentActivity
 import com.lvfq.kotlinbase.AppLifecycle
-import com.lvfq.kotlinbase.base.old.BaseActivity_old
+import com.lvfq.kotlinbase.kotlinx.startActivity
 
 /**
  * H5Activity
@@ -16,9 +16,7 @@ import com.lvfq.kotlinbase.base.old.BaseActivity_old
  * @desc :
  *
  */
-class H5Activity : BaseActivity_old() {
-
-    override fun getLayoutId(): Int = 0
+class H5Activity : FragmentActivity() {
 
     companion object {
         fun start(url: String, title: String) {
@@ -48,17 +46,18 @@ class H5Activity : BaseActivity_old() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(webView)
+        initUI(savedInstanceState)
     }
 
-    override fun initUI(savedInstanceState: Bundle?) {
+    private fun initUI(savedInstanceState: Bundle?) {
         val url = intent.getStringExtra("url") ?: ""
         val title = intent.getStringExtra("title") ?: ""
 
-        showLoading()   // pageStarted 中会执行多次加载网页数据，但是 finished 只会执行一次
+//        showLoading()   // pageStarted 中会执行多次加载网页数据，但是 finished 只会执行一次
 
         webView.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView, urlValue: String) {
-                disLoading()
+//                disLoading()
                 super.onPageFinished(view, urlValue)
             }
 
@@ -66,20 +65,15 @@ class H5Activity : BaseActivity_old() {
                 super.onPageStarted(view, urlValue, favicon)
             }
 
-            override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+            override fun shouldOverrideUrlLoading(
+                view: WebView?,
+                request: WebResourceRequest?
+            ): Boolean {
                 return super.shouldOverrideUrlLoading(view, request)
             }
         }
 
         webView.loadUrl(url)
-    }
-
-    override fun initData(savedInstanceState: Bundle?) {
-
-    }
-
-    override fun initListener() {
-
     }
 
 

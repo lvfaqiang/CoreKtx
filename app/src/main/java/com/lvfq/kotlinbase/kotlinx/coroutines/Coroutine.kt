@@ -21,7 +21,7 @@ fun launchAsync(block: suspend CoroutineScope.() -> Unit): Job {
 }
 
 fun launchAsync(scope: CoroutineScope, block: suspend CoroutineScope.() -> Unit): Job {
-    return GlobalScope.launch(Dispatchers.IO, block = block)
+    return scope.launch(Dispatchers.IO, block = block)
 }
 
 suspend fun <T> CoroutineScope.launchAsync(block: suspend CoroutineScope.() -> T): T {

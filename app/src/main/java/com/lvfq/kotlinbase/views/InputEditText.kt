@@ -15,11 +15,10 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.core.view.isVisible
+import com.lvfq.kotlinbase.R
 import com.lvfq.kotlinbase.kotlinx.getDraw
 import com.lvfq.kotlinbase.kotlinx.px2dp
-import com.fq.library.kotlin.ex.view.gone
-import com.fq.library.kotlin.ex.view.visible
-import com.lvfq.kotlinbase.R
 
 /**
  * InputEditText
@@ -171,7 +170,7 @@ class InputEditText
         editText.textSize = context.px2dp(textSize).toFloat()
         editText.setPadding(paddLeft, 0, 0, 0)
         editText.hint = hint
-        editText.setSingleLine(singleLine)
+        editText.isSingleLine = singleLine
         editText.setTextColor(resources.getColor(textColor))
         editText.setHintTextColor(resources.getColor(textColorHint))
         editText.inputType = inputType
@@ -209,11 +208,7 @@ class InputEditText
                     showPassEdit(editText, it.isSelected)
                     editText.setSelection(editText.text.toString().length)
                 }
-                if (showPasswordToggle) {
-                    rightIv.visible()
-                } else {
-                    rightIv.gone()
-                }
+                rightIv.isVisible = showPasswordToggle
             }
             else -> {
                 rightIv.setImageDrawable(closeResource)
@@ -265,11 +260,7 @@ class InputEditText
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             s?.let {
                 if ((showPasswordToggle && (inputType == InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD)) || showClose) {
-                    if (it.isNotEmpty()) {
-                        rightIv.visible()
-                    } else {
-                        rightIv.gone()
-                    }
+                    rightIv.isVisible = it.isNotEmpty()
                 }
                 onTextChanged.invoke(it)
             }

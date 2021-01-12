@@ -7,5 +7,5 @@ import androidx.lifecycle.ViewModel
  * @desc :
  *
  */
-abstract class BaseViewModel : ViewModel() {
+open class BaseViewModel : ViewModel() {
 }

@@ -1,4 +1,4 @@
-package com.lvfq.kotlinbase.utils.basic
+package com.lvfq.kotlinbase.builder
 
 import android.app.Activity
 import android.content.Context
@@ -31,7 +31,7 @@ class PopupWindowBuilder private constructor(private val context: Context) {
         return this
     }
 
-    fun setHeight(height: Int):PopupWindowBuilder {
+    fun setHeight(height: Int): PopupWindowBuilder {
         this.height = height
         return this
     }

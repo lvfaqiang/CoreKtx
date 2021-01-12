@@ -18,7 +18,7 @@ import java.io.File
  *
  */
 
-inline fun ImageView.load(
+fun ImageView.load(
         url: String?,
         @DrawableRes placeHolder: Int = 0, @DrawableRes error: Int = 0,
         roundCorner: Int = 0, isCircle: Boolean = false
@@ -27,7 +27,7 @@ inline fun ImageView.load(
     loadBuild(glide, this, placeHolder, error, roundCorner, isCircle)
 }
 
-inline fun ImageView.load(
+fun ImageView.load(
         bitmap: Bitmap?,
         @DrawableRes placeHolder: Int = 0, @DrawableRes error: Int = 0,
         roundCorner: Int = 0, isCircle: Boolean = false
@@ -36,7 +36,7 @@ inline fun ImageView.load(
     loadBuild(glide, this, placeHolder, error, roundCorner, isCircle)
 }
 
-inline fun ImageView.load(
+fun ImageView.load(
         drawable: Drawable?,
         @DrawableRes placeHolder: Int = 0, @DrawableRes error: Int = 0,
         roundCorner: Int = 0, isCircle: Boolean = false
@@ -45,7 +45,7 @@ inline fun ImageView.load(
     loadBuild(glide, this, placeHolder, error, roundCorner, isCircle)
 }
 
-inline fun ImageView.load(
+fun ImageView.load(
         uri: Uri?,
         @DrawableRes placeHolder: Int = 0, @DrawableRes error: Int = 0,
         roundCorner: Int = 0, isCircle: Boolean = false
@@ -54,7 +54,7 @@ inline fun ImageView.load(
     loadBuild(glide, this, placeHolder, error, roundCorner, isCircle)
 }
 
-inline fun ImageView.load(
+fun ImageView.load(
         file: File?,
         @DrawableRes placeHolder: Int = 0, @DrawableRes error: Int = 0,
         roundCorner: Int = 0, isCircle: Boolean = false
@@ -63,7 +63,7 @@ inline fun ImageView.load(
     loadBuild(glide, this, placeHolder, error, roundCorner, isCircle)
 }
 
-inline fun loadBuild(
+fun loadBuild(
         inGlide: GlideRequest<Drawable>,
         imageView: ImageView,
         @DrawableRes placeHolder: Int = 0, @DrawableRes error: Int = 0,

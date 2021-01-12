@@ -7,11 +7,14 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.lvfq.kotlinbase.R
 import com.lvfq.kotlinbase.base.BaseActivity
+import com.lvfq.kotlinbase.databinding.ActivityMainBinding
 
 
-class MainActivity : BaseActivity() {
-    override val layoutRes: Int
-        get() = R.layout.activity_main
+class MainActivity : BaseActivity<ActivityMainBinding>() {
+
+    override fun bindingView(): ActivityMainBinding {
+        return ActivityMainBinding.inflate(layoutInflater)
+    }
 
     override fun init(savedInstanceState: Bundle?) {
 
@@ -28,4 +31,6 @@ class MainActivity : BaseActivity() {
 //        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
+
+
 }

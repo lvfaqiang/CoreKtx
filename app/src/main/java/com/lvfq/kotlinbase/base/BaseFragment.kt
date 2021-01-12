@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.viewbinding.ViewBinding
 import com.lvfq.kotlinbase.utils.tool.KeyBoardUtils
 import org.greenrobot.eventbus.EventBus
 
@@ -13,11 +14,17 @@ import org.greenrobot.eventbus.EventBus
  * @desc :
  *
  */
-abstract class BaseFragment : Fragment() {
-
-    abstract val layoutRes: Int
+abstract class BaseFragment<T : ViewBinding> : Fragment() {
 
     abstract fun init(savedInstanceState: Bundle?)
+
+    protected abstract fun bindingView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        attachToRoot: Boolean
+    ): T
+
+    protected lateinit var binding: T
 
     open var useEventBus: Boolean = false
         protected set
@@ -46,11 +53,8 @@ abstract class BaseFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        if (layoutRes != 0) {
-            return inflater.inflate(layoutRes, container, false)
-        }
-        return super.onCreateView(inflater, container, savedInstanceState)
+        binding = bindingView(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

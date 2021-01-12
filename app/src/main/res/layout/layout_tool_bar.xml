@@ -4,7 +4,7 @@
     android:layout_height="@dimen/dp_44">
 
     <TextView
-        android:id="@+id/toolBar_tv_left"
+        android:id="@+id/toolBarTvLeft"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/dp_5"
@@ -13,7 +13,7 @@
         android:padding="@dimen/dp_10" />
 
     <TextView
-        android:id="@+id/toolBar_tv_title"
+        android:id="@+id/toolBarTvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -21,7 +21,7 @@
         android:textSize="@dimen/sp_18" />
 
     <TextView
-        android:id="@+id/toolBar_tv_right"
+        android:id="@+id/toolBarTvRight"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"

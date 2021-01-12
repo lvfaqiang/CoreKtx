@@ -5,15 +5,10 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
-import com.lvfq.kotlinbase.Const.AppConst
 import com.lvfq.kotlinbase.R
-import com.lvfq.kotlinbase.views.SwipeRefreshView
-import kotlinx.coroutines.GlobalScope
+import com.lvfq.kotlinbase.kotlinx.coroutines.launchUI
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlin.coroutines.CoroutineContext
 
 /**
  * ViewUtil
@@ -64,8 +59,8 @@ object ViewUtil {
 
 
     fun countDown(
+        coroutineScope: CoroutineScope,
         textView: TextView,
-        coroutineContext: CoroutineContext,
         resetLabel: Int = 0,
         sendingLabel: Int = 0,
         seconds: Long = 60
@@ -80,7 +75,7 @@ object ViewUtil {
         textView.isSelected = false
 
         textView.text = context.getString(sendingStrId, seconds.toString())
-        val job = GlobalScope.launch(coroutineContext) {
+        val job = launchUI(coroutineScope) {
             var count = seconds
             while (count > 0) {
                 delay(1000)
@@ -97,20 +92,4 @@ object ViewUtil {
         }
     }
 
-    fun <T : Any> loadComplete(
-        list: ArrayList<T>,
-        swipeRefreshView: SwipeRefreshView,
-        adapter: BaseQuickAdapter<T, BaseViewHolder>?
-    ) {
-        if (swipeRefreshView.pageNo == AppConst.PAGE) {
-            adapter?.setNewData(list)
-        } else {
-            adapter?.addData(list)
-        }
-        if (list.size < AppConst.PAGE_SIZE) {
-            swipeRefreshView.loadMoreEnd(true)
-        } else {
-            swipeRefreshView.loadMoreComplete()
-        }
-    }
 }

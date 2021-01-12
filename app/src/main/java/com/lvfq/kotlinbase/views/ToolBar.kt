@@ -3,14 +3,15 @@ package com.lvfq.kotlinbase.views
 import android.app.Activity
 import android.content.Context
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.core.content.withStyledAttributes
-import com.fq.library.kotlin.ex.view.Position
-import com.fq.library.kotlin.ex.view.drawable
 import com.lvfq.kotlinbase.R
-import kotlinx.android.synthetic.main.layout_tool_bar.view.*
+import com.lvfq.kotlinbase.databinding.LayoutToolBarBinding
+import com.lvfq.kotlinbase.kotlinx.Position
+import com.lvfq.kotlinbase.kotlinx.drawable
 
 /**
  * TopBar
@@ -19,22 +20,23 @@ import kotlinx.android.synthetic.main.layout_tool_bar.view.*
  *
  */
 class ToolBar
-@JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
-    : RelativeLayout(context, attrs, defStyleAttr) {
+@JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
+    RelativeLayout(context, attrs, defStyleAttr) {
 
     private var leftImg: Int = 0
     private var titleText: String = ""
     private var titleSize = 16f
+
     // 0xff000000 等同于 #000000
     private var titleColor: Int = 0xff000000.toInt()
     private var rightText: String = ""
     private var rightTextSize = 16f
     private var rightTextColor = 0xff000000.toInt()
 
+    private lateinit var binding: LayoutToolBarBinding
 
     init {
-        View.inflate(context, R.layout.layout_tool_bar, this)
-
+        val binding = LayoutToolBarBinding.inflate(LayoutInflater.from(getContext()), this, false)
 
         context.withStyledAttributes(attrs, R.styleable.ToolBar) {
             leftImg = getResourceId(R.styleable.ToolBar_leftImg, leftImg)
@@ -43,16 +45,17 @@ class ToolBar
             titleColor = getColor(R.styleable.ToolBar_titleColor, titleColor)
 
             rightText = getString(R.styleable.ToolBar_rightText) ?: rightText
-            rightTextSize = getInt(R.styleable.ToolBar_rightTextSize, rightTextSize.toInt()).toFloat()
+            rightTextSize =
+                getInt(R.styleable.ToolBar_rightTextSize, rightTextSize.toInt()).toFloat()
             rightTextColor = getColor(R.styleable.ToolBar_rightTextColor, rightTextColor)
         }
 
-        toolBar_tv_title.apply {
+        binding.toolBarTvTitle.apply {
             setTextColor(titleColor)
             textSize = titleSize
             text = titleText
         }
-        toolBar_tv_right.apply {
+        binding.toolBarTvRight.apply {
             setTextColor(rightTextColor)
             text = rightText
             textSize = rightTextSize
@@ -65,31 +68,31 @@ class ToolBar
         if (drawId == 0) {
 //            toolBar_tv_left.drawable(R.drawable.icon_back, Position.LEFT)
         } else {
-            toolBar_tv_left.drawable(drawId, Position.LEFT)
+            binding.toolBarTvLeft.drawable(drawId, Position.LEFT)
         }
-        toolBar_tv_left.setOnClickListener {
+        binding.toolBarTvLeft.setOnClickListener {
             activity?.finish()
         }
         return this
     }
 
     fun setLeft(string: String, click: (View) -> Unit): ToolBar {
-        toolBar_tv_left.text = string
-        toolBar_tv_left.setOnClickListener(click)
+        binding.toolBarTvLeft.text = string
+        binding.toolBarTvLeft.setOnClickListener(click)
         return this
     }
 
     fun setLeft(string: String, click: (View) -> Unit, block: TextView.() -> Unit = {}) {
-        toolBar_tv_left.text = string
-        toolBar_tv_left.setOnClickListener(click)
-        toolBar_tv_left.apply(block)
+        binding.toolBarTvLeft.text = string
+        binding.toolBarTvLeft.setOnClickListener(click)
+        binding.toolBarTvLeft.apply(block)
     }
 
 
     fun setTitle(title: String, click: ((View) -> Unit)? = null): ToolBar {
-        toolBar_tv_title.text = title
+        binding.toolBarTvTitle.text = title
         click?.let {
-            toolBar_tv_title.setOnClickListener(it)
+            binding.toolBarTvTitle.setOnClickListener(it)
         }
         return this
     }
@@ -98,9 +101,9 @@ class ToolBar
      * 适用于右上角文本，带图标，可在 block 中自行添加图标显示，
      */
     fun setRight(label: String, click: (View) -> Unit, block: TextView.() -> Unit = {}): ToolBar {
-        toolBar_tv_right.text = label
-        toolBar_tv_right.setOnClickListener(click)
-        toolBar_tv_right.apply(block)
+        binding.toolBarTvRight.text = label
+        binding.toolBarTvRight.setOnClickListener(click)
+        binding.toolBarTvRight.apply(block)
         return this
     }
 
@@ -108,8 +111,8 @@ class ToolBar
      * 右边位置 只显示图标，无文本。
      */
     fun setRight(drawId: Int, click: (View) -> Unit): ToolBar {
-        toolBar_tv_right.drawable(drawId, Position.RIGHT)
-        toolBar_tv_right.setOnClickListener(click)
+        binding.toolBarTvRight.drawable(drawId, Position.RIGHT)
+        binding.toolBarTvRight.setOnClickListener(click)
         return this
     }
 

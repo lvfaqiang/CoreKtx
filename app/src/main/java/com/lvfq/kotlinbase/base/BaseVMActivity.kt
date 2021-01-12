@@ -1,13 +1,14 @@
 package com.lvfq.kotlinbase.base
 
 import android.os.Bundle
+import androidx.viewbinding.ViewBinding
 
 /**
  * BaseVMActivity2020-02-24 15:39
  * @desc :
  *
  */
-abstract class BaseVMActivity<VM : BaseViewModel> : BaseActivity() {
+abstract class BaseVMActivity<T : ViewBinding, VM : BaseViewModel> : BaseActivity<T>() {
 
     protected abstract val viewModelClass: Class<VM>
 
@@ -21,10 +22,6 @@ abstract class BaseVMActivity<VM : BaseViewModel> : BaseActivity() {
 
     private fun initViewModel() {
         viewModel = VMFactory.findVM(this, viewModelClass)
-    }
-
-    protected inline fun <reified T : BaseViewModel> findVM(): T {
-        return VMFactory.findVM(this, T::class.java)
     }
 
 }

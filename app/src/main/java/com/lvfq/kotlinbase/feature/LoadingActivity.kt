@@ -1,6 +1,8 @@
 package com.lvfq.kotlinbase.feature
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
 import com.lvfq.kotlinbase.kotlinx.startActivity
 import com.lvfq.kotlinbase.base.BaseActivity
@@ -13,13 +15,7 @@ import kotlinx.coroutines.delay
  * @desc :
  *
  */
-class LoadingActivity : BaseActivity() {
-    override val layoutRes: Int
-        get() = 0
-
-    override fun init(savedInstanceState: Bundle?) {
-
-    }
+class LoadingActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
