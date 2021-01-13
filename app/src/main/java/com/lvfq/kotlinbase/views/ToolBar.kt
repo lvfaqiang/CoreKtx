@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.core.content.withStyledAttributes
 import com.lvfq.kotlinbase.R
 import com.lvfq.kotlinbase.databinding.LayoutToolBarBinding
-import com.lvfq.kotlinbase.kotlinx.Position
 import com.lvfq.kotlinbase.kotlinx.drawable
 
 /**
@@ -68,7 +67,7 @@ class ToolBar
         if (drawId == 0) {
 //            toolBar_tv_left.drawable(R.drawable.icon_back, Position.LEFT)
         } else {
-            binding.toolBarTvLeft.drawable(drawId, Position.LEFT)
+            binding.toolBarTvLeft.drawable(leftRes = drawId)
         }
         binding.toolBarTvLeft.setOnClickListener {
             activity?.finish()
@@ -111,7 +110,7 @@ class ToolBar
      * 右边位置 只显示图标，无文本。
      */
     fun setRight(drawId: Int, click: (View) -> Unit): ToolBar {
-        binding.toolBarTvRight.drawable(drawId, Position.RIGHT)
+        binding.toolBarTvRight.drawable(rightRes = drawId)
         binding.toolBarTvRight.setOnClickListener(click)
         return this
     }
