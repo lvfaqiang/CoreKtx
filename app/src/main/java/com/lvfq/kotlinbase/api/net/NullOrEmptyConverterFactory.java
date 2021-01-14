@@ -1,6 +1,5 @@
 package com.lvfq.kotlinbase.api.net;
 
-import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
@@ -17,15 +16,12 @@ public class NullOrEmptyConverterFactory extends Converter.Factory {
     @Override
     public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
         final Converter<ResponseBody, ?> delegate = retrofit.nextResponseBodyConverter(this, type, annotations);
-        return new Converter<ResponseBody, Object>() {
-            @Override
-            public Object convert(ResponseBody body) throws IOException {
-                long contentLength = body.contentLength();
-                if (contentLength == 0) {
-                    return "{}";
-                }
-                return delegate.convert(body);
+        return (Converter<ResponseBody, Object>) body -> {
+            long contentLength = body.contentLength();
+            if (contentLength == 0) {
+                return "{}";
             }
+            return delegate.convert(body);
         };
     }
 }

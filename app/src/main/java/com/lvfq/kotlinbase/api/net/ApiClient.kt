@@ -20,7 +20,6 @@ object ApiClient {
             .baseUrl(API_COMMON)
             .addConverterFactory(NullOrEmptyConverterFactory())
             .addConverterFactory(GsonConverterFactory.create())
-//                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(ApiConfig().configOkHttp())
             .build()
     }
