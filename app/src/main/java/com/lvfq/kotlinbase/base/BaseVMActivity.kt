@@ -2,6 +2,7 @@ package com.lvfq.kotlinbase.base
 
 import android.os.Bundle
 import androidx.viewbinding.ViewBinding
+import com.lvfq.kotlinbase.factory.VMFactory
 
 /**
  * BaseVMActivity2020-02-24 15:39

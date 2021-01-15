@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.lvfq.kotlinbase.R
 import com.lvfq.kotlinbase.feature.main.dashboard.DashboardViewModel
+import com.lvfq.kotlinbase.utils.basic.LogUtil
 
 class DashboardFragment : Fragment() {
 
@@ -24,9 +25,14 @@ class DashboardFragment : Fragment() {
             ViewModelProvider(this).get(DashboardViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
         val textView: TextView = root.findViewById(R.id.text_dashboard)
-        dashboardViewModel.text.observe(this, Observer {
+        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
+        LogUtil.i("1111111")
         return root
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        LogUtil.i("222222")
     }
 }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.WindowManager
 import androidx.fragment.app.FragmentActivity
 import androidx.viewbinding.ViewBinding
+import com.lvfq.kotlinbase.factory.VMFactory
 import com.lvfq.kotlinbase.utils.basic.StatusBarUtil
 import com.lvfq.kotlinbase.utils.tool.KeyBoardUtils
 import org.greenrobot.eventbus.EventBus
@@ -67,7 +68,7 @@ abstract class BaseActivity<T : ViewBinding> : FragmentActivity() {
 
     }
 
-    protected fun applySinking(){
+    protected fun applySinking() {
         //沉侵
         StatusBarUtil.immersive(this)
         StatusBarUtil.setPadding(this, binding.root)

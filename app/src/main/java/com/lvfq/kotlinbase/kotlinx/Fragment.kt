@@ -16,11 +16,11 @@ inline fun <reified T : Activity> Fragment.startActivity(
     crossinline action: Intent.() -> Unit = {}
 ) {
     startActivityForResult(
-        Intent(context, T::class.java)
-            .apply {
-                action.invoke(this)
-            }
-        , requestCode)
+        Intent(context, T::class.java).apply {
+            action.invoke(this)
+        },
+        requestCode
+    )
 }
 
 
@@ -31,9 +31,9 @@ inline fun Fragment.startAction(
 ) {
     startActivityForResult(
         (takeIf { intentAction.isNotEmpty() }?.let { return@let Intent(intentAction) }
-            ?: Intent())
-            .apply {
-                action.invoke(this)
-            }
-        , requestCode)
+            ?: Intent()).apply {
+            action.invoke(this)
+        },
+        requestCode
+    )
 }

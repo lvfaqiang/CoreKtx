@@ -26,7 +26,7 @@ object LogUtil {
 
     fun i(tag: String, msg: String?) {
         if (logOff) {
-            Log.i(generateTempTag(tag), msg)
+            Log.i(generateTempTag(tag), msg ?: "")
         }
     }
 
@@ -36,7 +36,7 @@ object LogUtil {
 
     fun e(tag: String, msg: String?) {
         if (logOff) {
-            Log.e(generateTempTag(tag), msg)
+            Log.e(generateTempTag(tag), msg ?: "")
         }
     }
 
@@ -46,7 +46,7 @@ object LogUtil {
 
     fun d(tag: String, msg: String?) {
         if (logOff) {
-            Log.d(generateTempTag(tag), msg)
+            Log.d(generateTempTag(tag), msg ?: "")
         }
     }
 
@@ -56,13 +56,13 @@ object LogUtil {
 
     fun v(tag: String, msg: String?) {
         if (logOff) {
-            Log.v(generateTempTag(tag), msg)
+            Log.v(generateTempTag(tag), msg ?: "")
         }
     }
 
     fun w(tag: String, msg: String?) {
         if (logOff) {
-            Log.w(generateTempTag(tag), msg)
+            Log.w(generateTempTag(tag), msg ?: "")
         }
     }
 

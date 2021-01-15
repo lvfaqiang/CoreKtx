@@ -1,4 +1,4 @@
-package com.lvfq.kotlinbase.feature.util
+package com.lvfq.kotlinbase.factory
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

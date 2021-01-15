@@ -2,11 +2,10 @@ package com.lvfq.kotlinbase.feature
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
-import com.lvfq.kotlinbase.kotlinx.startActivity
-import com.lvfq.kotlinbase.base.BaseActivity
+import com.lvfq.kotlinbase.feature.main.TabMainActivity
 import com.lvfq.kotlinbase.kotlinx.coroutines.launchUI
+import com.lvfq.kotlinbase.kotlinx.startActivity
 import kotlinx.coroutines.delay
 
 /**
@@ -23,7 +22,7 @@ class LoadingActivity : AppCompatActivity() {
         launchUI(lifecycleScope) {
             delay(2000)
             //                     下一步操作
-            startActivity<MainActivity>()
+            startActivity<TabMainActivity>()
             finish()
         }
     }

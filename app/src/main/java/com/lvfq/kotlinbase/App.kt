@@ -123,11 +123,11 @@ object AppLifecycle : Application.ActivityLifecycleCallbacks {
     fun latestActivity() = takeIf { activitys.size > 0 }?.let { activitys.last }
 
 
-    override fun onActivityPaused(activity: Activity?) {
+    override fun onActivityPaused(activity: Activity) {
         //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onActivityResumed(activity: Activity?) {
+    override fun onActivityResumed(activity: Activity) {
         //To change body of created functions use File | Settings | File Templates.
         if (!isForeground) {
             isForeground = true
@@ -135,19 +135,19 @@ object AppLifecycle : Application.ActivityLifecycleCallbacks {
         activityCount++
     }
 
-    override fun onActivityStarted(activity: Activity?) {
+    override fun onActivityStarted(activity: Activity) {
         //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onActivityDestroyed(activity: Activity?) {
+    override fun onActivityDestroyed(activity: Activity) {
         remove(activity)
     }
 
-    override fun onActivitySaveInstanceState(activity: Activity?, outState: Bundle?) {
+    override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
         //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onActivityStopped(activity: Activity?) {
+    override fun onActivityStopped(activity: Activity) {
         //To change body of created functions use File | Settings | File Templates.
         activityCount--
         if (activityCount == 0) {
@@ -155,7 +155,7 @@ object AppLifecycle : Application.ActivityLifecycleCallbacks {
         }
     }
 
-    override fun onActivityCreated(activity: Activity?, savedInstanceState: Bundle?) {
+    override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
         add(activity)
     }
 

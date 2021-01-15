@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/KotlinBase.iml" filepath="$PROJECT_DIR$/KotlinBase.iml" group="KotlinBase" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="KotlinBase/app" />
+      <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" group="KotlinBase/core" />
     </modules>
   </component>
 </project>

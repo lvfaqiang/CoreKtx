@@ -14,11 +14,11 @@ inline fun <reified T : Activity> Activity.startActivity(
     crossinline action: Intent.() -> Unit = {}
 ) {
     startActivityForResult(
-        Intent(this, T::class.java)
-            .apply {
-                action.invoke(this)
-            }
-        , requestCode)
+        Intent(this, T::class.java).apply {
+            action.invoke(this)
+        },
+        requestCode
+    )
 }
 
 inline fun Activity.startAction(
@@ -28,9 +28,9 @@ inline fun Activity.startAction(
 ) {
     startActivityForResult(
         (takeIf { !intentAction.isEmpty() }?.let { return@let Intent(intentAction) }
-            ?: Intent())
-            .apply {
-                action.invoke(this)
-            }
-        , requestCode)
+            ?: Intent()).apply {
+            action.invoke(this)
+        },
+        requestCode
+    )
 }

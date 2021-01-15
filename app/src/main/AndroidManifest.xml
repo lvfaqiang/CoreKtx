@@ -36,6 +36,7 @@
         <activity android:name=".feature.MainActivity" />
         <!-- H5 界面-->
         <activity android:name=".feature.h5.H5Activity" />
+        <activity android:name=".feature.main.TabMainActivity" />
         <!--心跳服务-->
         <service android:name=".service.BeatService" />
     </application>

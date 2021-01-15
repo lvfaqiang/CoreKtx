@@ -10,4 +10,7 @@
     <color name="c_838291">#838291</color>
     <color name="c_517cff">#517CFF</color>
 
+    <color name="white">#fff</color>
+    <color name="black">#000</color>
+
 </resources>

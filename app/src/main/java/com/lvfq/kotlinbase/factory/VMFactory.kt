@@ -1,4 +1,4 @@
-package com.lvfq.kotlinbase.base
+package com.lvfq.kotlinbase.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

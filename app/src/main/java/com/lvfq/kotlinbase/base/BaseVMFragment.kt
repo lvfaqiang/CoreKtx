@@ -3,13 +3,15 @@ package com.lvfq.kotlinbase.base
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModel
+import androidx.viewbinding.ViewBinding
+import com.lvfq.kotlinbase.factory.VMFactory
 
 /**
  * BaseVMFragment2020-02-24 16:54
  * @desc :
  *
  */
-abstract class BaseVMFragment<VM : ViewModel> : BaseFragment() {
+abstract class BaseVMFragment<T : ViewBinding, VM : ViewModel> : BaseFragment<T>() {
     protected abstract val viewModelClass: Class<VM>
 
     protected lateinit var viewModel: VM
