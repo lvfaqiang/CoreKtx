@@ -145,3 +145,12 @@
    
    implementation 'com.king.zxing:zxing-lite:2.0.1'
    ```
+
+-  SmartRefreshLayout 刷新加载 [Gitub 地址](https://github.com/scwang90/SmartRefreshLayout)
+   ```
+   依赖方式：
+   
+   implementation 'com.scwang.smart:refresh-layout-kernel:2.0.3'
+   implementation  'com.scwang.smart:refresh-header-material:2.0.3'    //谷歌刷新头
+   implementation  'com.scwang.smart:refresh-footer-classics:2.0.3'    //经典加载
+   ```

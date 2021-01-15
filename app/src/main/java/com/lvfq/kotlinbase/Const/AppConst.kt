@@ -13,7 +13,7 @@ object AppConst {
     const val KEY_PAGE_SIZE = "per"
 
 
-    const val PAGE = 1
-    const val PAGE_SIZE = 20
+    const val PAGE = 1  // 列表刷新的出事初始页面
+    const val PAGE_SIZE = 20    // 默认分页条数
 
 }

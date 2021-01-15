@@ -5,10 +5,15 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.lvfq.kotlinbase.Const.AppConst
 import com.lvfq.kotlinbase.R
 import com.lvfq.kotlinbase.kotlinx.coroutines.launchUI
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
+import java.util.*
 
 /**
  * ViewUtil
@@ -91,5 +96,46 @@ object ViewUtil {
             }
         }
     }
+
+
+    fun <T> loadMoreResult(
+        smartRefreshLayout: SmartRefreshLayout,
+        curPage: Int,
+        data: ArrayList<T>?,
+        adapter: BaseQuickAdapter<T, BaseViewHolder>?
+    ) {
+        var data = data
+        if (adapter == null) {
+            return
+        }
+        smartRefreshLayout.finishRefresh(0)
+        if (data == null) {
+            data = ArrayList()
+        }
+        if (curPage == AppConst.PAGE) {
+            adapter.setNewInstance(data)
+        } else {
+            adapter.addData(data)
+        }
+        if (data.size < AppConst.PAGE_SIZE) {
+            smartRefreshLayout.finishLoadMoreWithNoMoreData()
+        } else {
+            smartRefreshLayout.finishLoadMore(0)
+        }
+    }
+
+    /**
+     * 需要把返回结果  重新赋值给 页面中的页码
+     */
+    fun loadMoreFailed(smartRefreshLayout: SmartRefreshLayout, curPage: Int): Int {
+        var page = curPage
+        if (curPage > AppConst.PAGE) {
+            page--
+        }
+        smartRefreshLayout.finishRefresh(0)
+        smartRefreshLayout.finishLoadMore(false)
+        return page
+    }
+
 
 }

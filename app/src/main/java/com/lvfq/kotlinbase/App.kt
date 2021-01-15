@@ -13,6 +13,9 @@ import android.os.Bundle
 import android.os.Process
 import androidx.multidex.MultiDexApplication
 import com.lvfq.kotlinbase.config.HawkConfig
+import com.lvfq.kotlinbase.views.CustomClassicsFooter
+import com.scwang.smart.refresh.header.MaterialHeader
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import java.util.*
 
 /**
@@ -31,6 +34,20 @@ class App : MultiDexApplication() {
         fun exit() {
             AppLifecycle.finishAll()
             Process.killProcess(Process.myPid())
+        }
+
+        init {
+            SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->
+                layout.setPrimaryColorsId(R.color.colorPrimary, android.R.color.white) //全局设置主题颜色
+
+                MaterialHeader(
+                    context
+                )
+            }
+
+            SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout ->
+                CustomClassicsFooter(context)   // 自定义 仅仅是为了解决 刷新加载文案国际化问题，
+            }
         }
     }
 

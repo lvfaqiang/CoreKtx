@@ -13,6 +13,14 @@
     <string name="str_request_timeout">请求超时</string>
     <string name="str_exception_unknown">未知错误</string>
 
+    <!--  自定义刷新文案  为了自己适配国际化 -->
+    <string name="load_pulling">上拉加载更多</string>
+    <string name="load_release">释放立即加载</string>
+    <string name="load_refreshing">正在刷新</string>
+    <string name="load_loading">正在加载</string>
+    <string name="load_finish">加载完成</string>
+    <string name="load_failed">加载失败</string>
+    <string name="load_nothing">没有更多数据了</string>
 
     <string name="str_send_code_resend">重新发送</string>
     <string name="str_send_code_count_down_label_s">剩余%sS</string>
