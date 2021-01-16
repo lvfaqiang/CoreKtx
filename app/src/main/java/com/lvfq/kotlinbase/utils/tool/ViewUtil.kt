@@ -101,10 +101,10 @@ object ViewUtil {
     fun <T> loadMoreResult(
         smartRefreshLayout: SmartRefreshLayout,
         curPage: Int,
-        data: ArrayList<T>?,
+        datas: ArrayList<T>?,
         adapter: BaseQuickAdapter<T, BaseViewHolder>?
     ) {
-        var data = data
+        var data = datas
         if (adapter == null) {
             return
         }
