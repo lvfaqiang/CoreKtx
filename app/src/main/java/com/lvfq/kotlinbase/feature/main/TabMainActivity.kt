@@ -10,6 +10,10 @@ import com.lvfq.kotlinbase.R
 import com.lvfq.kotlinbase.base.BaseVMActivity
 import com.lvfq.kotlinbase.base.BaseViewModel
 import com.lvfq.kotlinbase.databinding.ActivityTabMainBinding
+import com.lvfq.kotlinbase.feature.demo.Test2Fragment
+import com.lvfq.kotlinbase.feature.demo.Test3Fragment
+import com.lvfq.kotlinbase.feature.demo.Test4Fragment
+import com.lvfq.kotlinbase.feature.demo.TestFragment
 import com.lvfq.kotlinbase.utils.basic.LogUtil
 import com.lvfq.kotlinbase.utils.basic.StatusBarUtil
 
@@ -52,10 +56,10 @@ class TabMainActivity : BaseVMActivity<ActivityTabMainBinding, BaseViewModel>() 
 
     private val tabFragments by lazy {
         ArrayList<Fragment>().apply {
-            add(HomeFragment().apply {
+            add(TestFragment().apply {
                 content = "1111"
             })
-            add(HomeFragment().apply {
+            add(Test2Fragment().apply {
                 content = "2222"
             })
             add(HomeFragment().apply {
@@ -96,15 +100,15 @@ class TabMainActivity : BaseVMActivity<ActivityTabMainBinding, BaseViewModel>() 
 
         binding.tabLayout.setOnTabSelectListener(object : OnTabSelectListener {
             override fun onTabSelect(position: Int) {
-                LogUtil.i("position: $position")
+//                LogUtil.i("position: $position")
             }
 
             override fun onTabReselect(position: Int) {
-                LogUtil.i("position: $position")
+//                LogUtil.i("position: $position")
             }
 
             override fun onDoubleTabSelect(position: Int) {
-                LogUtil.i("position: $position")
+//                LogUtil.i("position: $position")
             }
         })
 

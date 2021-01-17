@@ -34,6 +34,7 @@ class PageAdapterFactory constructor(val fragmentManager: FragmentManager) {
         fragmentManager: FragmentManager,
         val fragments: List<Fragment>,
         val titles: List<String>? = null
+//    ) : FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
     ) : FragmentStatePagerAdapter(fragmentManager) {
         override fun getItem(position: Int): Fragment {
             return fragments[position]
@@ -55,6 +56,7 @@ class PageAdapterFactory constructor(val fragmentManager: FragmentManager) {
         fragmentManager: FragmentManager,
         val fragments: List<Fragment>,
         val titles: List<String>? = null
+//    ) : FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
     ) : FragmentPagerAdapter(fragmentManager) {
 
         override fun getItem(position: Int): Fragment {

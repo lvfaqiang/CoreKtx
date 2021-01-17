@@ -28,7 +28,6 @@ class HomeFragment : Fragment() {
 //        homeViewModel.text.observe(viewLifecycleOwner, Observer {
 //            textView.text = it
 //        })
-        LogUtil.i("1111111")
 //        homeViewModel.data.observe(this, Observer {
 //            textView.text = it.toString()
 //        })
@@ -41,6 +40,5 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        LogUtil.i("222222")
     }
 }
