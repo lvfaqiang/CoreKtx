@@ -1,8 +1,9 @@
-package com.lvfq.kotlinbase.kotlinx
+package com.lvfq.kotlinbase.kotlinx.view
 
 import android.graphics.drawable.Drawable
 import android.widget.TextView
 import androidx.annotation.DrawableRes
+import com.lvfq.kotlinbase.kotlinx.getDraw
 
 /**
  * TextView2021/1/14 2:22 AM

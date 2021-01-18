@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.core.content.withStyledAttributes
 import com.lvfq.kotlinbase.R
 import com.lvfq.kotlinbase.databinding.LayoutToolBarBinding
-import com.lvfq.kotlinbase.kotlinx.drawable
+import com.lvfq.kotlinbase.kotlinx.view.drawable
 
 /**
  * TopBar
@@ -32,10 +32,10 @@ class ToolBar
     private var rightTextSize = 16f
     private var rightTextColor = 0xff000000.toInt()
 
-    private lateinit var binding: LayoutToolBarBinding
+    private var binding: LayoutToolBarBinding =
+        LayoutToolBarBinding.inflate(LayoutInflater.from(getContext()), this, false)
 
     init {
-        val binding = LayoutToolBarBinding.inflate(LayoutInflater.from(getContext()), this, false)
 
         context.withStyledAttributes(attrs, R.styleable.ToolBar) {
             leftImg = getResourceId(R.styleable.ToolBar_leftImg, leftImg)

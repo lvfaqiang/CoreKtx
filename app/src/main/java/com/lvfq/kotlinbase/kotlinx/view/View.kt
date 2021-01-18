@@ -1,4 +1,4 @@
-package com.lvfq.kotlinbase.kotlinx
+package com.lvfq.kotlinbase.kotlinx.view
 
 import android.view.View
 import androidx.core.view.isInvisible
