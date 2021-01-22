@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.lvfq.kotlinbase.R
+import com.lvfq.kotlinbase.feature.main.home.HomeViewModel
 import com.lvfq.kotlinbase.utils.basic.LogUtil
 
 class HomeFragment : Fragment() {

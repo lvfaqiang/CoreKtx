@@ -1,5 +1,7 @@
 package com.lvfq.kotlinbase.kotlinx.view
 
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.widget.EditText
 
 /**
@@ -31,4 +33,18 @@ fun EditText.checkEditTextInput(
         }
     }
     return str
+}
+
+/**
+ * 密码显示切换
+ */
+fun EditText.passwordDisplay(toggle: Boolean) {
+    if (toggle) {
+        // 明文
+        this.transformationMethod = HideReturnsTransformationMethod.getInstance()
+    } else
+    // 密文
+        this.transformationMethod = PasswordTransformationMethod.getInstance()
+
+    setSelection(text.toString().length)
 }

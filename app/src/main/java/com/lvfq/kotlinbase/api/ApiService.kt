@@ -1,5 +1,6 @@
 package com.lvfq.kotlinbase.api
 
+import com.lvfq.kotlinbase.base.BaseResp
 import com.lvfq.kotlinbase.entities.LoginData
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -20,5 +21,5 @@ interface ApiService {
         @Field("password") password: String,
         @Field("authCode") authCode: String? = null,
         @Field("authKey") authKey: String? = null
-    ): LoginData
+    ): BaseResp<LoginData>
 }

@@ -21,7 +21,7 @@ import java.net.SocketTimeoutException
  */
 class ApiException(e: Throwable) {
 
-    var code: Int = 0
+    var code: String = ""
         private set
     var httpCode: Int = 0
         private set
@@ -41,13 +41,13 @@ class ApiException(e: Throwable) {
                     println("ApiException : ${e.message}")
                 }
                 errorBody?.let {
-                    code = it.error?.code ?: code
+                    code = it.error?.code?.toString() ?: code
                     message = it.error?.message ?: message
                 }
 
                 when (httpCode) {
                     401 -> {
-                        if (code == 40001 || code == 6001) {
+                        if (code == "40001" || code == "6001") {
                         }
                     }
                     503 -> {
@@ -80,6 +80,7 @@ class ApiException(e: Throwable) {
                 message = App.mContext.getString(R.string.str_request_timeout)
             }
             is CustomException -> {
+                code = e.code ?: "-1"
                 message = e.message ?: ""
             }
             else -> {

@@ -1,11 +1,11 @@
-package com.example.basic.ui.home
+package com.lvfq.kotlinbase.feature.main.home
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.lvfq.kotlinbase.api.Request
+import com.lvfq.kotlinbase.api.callback.SimpleCallBack
 import com.lvfq.kotlinbase.api.net.ApiClient
+import com.lvfq.kotlinbase.api.net.ApiLauncher
 import com.lvfq.kotlinbase.entities.LoginData
-import com.lvfq.kotlinbase.utils.basic.LogUtil
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 
@@ -29,18 +29,23 @@ class HomeViewModel : ViewModel() {
 
     fun loadData() {
 
-        Request.create(
-            viewModelScope,
-            {
-                ApiClient.getService().login("13178126836", "111111", "313112")
-            },
-            { data ->
-                LogUtil.i("success ")
-            },
-            { apiException ->
-                LogUtil.i("error : ----- ${apiException.message}")
-            }
-        )
-    }
+        ApiLauncher.get {
+            ApiClient.getService().login("13178126836", "111111", "313112")
+        }.withScope(viewModelScope)
+            .callBack(object : SimpleCallBack<LoginData>() {
+                override fun onSuccess(t: LoginData) {
 
+                }
+
+            }).launch()
+
+
+//        Request.create(
+//            viewModelScope,
+//            {
+//                ApiClient.getService().login("13178126836", "111111", "313112")
+//            },
+//            { t -> }
+//        )
+    }
 }

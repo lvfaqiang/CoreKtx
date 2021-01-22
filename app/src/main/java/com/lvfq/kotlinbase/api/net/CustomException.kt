@@ -5,4 +5,8 @@ package com.lvfq.kotlinbase.api.net
  * @desc :
  *
  */
-class CustomException(val code: Int, message: String?) : Throwable(message)
+class CustomException
+    constructor(val code: String?, message: String?) : Throwable(message) {
+
+    constructor(code: Int, message: String?) : this(code.toString(), message)
+}

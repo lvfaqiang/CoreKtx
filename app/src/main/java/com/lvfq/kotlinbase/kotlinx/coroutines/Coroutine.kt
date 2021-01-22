@@ -8,14 +8,22 @@ import kotlinx.coroutines.*
  *
  */
 
-fun CoroutineScope.launchUI(block: suspend CoroutineScope.() -> Unit): Job {
-    return launch(Dispatchers.Main, block = block)
+fun launchUI(block: suspend CoroutineScope.() -> Unit): Job {
+    return GlobalScope.launch(Dispatchers.Main, block = block)
 }
 
-fun CoroutineScope.launchIO(block: suspend CoroutineScope.() -> Unit): Job {
-    return launch(Dispatchers.IO, block = block)
+fun launchUI(scope: CoroutineScope, block: suspend CoroutineScope.() -> Unit): Job {
+    return scope.launch(Dispatchers.Main, block = block)
 }
 
-suspend fun <T> CoroutineScope.launchIO(block: suspend CoroutineScope.() -> T): T {
+fun launchIO(block: suspend CoroutineScope.() -> Unit): Job {
+    return GlobalScope.launch(Dispatchers.IO, block = block)
+}
+
+fun launchIO(scope: CoroutineScope, block: suspend CoroutineScope.() -> Unit): Job {
+    return scope.launch(Dispatchers.IO, block = block)
+}
+
+suspend fun <T> launchIO(block: suspend CoroutineScope.() -> T): T {
     return withContext(Dispatchers.IO, block)
 }
