@@ -19,55 +19,73 @@ import java.io.File
  */
 
 fun ImageView.load(
-        url: String?,
-        @DrawableRes placeHolder: Int = 0, @DrawableRes error: Int = 0,
-        roundCorner: Int = 0, isCircle: Boolean = false
+    url: String?,
+    @DrawableRes placeHolder: Int = 0,
+    @DrawableRes error: Int = 0,
+    roundCorner: Int = 0,
+    isCircle: Boolean = false,
+    isCenterCrop: Boolean = true
 ) {
     val glide = GlideApp.with(this).load(url)
-    loadBuild(glide, this, placeHolder, error, roundCorner, isCircle)
+    loadBuild(glide, this, placeHolder, error, roundCorner, isCircle, isCenterCrop)
 }
 
 fun ImageView.load(
-        bitmap: Bitmap?,
-        @DrawableRes placeHolder: Int = 0, @DrawableRes error: Int = 0,
-        roundCorner: Int = 0, isCircle: Boolean = false
+    bitmap: Bitmap?,
+    @DrawableRes placeHolder: Int = 0,
+    @DrawableRes error: Int = 0,
+    roundCorner: Int = 0,
+    isCircle: Boolean = false,
+    isCenterCrop: Boolean = true
 ) {
     val glide = GlideApp.with(this).load(bitmap)
-    loadBuild(glide, this, placeHolder, error, roundCorner, isCircle)
+    loadBuild(glide, this, placeHolder, error, roundCorner, isCircle, isCenterCrop)
 }
 
 fun ImageView.load(
-        drawable: Drawable?,
-        @DrawableRes placeHolder: Int = 0, @DrawableRes error: Int = 0,
-        roundCorner: Int = 0, isCircle: Boolean = false
+    drawable: Drawable?,
+    @DrawableRes placeHolder: Int = 0,
+    @DrawableRes error: Int = 0,
+    roundCorner: Int = 0,
+    isCircle: Boolean = false,
+    isCenterCrop: Boolean = true
 ) {
     val glide = GlideApp.with(this).load(drawable)
-    loadBuild(glide, this, placeHolder, error, roundCorner, isCircle)
+    loadBuild(glide, this, placeHolder, error, roundCorner, isCircle, isCenterCrop)
 }
 
 fun ImageView.load(
-        uri: Uri?,
-        @DrawableRes placeHolder: Int = 0, @DrawableRes error: Int = 0,
-        roundCorner: Int = 0, isCircle: Boolean = false
+    uri: Uri?,
+    @DrawableRes placeHolder: Int = 0,
+    @DrawableRes error: Int = 0,
+    roundCorner: Int = 0,
+    isCircle: Boolean = false,
+    isCenterCrop: Boolean = true
 ) {
     val glide = GlideApp.with(this).load(uri)
-    loadBuild(glide, this, placeHolder, error, roundCorner, isCircle)
+    loadBuild(glide, this, placeHolder, error, roundCorner, isCircle, isCenterCrop)
 }
 
 fun ImageView.load(
-        file: File?,
-        @DrawableRes placeHolder: Int = 0, @DrawableRes error: Int = 0,
-        roundCorner: Int = 0, isCircle: Boolean = false
+    file: File?,
+    @DrawableRes placeHolder: Int = 0,
+    @DrawableRes error: Int = 0,
+    roundCorner: Int = 0,
+    isCircle: Boolean = false,
+    isCenterCrop: Boolean = true
 ) {
     val glide = GlideApp.with(this).load(file)
-    loadBuild(glide, this, placeHolder, error, roundCorner, isCircle)
+    loadBuild(glide, this, placeHolder, error, roundCorner, isCircle, isCenterCrop)
 }
 
 fun loadBuild(
-        inGlide: GlideRequest<Drawable>,
-        imageView: ImageView,
-        @DrawableRes placeHolder: Int = 0, @DrawableRes error: Int = 0,
-        roundCorner: Int = 0, isCircle: Boolean = false
+    inGlide: GlideRequest<Drawable>,
+    imageView: ImageView,
+    @DrawableRes placeHolder: Int = 0,
+    @DrawableRes error: Int = 0,
+    roundCorner: Int = 0,
+    isCircle: Boolean = false,
+    isCenterCrop: Boolean = true
 ) {
     var glide = inGlide.diskCacheStrategy(DiskCacheStrategy.ALL)
     if (placeHolder != 0) {
@@ -82,7 +100,9 @@ fun loadBuild(
     if (isCircle) {
         glide = glide.transform(CircleCrop())
     }
-    glide.centerCrop()
-            .into(imageView)
+    if (isCenterCrop) {
+        glide = glide.centerCrop()
+    }
+    glide.into(imageView)
 }
 
