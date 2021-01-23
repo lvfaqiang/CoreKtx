@@ -11,10 +11,19 @@ import com.lvfq.kotlinbase.base.BasicResp
  * SimpleRepository2020/3/1 6:30 PM
  * @desc :
  *
+ *  回调方法释义：
+ *
+ *  BasicCallBack   方法一，接口给什么就返回什么，
+ *
+ *  BaseCallBack    方法二，根据统一规范要求，响应成功回调，不需要携带返回数据。 需根据需求，调整 success 条件。
+ *
+ *  SimpleCallBack  方法三，数据进行简单处理，适用于结果为 BaseResp<T> 类型， 回调方法直接返回 T 数据
+ *
+ *  以上三者继承关系为  SimpleCallBack   ->    BaseCallBack   ->   BasicCallBack
  */
 
 /**
- * 方法一
+ * 方法一，接口给什么就返回什么，
  */
 abstract class BasicCallBack<T>(private val bindView: View? = null) : ApiCallBack<T> {
 
@@ -50,7 +59,7 @@ abstract class BasicCallBack<T>(private val bindView: View? = null) : ApiCallBac
 }
 
 /**
- * 方法二
+ * 方法二，根据统一规范要求，响应成功回调，不需要携带返回数据。
  */
 abstract class BaseCallBack<T : BasicResp>(bindView: View? = null) : BasicCallBack<T>(bindView) {
 
@@ -64,18 +73,14 @@ abstract class BaseCallBack<T : BasicResp>(bindView: View? = null) : BasicCallBa
 }
 
 /**
- * 方法三
+ * 方法三，数据进行简单处理，直接返回 泛型数据
  */
 abstract class SimpleCallBack<T>(bindView: View? = null) : BaseCallBack<BaseResp<T>>(bindView) {
 
     override fun response(t: BaseResp<T>) {
-        if (t.data != null) {
-            onSuccess(t.data)
-        } else {
-            throw CustomException(-1, "the Data parameter of Response is Null")
-        }
+        onSuccess(t.data)
     }
 
-    abstract fun onSuccess(t: T)
+    abstract fun onSuccess(t: T?)
 
 }
