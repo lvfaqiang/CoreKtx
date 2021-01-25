@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.viewbinding.ViewBinding
+import com.lvfq.kotlinbase.cache.AppCache
 import com.lvfq.kotlinbase.factory.VMFactory
+import com.lvfq.kotlinbase.utils.basic.LanguageUtil
 import com.lvfq.kotlinbase.utils.tool.KeyBoardUtils
 import org.greenrobot.eventbus.EventBus
 
@@ -62,6 +64,9 @@ abstract class BaseVMFragment<T : ViewBinding, VM : ViewModel> : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        LanguageUtil.updateLanguage(requireContext(), AppCache.getLanguage())    // 默认中文
+
         binding = bindingView(inflater, container, false)
         return binding.root
     }

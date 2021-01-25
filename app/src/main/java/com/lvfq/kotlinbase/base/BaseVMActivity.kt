@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.WindowManager
 import androidx.fragment.app.FragmentActivity
 import androidx.viewbinding.ViewBinding
+import com.lvfq.kotlinbase.cache.AppCache
 import com.lvfq.kotlinbase.factory.VMFactory
+import com.lvfq.kotlinbase.utils.basic.LanguageUtil
 import com.lvfq.kotlinbase.utils.basic.StatusBarUtil
 import com.lvfq.kotlinbase.utils.tool.KeyBoardUtils
 import org.greenrobot.eventbus.EventBus
@@ -45,6 +47,8 @@ abstract class BaseVMActivity<T : ViewBinding, VM : BaseViewModel> : FragmentAct
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
         super.onCreate(savedInstanceState)
+
+        LanguageUtil.updateLanguage(this, AppCache.getLanguage())    // 默认中文
 
         initViewModel()
 

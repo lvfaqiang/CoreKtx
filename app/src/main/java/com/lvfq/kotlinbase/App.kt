@@ -12,7 +12,9 @@ import android.net.NetworkInfo
 import android.os.Bundle
 import android.os.Process
 import androidx.multidex.MultiDexApplication
+import com.lvfq.kotlinbase.cache.AppCache
 import com.lvfq.kotlinbase.config.HawkConfig
+import com.lvfq.kotlinbase.utils.basic.LanguageUtil
 import com.lvfq.kotlinbase.views.CustomClassicsFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -62,6 +64,7 @@ class App : MultiDexApplication() {
 
         registerBroadcastReceiver()
 
+        LanguageUtil.updateLanguage(this, AppCache.getLanguage())    // 默认中文
     }
 
     private fun initGlobalConfig() {
