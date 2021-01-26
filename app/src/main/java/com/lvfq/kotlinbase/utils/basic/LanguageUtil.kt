@@ -22,13 +22,13 @@ object LanguageUtil {
     }
 
     fun updateLanguage(context: Context, index: Int) {
-        context.createConfigurationContext(getConfiguration(context, index))
-//        val resources = context.resources
-//        val displayMetrics = resources.displayMetrics
-//        resources.updateConfiguration(
-//            getConfiguration(context, index),
-//            displayMetrics
-//        )
+//        context.createConfigurationContext(getConfiguration(context, index))  // 代码不好使。
+        val resources = context.resources
+        val displayMetrics = resources.displayMetrics
+        resources.updateConfiguration(
+            getConfiguration(context, index),
+            displayMetrics
+        )
     }
 
 
