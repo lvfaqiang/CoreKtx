@@ -1,8 +1,10 @@
 package com.lvfq.kotlinbase.views
 
-import android.app.ProgressDialog
 import android.content.Context
-import android.content.DialogInterface
+import android.view.Gravity
+import android.view.LayoutInflater
+import com.lvfq.kotlinbase.builder.DialogBuilder
+import com.lvfq.kotlinbase.databinding.LayoutLoadingBinding
 
 /**
  * LoadingView
@@ -22,18 +24,30 @@ interface ILoading {
     fun setCancelable(boolean: Boolean)
 
     fun setCanceledOnTouchOutside(boolean: Boolean)
-
-    fun setOnDismissListener(listener: DialogInterface.OnDismissListener)
 }
 
 
-class LoadingView constructor(context: Context) : ILoading {
+class LoadingView private constructor(private val context: Context) : ILoading {
 
+    companion object {
+        fun get(context: Context): LoadingView {
+            return LoadingView(context)
+        }
+    }
+
+    private var cancelable = true
+    private var canceledOnTouchOutside = true
+
+    private var loadingBinding: LayoutLoadingBinding =
+        LayoutLoadingBinding.inflate(LayoutInflater.from(context))
 
     private val dialog by lazy {
-        ProgressDialog(context).apply {
-            setMessage("加载中...")
-        }
+        DialogBuilder.get(context)
+            .setCancelable(cancelable)
+            .setCanceledOnTouchOutside(canceledOnTouchOutside)
+            .setGravity(Gravity.CENTER)
+            .setWidth(0f)
+            .build(loadingBinding.root)
     }
 
     override fun show() {
@@ -49,20 +63,16 @@ class LoadingView constructor(context: Context) : ILoading {
     }
 
     override fun setMessage(message: String) {
-        dialog.setMessage(message)
+        loadingBinding.tvLoading.text = message
     }
 
     override fun setCancelable(boolean: Boolean) {
-        dialog.setCancelable(boolean)
+        cancelable = boolean
+        dialog.setCancelable(cancelable)
     }
 
     override fun setCanceledOnTouchOutside(boolean: Boolean) {
-        dialog.setCanceledOnTouchOutside(boolean)
+        canceledOnTouchOutside = boolean
+        dialog.setCanceledOnTouchOutside(cancelable)
     }
-
-    override fun setOnDismissListener(listener: DialogInterface.OnDismissListener) {
-        dialog.setOnDismissListener(listener)
-    }
-
-
 }

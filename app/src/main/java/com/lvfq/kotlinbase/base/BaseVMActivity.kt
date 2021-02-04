@@ -4,12 +4,14 @@ import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.observe
 import androidx.viewbinding.ViewBinding
 import com.lvfq.kotlinbase.cache.AppCache
 import com.lvfq.kotlinbase.factory.VMFactory
 import com.lvfq.kotlinbase.utils.basic.LanguageUtil
 import com.lvfq.kotlinbase.utils.basic.StatusBarUtil
 import com.lvfq.kotlinbase.utils.tool.KeyBoardUtils
+import com.lvfq.kotlinbase.views.LoadingView
 import org.greenrobot.eventbus.EventBus
 
 /**
@@ -27,6 +29,9 @@ abstract class BaseVMActivity<T : ViewBinding, VM : BaseViewModel> : FragmentAct
 
     protected lateinit var vM: VM
 
+    private val loadingView by lazy {
+        LoadingView.get(this)
+    }
 
     private fun initViewModel() {
         vM = VMFactory.findVM(this, viewModelClass)
@@ -52,6 +57,8 @@ abstract class BaseVMActivity<T : ViewBinding, VM : BaseViewModel> : FragmentAct
 
         initViewModel()
 
+        loadingObserve()
+
         setContentView(binding.root)
 
         KeyBoardUtils.setupUISoftKeyBoardHideSystem(
@@ -65,6 +72,31 @@ abstract class BaseVMActivity<T : ViewBinding, VM : BaseViewModel> : FragmentAct
      */
     open fun viewGroupFocused(): Boolean {
         return false
+    }
+
+    private fun loadingObserve() {
+        vM.updateMessage.observe(this) {
+            if (loadingView.isShowing()) {
+                loadingView.setMessage(it)
+            }
+        }
+        vM.loadingState.observe(this) {
+            if (it.loading) {
+                loadingView.setCancelable(it.cancelable)
+                loadingView.setCanceledOnTouchOutside(it.cancelable)
+
+                if (it.message.isNotEmpty()) {
+                    loadingView.setMessage(it.message)
+                }
+
+                if (!loadingView.isShowing()) {
+                    loadingView.show()
+                }
+
+            } else {
+                loadingView.dismiss()
+            }
+        }
     }
 
 

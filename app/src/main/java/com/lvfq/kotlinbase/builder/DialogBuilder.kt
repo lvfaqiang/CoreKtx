@@ -3,6 +3,7 @@ package com.lvfq.kotlinbase.builder
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.content.DialogInterface
 import android.view.View
 import androidx.annotation.StyleRes
 import com.lvfq.kotlinbase.R
@@ -12,7 +13,7 @@ import com.lvfq.kotlinbase.R
  * @desc :
  *
  */
-class DialogBuilder private constructor(val mContext: Context) {
+class DialogBuilder private constructor(private val mContext: Context) {
 
     private var isCancelable = true
     private var isCanceledOnTouchOutside = true
@@ -22,8 +23,11 @@ class DialogBuilder private constructor(val mContext: Context) {
     private var mWidthScale = 0.86f
     private var mHeightScale = 0f
 
+    private var dismissListener: DialogInterface.OnDismissListener? = null
+    private var cancelListener: DialogInterface.OnCancelListener? = null
+
     @StyleRes
-    private val styleRes = R.style.style_loading_light_dialog
+    private var styleRes = R.style.style_loading_light_dialog
 
     fun setWidth(width: Int): DialogBuilder {
         mWidth = width
@@ -60,6 +64,21 @@ class DialogBuilder private constructor(val mContext: Context) {
         return this
     }
 
+    fun setOnDismissListener(dismissListener: DialogInterface.OnDismissListener): DialogBuilder {
+        this.dismissListener = dismissListener
+        return this
+    }
+
+    fun setOnCancelListener(cancelListener: DialogInterface.OnCancelListener): DialogBuilder {
+        this.cancelListener = cancelListener
+        return this
+    }
+
+    fun setStyleRes(@StyleRes styleRes: Int): DialogBuilder {
+        this.styleRes = styleRes
+        return this
+    }
+
     fun build(view: View): Dialog {
         val dialog = Dialog(mContext, styleRes)
         dialog.setContentView(view)
@@ -86,6 +105,10 @@ class DialogBuilder private constructor(val mContext: Context) {
             }
         }
         window.attributes = windowAttr
+
+        dialog.setOnDismissListener(dismissListener)
+        dialog.setOnCancelListener(cancelListener)
+
         dialog.show()
         return dialog
     }

@@ -1,6 +1,8 @@
 package com.lvfq.kotlinbase.base
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.lvfq.kotlinbase.entities.LoadingState
 
 /**
  * BaseViewModel2020-02-24 17:39
@@ -8,4 +10,22 @@ import androidx.lifecycle.ViewModel
  *
  */
 open class BaseViewModel : ViewModel() {
+    val loadingState = MutableLiveData<LoadingState>()
+    val updateMessage = MutableLiveData<String>()
+
+
+    protected fun setMessage(message: String?) {
+        message?.let {
+            updateMessage.value = it
+        }
+    }
+
+    protected fun showLoading(message: String? = null, cancelable: Boolean) {
+        loadingState.value = LoadingState(true, message ?: "加载中...", cancelable)
+    }
+
+    protected fun disLoading() {
+        loadingState.value = LoadingState(false)
+    }
+
 }

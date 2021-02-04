@@ -8,7 +8,6 @@ import com.basic.core.tablayout.listener.OnTabSelectListener
 import com.example.basic.ui.home.HomeFragment
 import com.lvfq.kotlinbase.R
 import com.lvfq.kotlinbase.base.BaseVMActivity
-import com.lvfq.kotlinbase.base.BaseViewModel
 import com.lvfq.kotlinbase.databinding.ActivityTabMainBinding
 import com.lvfq.kotlinbase.utils.basic.LogUtil
 import com.lvfq.kotlinbase.utils.basic.StatusBarUtil
@@ -18,9 +17,9 @@ import com.lvfq.kotlinbase.utils.basic.StatusBarUtil
  * @desc :
  *
  */
-class TabMainActivity : BaseVMActivity<ActivityTabMainBinding, BaseViewModel>() {
-    override val viewModelClass: Class<BaseViewModel>
-        get() = BaseViewModel::class.java
+class TabMainActivity : BaseVMActivity<ActivityTabMainBinding, TabMainVM>() {
+    override val viewModelClass: Class<TabMainVM>
+        get() = TabMainVM::class.java
 
     override fun bindingView(): ActivityTabMainBinding {
         return ActivityTabMainBinding.inflate(layoutInflater)
@@ -105,6 +104,7 @@ class TabMainActivity : BaseVMActivity<ActivityTabMainBinding, BaseViewModel>() 
 
             override fun onDoubleTabSelect(position: Int) {
                 LogUtil.i("position: $position")
+                vM.show()
             }
         })
 

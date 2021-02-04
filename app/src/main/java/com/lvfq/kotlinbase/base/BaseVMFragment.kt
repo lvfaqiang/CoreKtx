@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.observe
 import androidx.viewbinding.ViewBinding
 import com.lvfq.kotlinbase.cache.AppCache
 import com.lvfq.kotlinbase.factory.VMFactory
 import com.lvfq.kotlinbase.utils.basic.LanguageUtil
 import com.lvfq.kotlinbase.utils.tool.KeyBoardUtils
+import com.lvfq.kotlinbase.views.LoadingView
 import org.greenrobot.eventbus.EventBus
 
 /**
@@ -18,10 +20,14 @@ import org.greenrobot.eventbus.EventBus
  * @desc :
  *
  */
-abstract class BaseVMFragment<T : ViewBinding, VM : ViewModel> : Fragment() {
+abstract class BaseVMFragment<T : ViewBinding, VM : BaseViewModel> : Fragment() {
     protected abstract val viewModelClass: Class<VM>
 
     protected lateinit var vM: VM
+
+    private val loadingView by lazy {
+        LoadingView.get(requireContext())
+    }
 
     private fun initViewModel() {
         vM = VMFactory.findVM(this, viewModelClass)
@@ -76,10 +82,37 @@ abstract class BaseVMFragment<T : ViewBinding, VM : ViewModel> : Fragment() {
 
         initViewModel()
 
+        loadingObserve()
+
         if (useEventBus) {
             EventBus.getDefault().register(this)
         }
         init(savedInstanceState)
+    }
+
+    private fun loadingObserve() {
+        vM.updateMessage.observe(this.viewLifecycleOwner) {
+            if (loadingView.isShowing()) {
+                loadingView.setMessage(it)
+            }
+        }
+        vM.loadingState.observe(this.viewLifecycleOwner) {
+            if (it.loading) {
+                loadingView.setCancelable(it.cancelable)
+                loadingView.setCanceledOnTouchOutside(it.cancelable)
+
+                if (it.message.isNotEmpty()) {
+                    loadingView.setMessage(it.message)
+                }
+
+                if (!loadingView.isShowing()) {
+                    loadingView.show()
+                }
+
+            } else {
+                loadingView.dismiss()
+            }
+        }
     }
 
     override fun onDestroyView() {
