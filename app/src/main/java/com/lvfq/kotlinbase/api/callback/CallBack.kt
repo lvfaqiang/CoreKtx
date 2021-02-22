@@ -67,7 +67,12 @@ abstract class BaseCallBack<T : BasicResp>(bindView: View? = null) : BasicCallBa
         if (t.success) {
             super.success(t)
         } else {
-            throw CustomException(t.code, t.message)     //需要抛出异常，再顶层捕获，然后执行 failure(Throwable) 方法。
+            super.failure(
+                CustomException(
+                    t.code,
+                    t.message
+                )
+            )
         }
     }
 }
