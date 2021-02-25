@@ -24,6 +24,6 @@ fun launchIO(scope: CoroutineScope, block: suspend CoroutineScope.() -> Unit): J
     return scope.launch(Dispatchers.IO, block = block)
 }
 
-suspend fun <T> launchIO(block: suspend CoroutineScope.() -> T): T {
+suspend fun <T> CoroutineScope.launchIO(block: suspend CoroutineScope.() -> T): T {
     return withContext(Dispatchers.IO, block)
 }

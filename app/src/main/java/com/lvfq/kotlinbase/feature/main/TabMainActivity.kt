@@ -1,5 +1,6 @@
 package com.lvfq.kotlinbase.feature.main
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.basic.core.tablayout.TabEntity
@@ -9,8 +10,10 @@ import com.example.basic.ui.home.HomeFragment
 import com.lvfq.kotlinbase.R
 import com.lvfq.kotlinbase.base.BaseVMActivity
 import com.lvfq.kotlinbase.databinding.ActivityTabMainBinding
+import com.lvfq.kotlinbase.kotlinx.startActivity
 import com.lvfq.kotlinbase.utils.basic.LogUtil
 import com.lvfq.kotlinbase.utils.basic.StatusBarUtil
+import com.lvfq.kotlinbase.widget.scan.ScanActivity
 
 /**
  * TabMainActivity2021/1/15 5:12 PM
@@ -104,7 +107,6 @@ class TabMainActivity : BaseVMActivity<ActivityTabMainBinding, TabMainVM>() {
 
             override fun onDoubleTabSelect(position: Int) {
                 LogUtil.i("position: $position")
-                vM.show()
             }
         })
 
@@ -130,4 +132,10 @@ class TabMainActivity : BaseVMActivity<ActivityTabMainBinding, TabMainVM>() {
         }
     }
 
+    /**
+     * 更新当前显示的 Tab
+     */
+    private fun updateCurTab(curTabIndex: Int) {
+        binding.tabLayout.currentTab = curTabIndex
+    }
 }

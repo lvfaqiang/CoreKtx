@@ -37,7 +37,7 @@ class MagicBuilder private constructor(private val context: Context) {
     }
 
     /**
-     * ⚠️   颜色值需要传入 getResource.getColor 获取到的值，
+     * ⚠️   颜色值需要传入 R.color.id 即可
      */
     private var titleNorColor: Int = 0
     private var titleSelColor: Int = 0

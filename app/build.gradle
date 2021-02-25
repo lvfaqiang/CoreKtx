@@ -34,10 +34,27 @@ android {
                     outputFileName = "${variant.productFlavors[0].name}_v${defaultConfig.versionName}.apk"
                 }
             }
+//            signingConfig signingConfigs.release
         }
 
         debug {
             minifyEnabled false
+//            signingConfig signingConfigs.debug
+        }
+    }
+
+    signingConfigs {
+        debug {
+//            storeFile file('xxx.p12') // 文件放到 app 目录下
+//            storePassword 'pwd'
+//            keyAlias = 'key0'
+//            keyPassword 'pwd'
+        }
+        release {
+//            storeFile file('xxx.p12')
+//            storePassword 'pwd'
+//            keyAlias = 'key0'
+//            keyPassword 'pwd'
         }
     }
 
@@ -262,7 +279,7 @@ dependencies {
      * https://github.com/lvfaqiang/ZXingLite
      */
     //AndroidX 版本
-    implementation 'com.king.zxing:zxing-lite:1.1.9-androidx'
+    implementation 'com.king.zxing:zxing-lite:2.0.2'
 
 //     用于处理 arch.core:common 包下的 Function 冲突
 //    implementation 'android.arch.lifecycle:extensions:1.1.1'

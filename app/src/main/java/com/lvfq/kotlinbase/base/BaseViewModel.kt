@@ -2,6 +2,8 @@ package com.lvfq.kotlinbase.base
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.lvfq.kotlinbase.App
+import com.lvfq.kotlinbase.R
 import com.lvfq.kotlinbase.entities.LoadingState
 
 /**
@@ -21,7 +23,8 @@ open class BaseViewModel : ViewModel() {
     }
 
     protected fun showLoading(message: String? = null, cancelable: Boolean) {
-        loadingState.value = LoadingState(true, message ?: "加载中...", cancelable)
+        loadingState.value =
+            LoadingState(true, message ?: App.mContext.getString(R.string.loading), cancelable)
     }
 
     protected fun disLoading() {
