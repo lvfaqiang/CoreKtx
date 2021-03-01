@@ -3,7 +3,6 @@ package com.lvfq.kotlinbase.kotlinx.view
 import android.graphics.drawable.Drawable
 import android.widget.TextView
 import androidx.annotation.DrawableRes
-import com.lvfq.kotlinbase.kotlinx.getDraw
 
 /**
  * TextView2021/1/14 2:22 AM
@@ -16,10 +15,10 @@ fun TextView.drawable(
     @DrawableRes rightRes: Int? = null,
     @DrawableRes bottomRes: Int? = null
 ) {
-    val ld = if (leftRes != null) resources.getDraw(leftRes) else null
-    val td = if (topRes != null) resources.getDraw(topRes) else null
-    val rd = if (rightRes != null) resources.getDraw(rightRes) else null
-    val bd = if (bottomRes != null) resources.getDraw(bottomRes) else null
+    val ld = if (leftRes != null) context.getDrawable(leftRes) else null
+    val td = if (topRes != null) context.getDrawable(topRes) else null
+    val rd = if (rightRes != null) context.getDrawable(rightRes) else null
+    val bd = if (bottomRes != null) context.getDrawable(bottomRes) else null
 
 
     ld?.let { it.setBounds(0, 0, it.minimumWidth, it.minimumHeight) }

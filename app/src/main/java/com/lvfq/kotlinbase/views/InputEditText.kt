@@ -17,6 +17,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.core.view.isVisible
 import com.lvfq.kotlinbase.R
+import com.lvfq.kotlinbase.kotlinx.getColorById
 import com.lvfq.kotlinbase.kotlinx.getDraw
 import com.lvfq.kotlinbase.kotlinx.px2dp
 
@@ -158,7 +159,7 @@ class InputEditText
         ta.recycle()
 
         if (closeResource == null) {
-            closeResource = resources.getDraw(R.drawable.img_icon_input_close)
+            closeResource = context.getDrawable(R.drawable.img_icon_input_close)
         }
         if (showPasswordResource == null) {
 //            showPasswordResource = resources.getDrawable(R.drawable.img_icon_input_close)
@@ -171,8 +172,8 @@ class InputEditText
         editText.setPadding(paddLeft, 0, 0, 0)
         editText.hint = hint
         editText.isSingleLine = singleLine
-        editText.setTextColor(resources.getColor(textColor))
-        editText.setHintTextColor(resources.getColor(textColorHint))
+        editText.setTextColor(resources.getColorById(textColor))
+        editText.setHintTextColor(resources.getColorById(textColorHint))
         editText.inputType = inputType
 
         editText.isCursorVisible = enable

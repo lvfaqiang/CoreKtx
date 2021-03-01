@@ -54,6 +54,10 @@ class MagicBuilder private constructor(private val context: Context) {
     private var isAdjustMode: Boolean = false // 是否均分， 适用少量的 Tab 数量。
 
     private var isTitleBold = false // 标题是否加粗
+    private var titleSelBig = false // 选中标题变大
+
+    private var customTitleView: ((Context, Int) -> IPagerTitleView)? = null
+
 
     /**
      * 不为空时，其他指示器的配置失效。
@@ -117,6 +121,18 @@ class MagicBuilder private constructor(private val context: Context) {
         return this
     }
 
+    /**
+     * 标题选中变大
+     */
+    fun setTitleSelcetBecomeLarge(becomeLarge: Boolean): MagicBuilder {
+        titleSelBig = becomeLarge
+        return this
+    }
+
+    fun setCustomTitleView(titleView: (Context, Int) -> IPagerTitleView): MagicBuilder {
+        this.customTitleView = titleView
+        return this
+    }
 
     fun setDatas(datas: List<String>): MagicBuilder {
         this.datas.clear()
@@ -147,17 +163,28 @@ class MagicBuilder private constructor(private val context: Context) {
 
             override fun getTitleView(context: Context, index: Int): IPagerTitleView {
                 val badgePagerTitleView = BadgePagerTitleView(context)
-                val simplePagerTitleView = ColorTransitionPagerTitleView(context).apply {
-                    normalColor = titleNorColor
-                    selectedColor = titleSelColor
-                    text = datas[index]
-                    typeface =
-                        if (isTitleBold) Typeface.defaultFromStyle(Typeface.BOLD) else Typeface.defaultFromStyle(
-                            Typeface.NORMAL
-                        )
-                    setTextSize(TypedValue.COMPLEX_UNIT_SP, titleSize)
-                    setOnClickListener { viewPager?.currentItem = index }
+                if (customTitleView != null) {
+                    badgePagerTitleView.innerPagerTitleView =
+                        customTitleView?.invoke(context, index)
+                    return badgePagerTitleView
                 }
+
+                val simplePagerTitleView =
+                    (if (titleSelBig)
+                        ScaleTransitionPagerTitleView(context)
+                    else
+                        ColorTransitionPagerTitleView(context))
+                        .apply {
+                            normalColor = titleNorColor
+                            selectedColor = titleSelColor
+                            text = datas[index]
+                            typeface =
+                                if (isTitleBold) Typeface.defaultFromStyle(Typeface.BOLD) else Typeface.defaultFromStyle(
+                                    Typeface.NORMAL
+                                )
+                            setTextSize(TypedValue.COMPLEX_UNIT_SP, titleSize)
+                            setOnClickListener { viewPager?.currentItem = index }
+                        }
 
                 badgePagerTitleView.innerPagerTitleView = simplePagerTitleView
                 return badgePagerTitleView
@@ -193,6 +220,33 @@ class MagicBuilder private constructor(private val context: Context) {
             }
         }
         ViewPagerHelper.bind(indicator, viewPager)
+    }
+
+    class ScaleTransitionPagerTitleView(context: Context?) :
+        ColorTransitionPagerTitleView(context) {
+        var minScale = 0.75f
+
+        override fun onEnter(
+            index: Int,
+            totalCount: Int,
+            enterPercent: Float,
+            leftToRight: Boolean
+        ) {
+            super.onEnter(index, totalCount, enterPercent, leftToRight) // 实现颜色渐变
+            scaleX = minScale + (1.0f - minScale) * enterPercent
+            scaleY = minScale + (1.0f - minScale) * enterPercent
+        }
+
+        override fun onLeave(
+            index: Int,
+            totalCount: Int,
+            leavePercent: Float,
+            leftToRight: Boolean
+        ) {
+            super.onLeave(index, totalCount, leavePercent, leftToRight) // 实现颜色渐变
+            scaleX = 1.0f + (minScale - 1.0f) * leavePercent
+            scaleY = 1.0f + (minScale - 1.0f) * leavePercent
+        }
     }
 
 }
