@@ -2,13 +2,12 @@ package com.lvfq.kotlinbase.feature.main.home
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.lvfq.kotlinbase.api.callback.BaseCallBack
-import com.lvfq.kotlinbase.api.callback.SimpleCallBack
+import com.lvfq.kotlinbase.api.net.Failure
+import com.lvfq.kotlinbase.api.net.Success
 import com.lvfq.kotlinbase.api.net.ApiClient
-import com.lvfq.kotlinbase.api.net.ApiException
-import com.lvfq.kotlinbase.api.net.ApiLauncher
-import com.lvfq.kotlinbase.base.BaseResp
 import com.lvfq.kotlinbase.entities.LoginData
+import com.lvfq.kotlinbase.kotlinx.apiLaunch
+import com.lvfq.kotlinbase.kotlinx.launch
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 
@@ -32,35 +31,21 @@ class HomeViewModel : ViewModel() {
 
     fun loadData() {
         /**
-         * 演示一
+         * 请求演示
          */
-        ApiLauncher.get {
-            ApiClient.getService().login("13178126836", "111111", "313112")
-        }.withScope(viewModelScope)
-            .callBack(object : SimpleCallBack<LoginData>() {
-                override fun onSuccess(t: LoginData?) {
-                    t?.let {
+        launch {
 
-                    }
-                }
+            val result = apiLaunch {
+                ApiClient.getService().login("13178126836", "111111", "313112")
+            }
 
-                override fun failure(apiException: ApiException) {
-                }
+            if (result is Failure) {
 
-            }).launch()
+            }
 
-        /**
-         * 演示二
-         */
-        ApiLauncher.get {
-            ApiClient.getService().login("", "", "")
-        }.withScope(viewModelScope)
-            .callBack(object : BaseCallBack<BaseResp<LoginData>>() {
-                override fun response(t: BaseResp<LoginData>) {
-                    t.data?.let {
-
-                    }
-                }
-            }).launch()
+            if (result is Success) {
+                result.data
+            }
+        }
     }
 }
