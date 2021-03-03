@@ -22,7 +22,7 @@ open class BaseViewModel : ViewModel() {
         }
     }
 
-    protected fun showLoading(message: String? = null, cancelable: Boolean) {
+    protected fun showLoading(message: String? = null, cancelable: Boolean = false) {
         loadingState.value =
             LoadingState(true, message ?: App.mContext.getString(R.string.loading), cancelable)
     }
