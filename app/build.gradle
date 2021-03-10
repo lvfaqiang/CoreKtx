@@ -281,6 +281,12 @@ dependencies {
     //AndroidX 版本
     implementation 'com.king.zxing:zxing-lite:2.0.2'
 
+    // banner
+    implementation 'com.youth.banner:banner:1.4.10'
+
+    // 跑马灯。
+    implementation 'com.sunfusheng:MarqueeView:1.4.1'
+
 //     用于处理 arch.core:common 包下的 Function 冲突
 //    implementation 'android.arch.lifecycle:extensions:1.1.1'
 }
