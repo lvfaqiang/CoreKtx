@@ -18,7 +18,6 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import com.lvfq.kotlinbase.R
 import com.lvfq.kotlinbase.kotlinx.getColorById
-import com.lvfq.kotlinbase.kotlinx.getDraw
 import com.lvfq.kotlinbase.kotlinx.px2dp
 
 /**
