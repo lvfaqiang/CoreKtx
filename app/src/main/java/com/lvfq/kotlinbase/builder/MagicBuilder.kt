@@ -7,7 +7,7 @@ import android.util.TypedValue
 import android.widget.LinearLayout
 import androidx.annotation.ColorRes
 import androidx.viewpager.widget.ViewPager
-import com.lvfq.kotlinbase.kotlinx.getColorById
+import cn.basic.core.ktx.getColorById
 import net.lucode.hackware.magicindicator.MagicIndicator
 import net.lucode.hackware.magicindicator.ViewPagerHelper
 import net.lucode.hackware.magicindicator.buildins.UIUtil
@@ -71,12 +71,12 @@ class MagicBuilder private constructor(private val context: Context) {
     }
 
     fun setTitleNorColor(@ColorRes color: Int): MagicBuilder {
-        titleNorColor = context.resources.getColorById(color)
+        titleNorColor = context.getColorById(color)
         return this
     }
 
     fun setTitleSelColor(@ColorRes color: Int): MagicBuilder {
-        titleSelColor = context.resources.getColorById(color)
+        titleSelColor = context.getColorById(color)
         return this
     }
 
@@ -91,7 +91,7 @@ class MagicBuilder private constructor(private val context: Context) {
     }
 
     fun setIndicatorColor(@ColorRes color: Int): MagicBuilder {
-        indicatorColor = context.resources.getColorById(color)
+        indicatorColor = context.getColorById(color)
         return this
     }
 

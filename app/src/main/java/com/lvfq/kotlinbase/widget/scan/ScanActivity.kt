@@ -4,12 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.lifecycle.lifecycleScope
+import cn.basic.core.ktx.launchIO
 import com.google.zxing.Result
 import com.king.zxing.CaptureActivity
-import com.king.zxing.util.CodeUtils
 import com.lvfq.kotlinbase.R
-import com.lvfq.kotlinbase.kotlinx.coroutines.launchIO
-import com.lvfq.kotlinbase.kotlinx.coroutines.launchUI
+import cn.basic.core.ktx.launchUI
+import com.king.zxing.util.CodeUtils
 
 /**
  * ScanActivity2021/2/25 10:22 AM

@@ -1,6 +1,6 @@
 package com.lvfq.kotlinbase.utils.tool
 
-import com.lvfq.kotlinbase.utils.basic.LogUtil
+import cn.basic.core.util.LogUtil
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*

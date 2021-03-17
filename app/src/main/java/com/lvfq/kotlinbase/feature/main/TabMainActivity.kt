@@ -1,19 +1,19 @@
 package com.lvfq.kotlinbase.feature.main
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.basic.core.tablayout.TabEntity
-import com.basic.core.tablayout.listener.CustomTabEntity
-import com.basic.core.tablayout.listener.OnTabSelectListener
 import com.example.basic.ui.home.HomeFragment
 import com.lvfq.kotlinbase.R
-import com.lvfq.kotlinbase.base.BaseVMActivity
+import cn.basic.core.base.BaseVMActivity
+import cn.basic.core.common.ILoading
+import cn.basic.core.tablayout.TabEntity
+import cn.basic.core.tablayout.listener.CustomTabEntity
+import cn.basic.core.tablayout.listener.OnTabSelectListener
 import com.lvfq.kotlinbase.databinding.ActivityTabMainBinding
-import com.lvfq.kotlinbase.kotlinx.startActivity
-import com.lvfq.kotlinbase.utils.basic.LogUtil
-import com.lvfq.kotlinbase.utils.basic.StatusBarUtil
-import com.lvfq.kotlinbase.widget.scan.ScanActivity
+import cn.basic.core.util.LogUtil
+import cn.basic.core.util.StatusBarUtil
+import com.lvfq.kotlinbase.views.LoadingView
+import okhttp3.Credentials.basic
 
 /**
  * TabMainActivity2021/1/15 5:12 PM
@@ -27,6 +27,9 @@ class TabMainActivity : BaseVMActivity<ActivityTabMainBinding, TabMainVM>() {
     override fun bindingView(): ActivityTabMainBinding {
         return ActivityTabMainBinding.inflate(layoutInflater)
     }
+
+    override val loadingView: ILoading
+        get() = LoadingView.get(this)
 
 
     private val tabTitles by lazy {

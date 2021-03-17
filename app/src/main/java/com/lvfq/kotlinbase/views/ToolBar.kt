@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.core.content.withStyledAttributes
 import com.lvfq.kotlinbase.R
 import com.lvfq.kotlinbase.databinding.LayoutToolBarBinding
-import com.lvfq.kotlinbase.kotlinx.view.drawable
+import cn.basic.core.ktx.view.drawable
 
 /**
  * TopBar

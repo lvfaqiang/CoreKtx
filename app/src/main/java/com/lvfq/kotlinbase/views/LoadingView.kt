@@ -3,7 +3,8 @@ package com.lvfq.kotlinbase.views
 import android.content.Context
 import android.view.Gravity
 import android.view.LayoutInflater
-import com.lvfq.kotlinbase.builder.DialogBuilder
+import cn.basic.core.builder.DialogBuilder
+import cn.basic.core.common.ILoading
 import com.lvfq.kotlinbase.databinding.LayoutLoadingBinding
 
 /**
@@ -12,19 +13,6 @@ import com.lvfq.kotlinbase.databinding.LayoutLoadingBinding
  * @desc :
  *
  */
-
-interface ILoading {
-    fun show()
-    fun dismiss()
-
-    fun isShowing(): Boolean
-
-    fun setMessage(message: String)
-
-    fun setCancelable(boolean: Boolean)
-
-    fun setCanceledOnTouchOutside(boolean: Boolean)
-}
 
 
 class LoadingView private constructor(private val context: Context) : ILoading {

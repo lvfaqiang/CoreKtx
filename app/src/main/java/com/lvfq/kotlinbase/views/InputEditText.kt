@@ -16,9 +16,9 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.core.view.isVisible
+import cn.basic.core.ktx.getColorById
 import com.lvfq.kotlinbase.R
-import com.lvfq.kotlinbase.kotlinx.getColorById
-import com.lvfq.kotlinbase.kotlinx.px2dp
+import cn.basic.core.ktx.px2dp
 
 /**
  * InputEditText
@@ -171,8 +171,8 @@ class InputEditText
         editText.setPadding(paddLeft, 0, 0, 0)
         editText.hint = hint
         editText.isSingleLine = singleLine
-        editText.setTextColor(resources.getColorById(textColor))
-        editText.setHintTextColor(resources.getColorById(textColorHint))
+        editText.setTextColor(context.getColorById(textColor))
+        editText.setHintTextColor(context.getColorById(textColorHint))
         editText.inputType = inputType
 
         editText.isCursorVisible = enable

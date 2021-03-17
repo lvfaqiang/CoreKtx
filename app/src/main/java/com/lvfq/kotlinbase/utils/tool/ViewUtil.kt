@@ -9,7 +9,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.lvfq.kotlinbase.Const.AppConst
 import com.lvfq.kotlinbase.R
-import com.lvfq.kotlinbase.kotlinx.coroutines.launchUI
+import cn.basic.core.ktx.launchUI
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay

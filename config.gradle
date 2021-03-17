@@ -8,4 +8,51 @@ ext {
             versionCode      : 100,
             versionName      : "1.0.0"
     ]
+
+    coreKtx = [
+            v: '1.3.2'
+    ]
+    appcompat = [
+            v: "1.2.0"
+    ]
+    constraintlayout = [
+            v: "2.0.4"
+    ]
+    googleMaterial = [
+            v: "1.3.0"
+    ]
+    coroutines = [
+            v: "1.3.9"
+    ]
+
+    navigation = [
+            v          : "2.3.2",
+            fragment   : "2.3.2",
+            ui         : "2.3.2",
+            fragmentKtx: "2.3.2",
+            uiKtx      : "2.3.2"
+    ]
+
+    lifecycle = [
+            lifecycleExt: "2.2.0",
+            liveDataKtx : "2.2.0"
+    ]
+
+    retrofit = [
+            v: "2.9.0"
+    ]
+
+    adapter = [
+            v: "3.0.0"
+    ]
+
+    glide = [
+            v: "4.9.0"
+    ]
+
+    permission = [
+            v: "3.0.0"
+    ]
+
+
 }

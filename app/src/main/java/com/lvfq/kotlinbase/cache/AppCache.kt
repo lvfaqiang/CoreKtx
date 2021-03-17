@@ -1,8 +1,8 @@
 package com.lvfq.kotlinbase.cache
 
 import android.content.Context
-import com.lvfq.kotlinbase.utils.basic.LanguageUtil
-import com.lvfq.kotlinbase.utils.basic.LocalCacheUtil
+import cn.basic.core.util.LanguageUtil
+import cn.basic.core.util.LocalCacheUtil
 
 /**
  * AppCache2021/1/12 11:41 AM

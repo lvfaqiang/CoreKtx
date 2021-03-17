@@ -11,10 +11,10 @@ import androidx.core.content.FileProvider
 import androidx.core.view.isVisible
 import com.lvfq.kotlinbase.App
 import com.lvfq.kotlinbase.R
-import com.lvfq.kotlinbase.builder.DialogBuilder
+import cn.basic.core.builder.DialogBuilder
 import com.lvfq.kotlinbase.databinding.DialogDownloadBinding
-import com.lvfq.kotlinbase.kotlinx.versionName
-import com.lvfq.kotlinbase.kotlinx.view.click
+import cn.basic.core.ktx.versionName
+import cn.basic.core.ktx.view.click
 import java.io.File
 import java.io.IOException
 

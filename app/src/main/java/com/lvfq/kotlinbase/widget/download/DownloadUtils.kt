@@ -5,7 +5,7 @@ import android.app.DownloadManager
 import android.content.Context
 import android.net.Uri
 import android.os.Environment
-import com.lvfq.kotlinbase.kotlinx.coroutines.launchUI
+import cn.basic.core.ktx.launchUI
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import java.io.File

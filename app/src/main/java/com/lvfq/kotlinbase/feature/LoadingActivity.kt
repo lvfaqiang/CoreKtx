@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.lvfq.kotlinbase.feature.main.TabMainActivity
-import com.lvfq.kotlinbase.kotlinx.coroutines.launchUI
-import com.lvfq.kotlinbase.kotlinx.startActivity
+import cn.basic.core.ktx.launchUI
+import cn.basic.core.ktx.startActivity
 import kotlinx.coroutines.delay
 
 /**

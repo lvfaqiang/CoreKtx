@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.lvfq.kotlinbase.R
 import com.lvfq.kotlinbase.feature.main.dashboard.DashboardViewModel
-import com.lvfq.kotlinbase.utils.basic.LogUtil
+import cn.basic.core.util.LogUtil
 
 class DashboardFragment : Fragment() {
 

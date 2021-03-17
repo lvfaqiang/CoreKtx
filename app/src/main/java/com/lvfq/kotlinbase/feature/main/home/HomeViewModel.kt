@@ -1,13 +1,16 @@
 package com.lvfq.kotlinbase.feature.main.home
 
 import android.util.Log
-import androidx.lifecycle.*
-import com.lvfq.kotlinbase.api.net.Failure
-import com.lvfq.kotlinbase.api.net.Success
-import com.lvfq.kotlinbase.api.net.ApiClient
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
+import cn.basic.core.api.Failure
+import cn.basic.core.api.Success
+import cn.basic.core.api.demo.DemoReq
+import cn.basic.core.ktx.apiLaunch
+import cn.basic.core.ktx.launch
 import com.lvfq.kotlinbase.entities.LoginData
-import com.lvfq.kotlinbase.kotlinx.apiLaunch
-import com.lvfq.kotlinbase.kotlinx.launch
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 
@@ -36,7 +39,7 @@ class HomeViewModel : ViewModel() {
         launch {
 
             val result = apiLaunch {
-                ApiClient.getService().login("13178126836", "111111", "313112")
+                DemoReq.get().getService().login("13178126836", "111111", "313112")
             }
 
             if (result is Failure) {

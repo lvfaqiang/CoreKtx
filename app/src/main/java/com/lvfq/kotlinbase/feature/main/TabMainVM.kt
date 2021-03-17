@@ -1,8 +1,8 @@
 package com.lvfq.kotlinbase.feature.main
 
 import androidx.lifecycle.viewModelScope
-import com.lvfq.kotlinbase.base.BaseViewModel
-import com.lvfq.kotlinbase.kotlinx.coroutines.launchUI
+import cn.basic.core.base.BaseViewModel
+import cn.basic.core.ktx.launchUI
 import kotlinx.coroutines.delay
 
 /**

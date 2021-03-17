@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.basic.core.CommonTabLayout
+    <cn.basic.core.tablayout.CommonTabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         app:layout_constraintLeft_toLeftOf="parent"

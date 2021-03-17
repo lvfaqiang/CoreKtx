@@ -4,10 +4,11 @@ import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import cn.basic.core.base.BaseActivity
+import cn.basic.core.common.ILoading
 import com.lvfq.kotlinbase.R
-import com.lvfq.kotlinbase.base.BaseActivity
 import com.lvfq.kotlinbase.databinding.ActivityMainBinding
+import com.lvfq.kotlinbase.views.LoadingView
 
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
@@ -31,6 +32,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 //        setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
     }
+
+    override val loadingView: ILoading
+        get() = LoadingView.get(this)
 
 //    override val binding: ActivityMainBinding
 //        get() = ActivityMainBinding.inflate(layoutInflater)

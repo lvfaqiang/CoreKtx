@@ -8,7 +8,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.FragmentActivity
 import com.lvfq.kotlinbase.AppLifecycle
-import com.lvfq.kotlinbase.kotlinx.startActivity
+import cn.basic.core.ktx.startActivity
 
 /**
  * H5Activity
