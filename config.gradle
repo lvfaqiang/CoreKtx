@@ -47,7 +47,7 @@ ext {
     ]
 
     glide = [
-            v: "4.9.0"
+            v: "4.11.0"
     ]
 
     permission = [
