@@ -16,13 +16,6 @@ class CoreKtxProvider private constructor(val context: Context) {
 
         var INSTANCE: CoreKtxProvider? = null
             private set
-            get() {
-                if (field == null) {
-                    throw NullPointerException("CoreKtxProvider not init ")
-                } else {
-                    return field
-                }
-            }
 
         fun get(context: Context): CoreKtxProvider {
             if (INSTANCE == null) {
