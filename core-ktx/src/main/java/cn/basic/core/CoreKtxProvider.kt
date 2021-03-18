@@ -24,7 +24,7 @@ class CoreKtxProvider private constructor(val context: Context) {
                 }
             }
 
-        fun init(context: Context): CoreKtxProvider {
+        fun get(context: Context): CoreKtxProvider {
             if (INSTANCE == null) {
                 INSTANCE = CoreKtxProvider(context)
             }
@@ -39,15 +39,18 @@ class CoreKtxProvider private constructor(val context: Context) {
     private var spName: String = ""
 
 
-    var baseUrl: String = ""
-        private set
+    private var baseUrl: String = ""
 
     fun setSPName(name: String): CoreKtxProvider {
         spName = name
         return this
     }
 
-    fun baseUrl(url: String): CoreKtxProvider {
+    fun getBaseUrl(): String {
+        return baseUrl
+    }
+
+    fun setBaseUrl(url: String): CoreKtxProvider {
         this.baseUrl = url
         return this
     }

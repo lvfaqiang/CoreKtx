@@ -16,7 +16,7 @@ object ApiClient {
 
     private val mRetrofit by lazy {
         Retrofit.Builder()
-            .baseUrl(CoreKtxProvider.INSTANCE?.baseUrl ?: "")
+            .baseUrl(CoreKtxProvider.INSTANCE?.getBaseUrl() ?: "")
             .addConverterFactory(NullOrEmptyConverterFactory())
             .addConverterFactory(GsonConverterFactory.create())
             .client(ApiConfig().configOkHttp())
