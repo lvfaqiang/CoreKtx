@@ -4,14 +4,14 @@ import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import cn.basic.core.base.BaseActivity
+import cn.basic.core.base.BasicActivity
 import cn.basic.core.common.ILoading
 import com.lvfq.kotlinbase.R
 import com.lvfq.kotlinbase.databinding.ActivityMainBinding
 import com.lvfq.kotlinbase.views.LoadingView
 
 
-class MainActivity : BaseActivity<ActivityMainBinding>() {
+class MainActivity : BasicActivity<ActivityMainBinding>() {
 
     override fun bindingView(): ActivityMainBinding {
         return ActivityMainBinding.inflate(layoutInflater)

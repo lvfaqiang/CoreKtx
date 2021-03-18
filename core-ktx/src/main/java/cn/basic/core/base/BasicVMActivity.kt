@@ -16,7 +16,7 @@ import cn.basic.core.util.StatusBarUtil
  * @desc :
  *
  */
-abstract class BaseVMActivity<T : ViewBinding, VM : BaseViewModel> : FragmentActivity() {
+abstract class BasicVMActivity<T : ViewBinding, VM : BasicViewModel> : FragmentActivity() {
 
     abstract fun bindingView(): T
 
@@ -114,7 +114,7 @@ abstract class BaseVMActivity<T : ViewBinding, VM : BaseViewModel> : FragmentAct
     }
 
 
-    protected inline fun <reified T : BaseViewModel> findVM(): T {
+    protected inline fun <reified T : BasicViewModel> findVM(): T {
         return VMFactory.findVM(this, T::class.java)
     }
 

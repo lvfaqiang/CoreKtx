@@ -17,7 +17,7 @@ import cn.basic.core.util.KeyBoardUtils
  * @desc :
  *
  */
-abstract class BaseVMFragment<T : ViewBinding, VM : BaseViewModel> : Fragment() {
+abstract class BasicVMFragment<T : ViewBinding, VM : BasicViewModel> : Fragment() {
     protected abstract val viewModelClass: Class<VM>
 
     protected lateinit var vM: VM

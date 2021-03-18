@@ -10,7 +10,7 @@ import cn.basic.core.ktx.R
  * @desc :
  *
  */
-open class BaseViewModel : ViewModel() {
+open class BasicViewModel : ViewModel() {
     val loadingState = MutableLiveData<LoadingState>()
     val updateMessage = MutableLiveData<String>()
 

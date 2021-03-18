@@ -1,7 +1,7 @@
 package com.lvfq.kotlinbase.feature.main
 
 import androidx.lifecycle.viewModelScope
-import cn.basic.core.base.BaseViewModel
+import cn.basic.core.base.BasicViewModel
 import cn.basic.core.ktx.launchUI
 import kotlinx.coroutines.delay
 
@@ -10,7 +10,7 @@ import kotlinx.coroutines.delay
  * @desc :
  *
  */
-class TabMainVM : BaseViewModel() {
+class TabMainVM : BasicViewModel() {
 
     fun show() {
         showLoading(cancelable = false)

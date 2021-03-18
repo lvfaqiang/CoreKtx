@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.basic.ui.home.HomeFragment
 import com.lvfq.kotlinbase.R
-import cn.basic.core.base.BaseVMActivity
+import cn.basic.core.base.BasicVMActivity
 import cn.basic.core.common.ILoading
 import cn.basic.core.tablayout.TabEntity
 import cn.basic.core.tablayout.listener.CustomTabEntity
@@ -13,14 +13,13 @@ import com.lvfq.kotlinbase.databinding.ActivityTabMainBinding
 import cn.basic.core.util.LogUtil
 import cn.basic.core.util.StatusBarUtil
 import com.lvfq.kotlinbase.views.LoadingView
-import okhttp3.Credentials.basic
 
 /**
  * TabMainActivity2021/1/15 5:12 PM
  * @desc :
  *
  */
-class TabMainActivity : BaseVMActivity<ActivityTabMainBinding, TabMainVM>() {
+class TabMainActivity : BasicVMActivity<ActivityTabMainBinding, TabMainVM>() {
     override val viewModelClass: Class<TabMainVM>
         get() = TabMainVM::class.java
 
