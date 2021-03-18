@@ -38,9 +38,6 @@ abstract class BasicVMFragment<T : ViewBinding, VM : BasicViewModel> : Fragment(
 
     protected lateinit var binding: T
 
-    open var useEventBus: Boolean = false
-        protected set
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }

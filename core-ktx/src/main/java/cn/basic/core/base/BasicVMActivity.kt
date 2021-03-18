@@ -36,10 +36,6 @@ abstract class BasicVMActivity<T : ViewBinding, VM : BasicViewModel> : FragmentA
         bindingView()
     }
 
-    open var useEventBus: Boolean = false
-        protected set
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         // 禁止页面自动弹出输入法, or 禁止输入法顶起布局
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN or WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
