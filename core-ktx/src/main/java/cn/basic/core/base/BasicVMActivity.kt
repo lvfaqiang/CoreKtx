@@ -18,11 +18,11 @@ import cn.basic.core.util.StatusBarUtil
  */
 abstract class BasicVMActivity<T : ViewBinding, VM : BasicViewModel> : FragmentActivity() {
 
+    protected abstract val viewModelClass: Class<VM>
+
     abstract fun bindingView(): T
 
     abstract fun init(savedInstanceState: Bundle?)
-
-    protected abstract val viewModelClass: Class<VM>
 
     protected lateinit var vM: VM
 
