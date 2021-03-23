@@ -29,13 +29,13 @@ abstract class BasicVMFragment<T : ViewBinding, VM : BasicViewModel> : Fragment(
         vM = VMFactory.findVM(this, viewModelClass)
     }
 
-    abstract fun init(savedInstanceState: Bundle?)
-
     protected abstract fun bindingView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         attachToRoot: Boolean
     ): T
+
+    abstract fun init(savedInstanceState: Bundle?)
 
     protected lateinit var binding: T
 
