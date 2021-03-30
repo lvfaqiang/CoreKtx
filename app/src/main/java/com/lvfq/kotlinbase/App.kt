@@ -12,6 +12,7 @@ import android.net.NetworkInfo
 import android.os.Bundle
 import android.os.Process
 import androidx.multidex.MultiDexApplication
+import cn.basic.core.CoreKtxProvider
 import com.lvfq.kotlinbase.cache.AppCache
 import cn.basic.core.config.HawkConfig
 import cn.basic.core.util.LanguageUtil
@@ -68,7 +69,10 @@ class App : MultiDexApplication() {
     }
 
     private fun initGlobalConfig() {
-
+        CoreKtxProvider.get(this)
+            .setBaseUrl(BuildConfig.BASE_URL)
+            .setSPName(BuildConfig.SP_CACHE_NAME)
+            .build()
     }
 
 

@@ -2,16 +2,17 @@ package com.lvfq.kotlinbase.feature.main
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.example.basic.ui.home.HomeFragment
-import com.lvfq.kotlinbase.R
 import cn.basic.core.base.BasicVMActivity
 import cn.basic.core.common.ILoading
 import cn.basic.core.tablayout.TabEntity
 import cn.basic.core.tablayout.listener.CustomTabEntity
 import cn.basic.core.tablayout.listener.OnTabSelectListener
-import com.lvfq.kotlinbase.databinding.ActivityTabMainBinding
 import cn.basic.core.util.LogUtil
 import cn.basic.core.util.StatusBarUtil
+import com.example.basic.ui.home.HomeFragment
+import com.lvfq.kotlinbase.R
+import com.lvfq.kotlinbase.cache.AppCache
+import com.lvfq.kotlinbase.databinding.ActivityTabMainBinding
 import com.lvfq.kotlinbase.views.LoadingView
 
 /**
@@ -92,6 +93,8 @@ class TabMainActivity : BasicVMActivity<ActivityTabMainBinding, TabMainVM>() {
         initTabLayout()
 
         initTabMsg()
+        val language = AppCache.getLanguage()
+        LogUtil.i("language :$language")
 
     }
 
