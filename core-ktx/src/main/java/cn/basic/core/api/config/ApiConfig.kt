@@ -1,5 +1,6 @@
 package cn.basic.core.api.config
 
+import cn.basic.core.CoreKtxProvider
 import cn.basic.core.ktx.BuildConfig
 import cn.basic.core.util.LogUtil
 import okhttp3.Interceptor
@@ -39,8 +40,12 @@ class ApiConfig {
 
     fun configOkHttp(): OkHttpClient {
         val builder = OkHttpClient.Builder()
-        builder.addInterceptor(headerInterceptor)
+//        builder.addInterceptor(headerInterceptor)
         builder.addInterceptor(logger)  // 网络请求日志
+
+        CoreKtxProvider.get().getApiInterceptors().map {
+            builder.addInterceptor(it)
+        }
         // 配置超时时间
         builder.connectTimeout(TIME_OUT, TimeUnit.SECONDS)
         builder.readTimeout(TIME_OUT, TimeUnit.SECONDS)

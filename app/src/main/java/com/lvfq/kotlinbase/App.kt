@@ -13,9 +13,9 @@ import android.os.Bundle
 import android.os.Process
 import androidx.multidex.MultiDexApplication
 import cn.basic.core.CoreKtxProvider
-import com.lvfq.kotlinbase.cache.AppCache
-import cn.basic.core.config.HawkConfig
+import cn.basic.core.api.Error
 import cn.basic.core.util.LanguageUtil
+import com.lvfq.kotlinbase.cache.AppCache
 import com.lvfq.kotlinbase.views.CustomClassicsFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -69,10 +69,16 @@ class App : MultiDexApplication() {
     }
 
     private fun initGlobalConfig() {
-        CoreKtxProvider.get(this)
+        CoreKtxProvider.get()
             .setBaseUrl(BuildConfig.BASE_URL)
             .setSPName(BuildConfig.SP_CACHE_NAME)
-            .build()
+            .setCustomExceptionHandling { e ->
+                val errorString = e.response()?.errorBody()?.string() ?: ""
+                //实现异常处理
+
+                return@setCustomExceptionHandling Error(0, "")
+            }
+            .build(this)
     }
 
 

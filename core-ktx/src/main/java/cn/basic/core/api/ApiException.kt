@@ -35,35 +35,43 @@ class ApiException(e: Throwable) {
         when (e) {
             is HttpException -> {
                 httpCode = e.code()
-                val string = e.response()?.errorBody()?.string() ?: ""
-                try {
-                    errorBody = Gson().fromJson(string, HttpErrorBody::class.java)
-                } catch (e: Exception) {
-                    println("ApiException : ${e.message}")
-                }
-                errorBody?.let {
-                    code = it.error?.code?.toString() ?: code
-                    message = it.error?.message ?: message
-                }
+                val error = CoreKtxProvider.get().getExceptionHandling()?.invoke(e)
+                if (error != null) {
+                    code = "${error.code}"
+                    message = error.message
+                } else {
+                    // 演示  Demo   主要依赖自定义异常处理
+                    val string = e.response()?.errorBody()?.string() ?: ""
+                    try {
+                        errorBody = Gson().fromJson(string, HttpErrorBody::class.java)
+                    } catch (e: Exception) {
+                        println("ApiException : ${e.message}")
+                    }
+                    errorBody?.let {
+                        code = it.error?.code?.toString() ?: code
+                        message = it.error?.message ?: message
+                    }
 
-                when (httpCode) {
-                    401 -> {
-                        if (code == "40001" || code == "6001") {
+                    when (httpCode) {
+                        401 -> {
+                            if (code == "40001" || code == "6001") {
+                            }
                         }
-                    }
-                    503 -> {
-                        // 服务器正在维护
-                        message =
-                            CoreKtxProvider.mContext.getString(R.string.str_exception_server_maintance)
-                    }
-                    in 500 until 600 -> {
-                        // 服务器异常
-                        message = CoreKtxProvider.mContext.getString(R.string.str_exception_server)
-                    }
-                    else -> {
-                        if (message.isEmpty()) {
-                            val msg = e.message() ?: ""
-                            message = "$msg : $httpCode"
+                        503 -> {
+                            // 服务器正在维护
+                            message =
+                                CoreKtxProvider.mContext.getString(R.string.str_exception_server_maintance)
+                        }
+                        in 500 until 600 -> {
+                            // 服务器异常
+                            message =
+                                CoreKtxProvider.mContext.getString(R.string.str_exception_server)
+                        }
+                        else -> {
+                            if (message.isEmpty()) {
+                                val msg = e.message() ?: ""
+                                message = "$msg : $httpCode"
+                            }
                         }
                     }
                 }
