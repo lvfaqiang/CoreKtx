@@ -17,14 +17,13 @@ class CoreKtxProvider private constructor() {
         lateinit var mContext: Context
             private set
 
-        private var INSTANCE: CoreKtxProvider? = null
-            private set
+        private var singleInstance: CoreKtxProvider? = null
 
         fun get(): CoreKtxProvider {
-            if (INSTANCE == null) {
-                INSTANCE = CoreKtxProvider()
+            if (singleInstance == null) {
+                singleInstance = CoreKtxProvider()
             }
-            return INSTANCE!!
+            return singleInstance!!
         }
     }
 

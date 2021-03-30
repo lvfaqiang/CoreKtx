@@ -5,10 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import cn.basic.core.api.ApiLauncherDemo
 import cn.basic.core.api.Failure
 import cn.basic.core.api.Success
 import cn.basic.core.api.demo.DemoReq
-import cn.basic.core.ktx.apiLaunch
 import cn.basic.core.ktx.launch
 import com.lvfq.kotlinbase.entities.LoginData
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -38,7 +38,7 @@ class HomeViewModel : ViewModel() {
          */
         launch {
 
-            val result = apiLaunch {
+            val result = ApiLauncherDemo.launch {
                 DemoReq.get().getService().login("13178126836", "111111", "313112")
             }
 

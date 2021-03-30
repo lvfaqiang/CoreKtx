@@ -3,7 +3,7 @@ package cn.basic.core.api
 import cn.basic.core.api.config.CustomException
 
 
-object ApiLauncher {
+object ApiLauncherDemo {
 
     suspend fun <T> launchCommon(call: suspend () -> T): Results<T> {
         return try {
