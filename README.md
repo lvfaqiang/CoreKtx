@@ -1,7 +1,6 @@
 ## 项目简介
---
 
-###Step 1. Add the JitPack repository to your build file
+### Step 1. Add the JitPack repository to your build file
 
 Add it in your root build.gradle at the end of repositories:
 ```
@@ -13,7 +12,7 @@ Add it in your root build.gradle at the end of repositories:
 	}
 ```
 
-###Step 2. Add the dependency
+### Step 2. Add the dependency
 ```
 	dependencies {
 	        implementation 'com.github.lvfaqiang:CoreKtx:Tag'
@@ -34,7 +33,7 @@ android {
     }
 }
 ```
-###How To Use :
+### How To Use :
 setup in your Application :
 ```
 CoreKtxProvider.get()
