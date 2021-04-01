@@ -31,6 +31,8 @@ class CoreKtxProvider private constructor() {
 
     private var baseUrl: String = ""
 
+    private var version = ""
+
     private var customExceptionHandling: ((HttpException) -> Error?)? = null
 
     private var apiInterceptors = ArrayList<Interceptor>()
@@ -43,6 +45,11 @@ class CoreKtxProvider private constructor() {
 
     fun setBaseUrl(url: String): CoreKtxProvider {
         this.baseUrl = url
+        return this
+    }
+
+    fun setVersion(version: String): CoreKtxProvider {
+        this.version = version
         return this
     }
 
@@ -73,6 +80,10 @@ class CoreKtxProvider private constructor() {
 
     fun getBaseUrl(): String {
         return baseUrl
+    }
+
+    fun getVersion(): String {
+        return version
     }
 
     fun getExceptionHandling(): ((HttpException) -> Error?)? {
