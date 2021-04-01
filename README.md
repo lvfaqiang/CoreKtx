@@ -20,7 +20,7 @@ Add it in your root build.gradle at the end of repositories:
 ```
 Tag: [![](https://jitpack.io/v/lvfaqiang/CoreKtx.svg)](https://jitpack.io/#lvfaqiang/CoreKtx)
 
-Step 3. Add the following configuration
+### Step 3. Add the following configuration
 
 Add it in your app build.gradle at the android block
 
