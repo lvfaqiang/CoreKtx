@@ -3,6 +3,7 @@ package cn.basic.core
 import android.content.Context
 import cn.basic.core.api.Error
 import cn.basic.core.config.HawkConfig
+import cn.basic.core.util.LogUtil
 import okhttp3.Interceptor
 import retrofit2.HttpException
 
@@ -50,6 +51,11 @@ class CoreKtxProvider private constructor() {
 
     fun setVersion(version: String): CoreKtxProvider {
         this.version = version
+        return this
+    }
+
+    fun setLogEnable(enable: Boolean): CoreKtxProvider {
+        LogUtil.setLogEnable(enable)
         return this
     }
 
