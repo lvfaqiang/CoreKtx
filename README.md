@@ -75,7 +75,7 @@ CoreKtxProvider.get()
     implementation "com.orhanobut:hawk:2.0.1"
 ```
 ### Release Log
-    #### 2.0.0
+#### 2.0.0
     ```
     CoreKtxProvider 添加 Log 控制开关
        setLogEnable(boolean)
