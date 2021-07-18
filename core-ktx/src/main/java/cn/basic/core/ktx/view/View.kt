@@ -25,8 +25,20 @@ fun View?.click(l: (View) -> Unit = {}) {
  *
  * @param listener 按钮事件监听类
  * @param v 控件
+ * @use #onClicks(vararg v: View, listener: View.OnClickListener)
  */
+@Deprecated("@use #onClicks(vararg v: View, listener: View.OnClickListener)")
 fun setOnClickListener(listener: View.OnClickListener, vararg v: View) {
+    v.forEach { it.setOnClickListener(listener) }
+}
+
+/**
+ * 批量设置View点击事件
+ *
+ * @param v 控件
+ * @param listener 按钮事件监听类
+ */
+fun onClicks(vararg v: View, listener: View.OnClickListener) {
     v.forEach { it.setOnClickListener(listener) }
 }
 
