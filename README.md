@@ -75,6 +75,14 @@ CoreKtxProvider.get()
     implementation "com.orhanobut:hawk:2.0.1"
 ```
 ### Release Log
+#### 2.0.1
+    ```
+    BaseVMActivity 修改沉浸式方法参数，添加 View 参数
+       applySinking(View)
+
+    新增 onClicks(vararg v: View, listener: View.OnClickListener)
+    取代 setOnClickListener(listener: View.OnClickListener, vararg v: View)
+    ```
 #### 2.0.0
     ```
     CoreKtxProvider 添加 Log 控制开关
