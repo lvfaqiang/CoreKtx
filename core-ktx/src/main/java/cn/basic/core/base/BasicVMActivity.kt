@@ -2,6 +2,7 @@ package cn.basic.core.base
 
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.view.View
 import android.view.WindowManager
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.observe
@@ -103,10 +104,10 @@ abstract class BasicVMActivity<T : ViewBinding, VM : BasicViewModel> : FragmentA
 
     }
 
-    protected fun applySinking() {
+    protected fun applySinking(view: View = binding.root) {
         //沉侵
         StatusBarUtil.immersive(this)
-        StatusBarUtil.setPadding(this, binding.root)
+        StatusBarUtil.setPadding(this, view)
     }
 
 
