@@ -10,7 +10,7 @@ import java.util.*
 /**
  * LocationUtil8/10/21 12:14 AM
  * @desc :
- *
+ *  用法； https://www.jianshu.com/p/efda5a2ebf23
  */
 class LocationUtil(val context: Context) {
 

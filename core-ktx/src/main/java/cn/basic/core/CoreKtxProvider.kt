@@ -28,36 +28,52 @@ class CoreKtxProvider private constructor() {
         }
     }
 
-    private var spName: String = ""
+    var spName: String = ""
+        private set
 
-    private var baseUrl: String = ""
+    var baseUrl: String = ""
+        private set
 
-    private var version = ""
+    var appVersion = ""
+        private set
+
+    var DEBUG = false
+        private set
+
+    var appFileProvider: String = ""
+        private set
+
 
     private var customExceptionHandling: ((HttpException) -> Error?)? = null
 
     private var apiInterceptors = ArrayList<Interceptor>()
 
 
-    fun setSPName(name: String): CoreKtxProvider {
+    fun spName(name: String): CoreKtxProvider {
         spName = name
         return this
     }
 
-    fun setBaseUrl(url: String): CoreKtxProvider {
+    fun baseUrl(url: String): CoreKtxProvider {
         this.baseUrl = url
         return this
     }
 
-    fun setVersion(version: String): CoreKtxProvider {
-        this.version = version
+    fun appVersion(version: String): CoreKtxProvider {
+        this.appVersion = version
         return this
     }
 
-    fun setLogEnable(enable: Boolean): CoreKtxProvider {
+    fun logEnable(enable: Boolean): CoreKtxProvider {
         LogUtil.setLogEnable(enable)
         return this
     }
+
+    fun fileProvider(fileProvider: String): CoreKtxProvider {
+        appFileProvider = fileProvider
+        return this
+    }
+
 
     // 设置自定义错误处理，不需要就不设置
     fun setCustomExceptionHandling(handling: (HttpException) -> Error?): CoreKtxProvider {
@@ -73,6 +89,11 @@ class CoreKtxProvider private constructor() {
         return this
     }
 
+    fun isDebug(debug: Boolean): CoreKtxProvider {
+        this.DEBUG = debug
+        return this
+    }
+
 
     fun build(context: Context) {
         mContext = context
@@ -83,14 +104,6 @@ class CoreKtxProvider private constructor() {
         HawkConfig.init(mContext, spName)
     }
 
-
-    fun getBaseUrl(): String {
-        return baseUrl
-    }
-
-    fun getVersion(): String {
-        return version
-    }
 
     fun getExceptionHandling(): ((HttpException) -> Error?)? {
         return customExceptionHandling

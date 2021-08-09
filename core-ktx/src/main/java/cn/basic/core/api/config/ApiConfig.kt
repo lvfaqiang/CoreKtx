@@ -20,7 +20,7 @@ class ApiConfig {
     val logger = HttpLogIntercepter(object :
         HttpLogIntercepter.Logger {
         override fun log(message: String?) {
-            takeIf { BuildConfig.DEBUG }?.let {
+            takeIf { CoreKtxProvider.get().DEBUG }?.let {
                 LogUtil.i("HTTP", message)
             }
         }
@@ -33,7 +33,7 @@ class ApiConfig {
         val request = chain.request()
             .newBuilder()
             .addHeader("client", "android")
-            .addHeader("appVersion", BuildConfig.VERSION_NAME)
+            .addHeader("appVersion", CoreKtxProvider.get().appVersion)
             .build()
         chain.proceed(request)
     }

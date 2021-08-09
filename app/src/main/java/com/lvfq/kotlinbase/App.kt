@@ -70,8 +70,9 @@ class App : MultiDexApplication() {
 
     private fun initGlobalConfig() {
         CoreKtxProvider.get()
-            .setBaseUrl(BuildConfig.BASE_URL)
-            .setSPName(BuildConfig.SP_CACHE_NAME)
+            .baseUrl(BuildConfig.BASE_URL)
+            .spName(BuildConfig.SP_CACHE_NAME)
+            .isDebug(BuildConfig.DEBUG)
             .setCustomExceptionHandling { e ->
                 val errorString = e.response()?.errorBody()?.string() ?: ""
                 //实现异常处理

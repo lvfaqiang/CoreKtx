@@ -1,7 +1,7 @@
 package cn.basic.core.util
 
 import android.util.Log
-import cn.basic.core.ktx.BuildConfig
+import cn.basic.core.CoreKtxProvider
 
 /**
  * LogUtil
@@ -11,7 +11,7 @@ import cn.basic.core.ktx.BuildConfig
  */
 object LogUtil {
 
-    private var logOff = BuildConfig.DEBUG
+    private var logOff = CoreKtxProvider.get().DEBUG
 
     /**
      * 开关
