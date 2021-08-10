@@ -1,7 +1,7 @@
 package cn.basic.core
 
 import android.content.Context
-import cn.basic.core.api.Error
+import cn.basic.core.api.CustomError
 import cn.basic.core.config.HawkConfig
 import cn.basic.core.util.LogUtil
 import okhttp3.Interceptor
@@ -44,7 +44,7 @@ class CoreKtxProvider private constructor() {
         private set
 
 
-    private var customExceptionHandling: ((HttpException) -> Error?)? = null
+    private var customExceptionHandling: ((HttpException) -> CustomError?)? = null
 
     private var apiInterceptors = ArrayList<Interceptor>()
 
@@ -76,7 +76,7 @@ class CoreKtxProvider private constructor() {
 
 
     // 设置自定义错误处理，不需要就不设置
-    fun setCustomExceptionHandling(handling: (HttpException) -> Error?): CoreKtxProvider {
+    fun setCustomExceptionHandling(handling: (HttpException) -> CustomError?): CoreKtxProvider {
         customExceptionHandling = handling
         return this
     }
@@ -105,7 +105,7 @@ class CoreKtxProvider private constructor() {
     }
 
 
-    fun getExceptionHandling(): ((HttpException) -> Error?)? {
+    fun getExceptionHandling(): ((HttpException) -> CustomError?)? {
         return customExceptionHandling
     }
 

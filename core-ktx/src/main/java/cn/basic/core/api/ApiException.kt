@@ -103,7 +103,7 @@ class ApiException(e: Exception) {
     }
 }
 
-data class HttpErrorBody(var error: Error?)
+data class HttpErrorBody(var error: CustomError?)
 
 @Parcelize
-class Error(var code: Int, var message: String = "") : Parcelable
+class CustomError(var code: Int, var message: String = "") : Parcelable
