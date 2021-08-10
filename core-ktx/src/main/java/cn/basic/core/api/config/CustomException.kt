@@ -6,7 +6,7 @@ package cn.basic.core.api.config
  *
  */
 class CustomException
-    constructor(val code: String?, message: String?) : Throwable(message) {
+    constructor(val code: String?, message: String?) : Exception(message) {
 
     constructor(code: Int, message: String?) : this(code.toString(), message)
 }

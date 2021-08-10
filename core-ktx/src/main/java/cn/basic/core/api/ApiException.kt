@@ -20,7 +20,7 @@ import java.net.SocketTimeoutException
  * @desc :
  *
  */
-class ApiException(e: Throwable) {
+class ApiException(e: Exception) {
 
     var code: String = ""
         private set

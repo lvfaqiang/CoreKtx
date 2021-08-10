@@ -10,12 +10,7 @@ object ApiLauncherDemo {
             val t = call.invoke()
             Results.success(t)
         } catch (e: Exception) {
-            Results.failure(
-                e.cause ?: CustomException(
-                    -1,
-                    "Unknow Exception"
-                )
-            )
+            Results.failure(e)
         }
     }
 
@@ -42,12 +37,7 @@ object ApiLauncherDemo {
                 )
             }
         } catch (e: Exception) {
-            Results.failure(
-                e.cause ?: CustomException(
-                    -1,
-                    "Unknow Exception"
-                )
-            )
+            Results.failure(e)
         }
     }
 

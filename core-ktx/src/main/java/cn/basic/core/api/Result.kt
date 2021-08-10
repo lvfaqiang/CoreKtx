@@ -11,13 +11,13 @@ sealed class Results<out T> {
         fun <T> success(result: T): Results<T> =
             Success(result)
 
-        fun <T> failure(error: Throwable): Results<T> =
+        fun <T> failure(error: Exception): Results<T> =
             Failure(error)
     }
 
 }
 
-data class Failure(val throwable: Throwable) : Results<Nothing>() {
+data class Failure(val throwable: Exception) : Results<Nothing>() {
     val exception = ApiException(throwable)
 }
 
