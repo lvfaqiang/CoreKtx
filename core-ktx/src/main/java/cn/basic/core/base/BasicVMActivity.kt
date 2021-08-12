@@ -86,7 +86,9 @@ abstract class BasicVMActivity<T : ViewBinding, VM : BasicViewModel> : FragmentA
                 }
 
             } else {
-                loadingView.dismiss()
+                if (loadingView.isShowing()) {
+                    loadingView.dismiss()
+                }
             }
         }
     }
