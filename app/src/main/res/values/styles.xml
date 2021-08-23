@@ -10,7 +10,9 @@
 
     <!--启动页主题样式，解决启动白屏效果-->
     <style name="launcher_theme" parent="AppTheme">
-        <!--        <item name="android:windowBackground">@color/red</item>-->
+        <!--        <item name="android:windowBackground">@color/red</item> -->
+        <!--        这里需要使用 background 属性来设置，启动图最好生成 .9 图片  1，避免启动时导航栏导致图片中的 icon 移动， 2，适配不同机型，避免图片拉伸-->
+        <item name="android:background">@color/red_end</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
