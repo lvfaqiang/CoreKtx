@@ -16,7 +16,29 @@ import androidx.core.view.isVisible
  * @return Unit
  */
 fun View?.click(l: (View) -> Unit = {}) {
-    this?.setOnClickListener { l(it) }
+    this?.setOnClickListener(l)
+}
+
+/**
+ * 控制View 重复点击事件
+ * @param interval 单位 毫秒(ms)
+ * @param l 触发事件
+ */
+fun View.clickInterval(interval: Long = 1000, l: (View) -> Unit = {}) {
+    var lastClickTime = 0L
+    this.setOnClickListener {
+        val curTime = System.currentTimeMillis()
+        if (curTime - lastClickTime > interval) {
+            l(it)
+            lastClickTime = System.currentTimeMillis()
+        }
+    }
+}
+
+fun onClicksInterval(interval: Long = 1000, vararg v: View, l: (View) -> Unit = {}) {
+    v.forEach {
+        it.clickInterval(interval, l)
+    }
 }
 
 
