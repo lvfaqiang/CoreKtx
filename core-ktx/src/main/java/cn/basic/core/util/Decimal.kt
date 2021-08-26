@@ -26,7 +26,7 @@ object Decimal {
         return result[0].multiply(result[1]).toPlainString()
     }
 
-    fun div(v1: String?, v2: String?, scale: Int = 10): String {
+    fun div(v1: String?, v2: String?, scale: Int = 2): String {
         val result = checkValue(v1, v2)
         if (result[0] == BigDecimal("0") || result[1] == BigDecimal("0")) {
             return "0"
@@ -71,11 +71,13 @@ object Decimal {
      */
     fun maxKeepTwoDecimal(number: String?): String {
         val df = DecimalFormat("##.##")
-        return df.format(BigDecimal(
-            checkNumberValue(
-                number
+        return df.format(
+            BigDecimal(
+                checkNumberValue(
+                    number
+                )
             )
-        ))
+        )
     }
 
     /**
@@ -86,11 +88,13 @@ object Decimal {
      */
     fun maxKeepTwoDecimalDown(number: String?): String {
         val df = DecimalFormat("##.##")
-        return df.format(BigDecimal(
-            checkNumberValue(
-                number
-            )
-        ).setScale(2, RoundingMode.DOWN))
+        return df.format(
+            BigDecimal(
+                checkNumberValue(
+                    number
+                )
+            ).setScale(2, RoundingMode.DOWN)
+        )
     }
 
     /**
@@ -101,11 +105,13 @@ object Decimal {
      */
     fun keepTwoDecimal(number: String?): String {
         val df = DecimalFormat("#0.00")
-        return df.format(BigDecimal(
-            checkNumberValue(
-                number
+        return df.format(
+            BigDecimal(
+                checkNumberValue(
+                    number
+                )
             )
-        ))
+        )
     }
 
     /**
