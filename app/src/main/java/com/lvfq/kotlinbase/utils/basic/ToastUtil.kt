@@ -43,7 +43,12 @@ object ToastUtil {
      * @param message 显示信息
      * @param gravity 显示位置
      */
-    fun showToast(context: Context?, message: String, gravity: Int = 0, duration: Int = DURATION_DEF) {
+    fun showToast(
+        context: Context?,
+        message: String,
+        gravity: Int = 0,
+        duration: Int = DURATION_DEF
+    ) {
         if (context != null) {
             Handler(Looper.getMainLooper()).post {
                 if (toast == null) {
@@ -66,7 +71,14 @@ object ToastUtil {
      * @param view    自定义视图
      * @param gravity 显示位置
      */
-    fun showToast(context: Context?, view: View, gravity: Int = 0, duration: Int = DURATION_DEF) {
+    fun showToast(
+        context: Context?,
+        view: View,
+        gravity: Int = 0,
+        xOffset: Int = 0,
+        yOffset: Int = 0,
+        duration: Int = DURATION_DEF
+    ) {
         if (context != null) {
             Handler(Looper.getMainLooper()).post(Runnable {
                 if (toast == null) {
@@ -77,9 +89,9 @@ object ToastUtil {
                     toast?.view = view
                 }
                 if (gravity == 0) {
-                    toast?.setGravity(Gravity.CENTER, 0, 0)
+                    toast?.setGravity(Gravity.CENTER, xOffset, yOffset)
                 } else {
-                    toast?.setGravity(gravity, 0, 0)
+                    toast?.setGravity(gravity, xOffset, yOffset)
                 }
                 toast?.show()
             })
@@ -92,7 +104,14 @@ object ToastUtil {
      * @param view    自定义视图
      * @param gravity 显示位置
      */
-    fun showToast(context: Context?, layoutId: Int, gravity: Int = 0, duration: Int = DURATION_DEF) {
+    fun showToast(
+        context: Context?,
+        layoutId: Int,
+        gravity: Int = 0,
+        xOffset: Int = 0,
+        yOffset: Int = 0,
+        duration: Int = DURATION_DEF
+    ) {
         if (context != null) {
             val view = View.inflate(context, layoutId, null)
             Handler(Looper.getMainLooper()).post(Runnable {
@@ -104,9 +123,9 @@ object ToastUtil {
                     toast?.view = view
                 }
                 if (gravity == 0) {
-                    toast?.setGravity(Gravity.CENTER, 0, 0)
+                    toast?.setGravity(Gravity.CENTER, xOffset, yOffset)
                 } else {
-                    toast?.setGravity(gravity, 0, 0)
+                    toast?.setGravity(gravity, xOffset, yOffset)
                 }
                 toast?.show()
             })
