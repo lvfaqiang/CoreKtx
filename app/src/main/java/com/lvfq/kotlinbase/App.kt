@@ -13,7 +13,7 @@ import android.os.Bundle
 import android.os.Process
 import androidx.multidex.MultiDexApplication
 import cn.basic.core.CoreKtxProvider
-import cn.basic.core.api.Error
+import cn.basic.core.api.CustomError
 import cn.basic.core.util.LanguageUtil
 import com.lvfq.kotlinbase.cache.AppCache
 import com.lvfq.kotlinbase.views.CustomClassicsFooter
@@ -77,7 +77,7 @@ class App : MultiDexApplication() {
                 val errorString = e.response()?.errorBody()?.string() ?: ""
                 //实现异常处理
 
-                return@setCustomExceptionHandling Error(0, "")
+                return@setCustomExceptionHandling CustomError(0, "")
             }
             .build(this)
     }
