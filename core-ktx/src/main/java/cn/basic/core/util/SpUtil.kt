@@ -10,21 +10,18 @@ object SpUtil {
     fun cache(
         spName: String? = defaultSpName,
         block: SharedPreferences.Editor.() -> Unit
-    ): Boolean? {
-        val sharedPre = CoreKtxProvider.mContext.let {
-            it.getSharedPreferences(spName, Context.MODE_PRIVATE)
-        }
+    ): Boolean {
+        val sharedPre = CoreKtxProvider.mContext.getSharedPreferences(spName, Context.MODE_PRIVATE)
         return with(sharedPre?.edit()) {
             this?.apply(block)
-            return this?.commit()
+            return this?.commit() ?: false
         }
     }
 
-    fun get(spName: String? = defaultSpName): SharedPreferences? {
-        return CoreKtxProvider.mContext.applicationContext.let {
+    fun get(spName: String? = defaultSpName): SharedPreferences? =
+        CoreKtxProvider.mContext.applicationContext.let {
             return it.getSharedPreferences(spName, Context.MODE_PRIVATE)
         }
-    }
 
     fun clear(spName: String) {
         get(spName)?.let {
@@ -35,9 +32,7 @@ object SpUtil {
     }
 
     fun asyncCache(spName: String? = defaultSpName, block: SharedPreferences.Editor.() -> Unit) {
-        val sharedPre = CoreKtxProvider.mContext.let {
-            it.getSharedPreferences(spName, Context.MODE_PRIVATE)
-        }
+        val sharedPre = CoreKtxProvider.mContext.getSharedPreferences(spName, Context.MODE_PRIVATE)
         return with(sharedPre?.edit()) {
             this?.apply(block)
             this?.apply()

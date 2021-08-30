@@ -1,5 +1,6 @@
 package cn.basic.core
 
+import android.annotation.SuppressLint
 import android.content.Context
 import cn.basic.core.api.CustomError
 import cn.basic.core.config.HawkConfig
@@ -15,9 +16,11 @@ import retrofit2.HttpException
 class CoreKtxProvider private constructor() {
 
     companion object {
+        @SuppressLint("StaticFieldLeak")
         lateinit var mContext: Context
             private set
 
+        @SuppressLint("StaticFieldLeak")
         private var singleInstance: CoreKtxProvider? = null
 
         fun get(): CoreKtxProvider {
