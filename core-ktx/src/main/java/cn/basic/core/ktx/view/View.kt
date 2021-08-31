@@ -3,6 +3,10 @@ package cn.basic.core.ktx.view
 import android.view.View
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
+import cn.basic.core.ktx.launchUI
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 
 /**
  * View2021/1/12 4:27 PM
@@ -62,6 +66,39 @@ fun setOnClickListener(listener: View.OnClickListener, vararg v: View) {
  */
 fun onClicks(vararg v: View, listener: View.OnClickListener) {
     v.forEach { it.setOnClickListener(listener) }
+}
+
+/**
+ * 控制 View 单次点击 和双次点击
+ */
+fun View.clickOnceOrDouble(
+    interval: Long = 500,
+    onceClick: (View) -> Unit = {},
+    doubleClick: (View) -> Unit = {}
+) {
+    var preClickTime = 0L
+    var doubleClicked = false
+    this.setOnClickListener {
+        val curTime = System.currentTimeMillis()
+        if (curTime - preClickTime < interval) {
+            doubleClick(it)
+            preClickTime = 0L
+            doubleClicked = true
+        } else {
+            launchUI {
+                val a = withContext(Dispatchers.Default) {
+                    delay(interval)
+                    true
+                }
+                if (a && !doubleClicked) {
+                    onceClick(it)
+                } else {
+                    doubleClicked = false
+                }
+            }
+        }
+        preClickTime = System.currentTimeMillis()
+    }
 }
 
 /**
