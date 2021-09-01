@@ -1,13 +1,15 @@
 package cn.basic.core.api
 
 import cn.basic.core.api.config.CustomException
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 
 object ApiLauncherDemo {
 
     suspend fun <T> launchCommon(call: suspend () -> T): Results<T> {
         return try {
-            val t = call.invoke()
+            val t = withContext(Dispatchers.Default) { call.invoke() }
             Results.success(t)
         } catch (e: Exception) {
             Results.failure(e)
@@ -16,7 +18,7 @@ object ApiLauncherDemo {
 
     suspend fun <T> launch(call: suspend () -> BaseResp<T>): Results<T> {
         return try {
-            val respData = call.invoke()
+            val respData = withContext(Dispatchers.Default) { call.invoke() }
             if (respData.success || respData.code == "0") {
                 if (respData.data != null) {
                     Results.success(respData.data)
