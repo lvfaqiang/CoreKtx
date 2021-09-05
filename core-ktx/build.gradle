@@ -47,8 +47,8 @@ dependencies {
     api "androidx.lifecycle:lifecycle-extensions:$rootProject.ext.lifecycle.lifecycleExt"
     api "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.ext.lifecycle.liveDataKtx"
 
-    api "androidx.navigation:navigation-fragment:$rootProject.ext.navigation.v"
-    api "androidx.navigation:navigation-ui:$rootProject.ext.navigation.v"
+    api "androidx.navigation:navigation-fragment-ktx:$rootProject.ext.navigation.v"
+    api "androidx.navigation:navigation-ui-ktx:$rootProject.ext.navigation.v"
     api "androidx.navigation:navigation-fragment-ktx:$rootProject.ext.navigation.v"
     api "androidx.navigation:navigation-ui-ktx:$rootProject.ext.navigation.v"
 

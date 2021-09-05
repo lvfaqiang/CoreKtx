@@ -10,19 +10,19 @@ ext {
     ]
 
     coreKtx = [
-            v: '1.3.2'
+            v: '1.6.0'
     ]
     appcompat = [
-            v: "1.3.0"
+            v: "1.3.1"
     ]
     constraintlayout = [
             v: "2.0.4"
     ]
     googleMaterial = [
-            v: "1.3.0"
+            v: "1.4.0"
     ]
     coroutines = [
-            v: "1.3.9"
+            v: "1.4.1"
     ]
 
     navigation = [
@@ -35,7 +35,7 @@ ext {
 
     lifecycle = [
             lifecycleExt: "2.2.0",
-            liveDataKtx : "2.2.0"
+            liveDataKtx : "2.3.1"
     ]
 
     retrofit = [
