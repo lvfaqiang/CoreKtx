@@ -5,6 +5,7 @@ import cn.basic.core.api.config.ApiConfig
 import cn.basic.core.api.config.NullOrEmptyConverterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 
 /**
  * ApiClient
@@ -18,6 +19,7 @@ object ApiClient {
         Retrofit.Builder()
             .baseUrl(CoreKtxProvider.get().baseUrl)
             .addConverterFactory(NullOrEmptyConverterFactory())
+            .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .client(ApiConfig().configOkHttp())
             .build()
