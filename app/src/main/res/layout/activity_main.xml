@@ -1,32 +1,82 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/container"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:background="?android:attr/windowBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <LinearLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_54"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/c_2d2d46"
+        android:orientation="horizontal">
 
-    <fragment
-        android:id="@+id/nav_host_fragment"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@id/nav_view"
+        <FrameLayout
+            android:id="@+id/flTabHome"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ivTabHome"
+                android:layout_gravity="center"
+                android:layout_width="@dimen/dp_22"
+                android:layout_height="@dimen/dp_22" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/flTabComposition"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:visibility="gone"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ivTabComposition"
+                android:layout_gravity="center"
+                android:layout_width="@dimen/dp_22"
+                android:layout_height="@dimen/dp_22" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/flTabNote"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:id="@+id/ivTabNote"
+                android:layout_width="@dimen/dp_22"
+                android:layout_height="@dimen/dp_22" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/flTabMine"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:id="@+id/ivTabMine"
+                android:layout_width="@dimen/dp_22"
+                android:layout_height="@dimen/dp_22" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+
+    <FrameLayout
+        android:id="@+id/flContent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/mobile_navigation" />
-
+        app:layout_constraintBottom_toTopOf="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
