@@ -7,6 +7,11 @@ import cn.basic.core.ktx.launchUI
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
+import java.lang.reflect.InvocationHandler
+import java.lang.reflect.Method
+import java.lang.reflect.Proxy
+import java.util.*
+import kotlin.collections.HashMap
 
 /**
  * View2021/1/12 4:27 PM
@@ -19,8 +24,12 @@ import kotlinx.coroutines.withContext
  * @param block: (T) -> Unit 函数
  * @return Unit
  */
-fun View?.click(l: (View) -> Unit = {}) {
-    this?.setOnClickListener(l)
+fun View?.click(during: Long = 2000L, l: (View) -> Unit = {}) {
+    this?.setOnClickListener(
+        View.OnClickListener {
+            l(it)
+        }.throttle(during)
+    )
 }
 
 /**
@@ -125,5 +134,37 @@ fun Any.gones(vararg views: View?) {
 fun Any.invisibles(vararg views: View?) {
     for (view in views) {
         view?.isInvisible = true
+    }
+}
+
+/**
+ * @param during 防抖时间间隔
+ * @param combine 一个接口中的多个回调方法是否共用防抖时间
+ */
+fun <T : Any> T.throttle(during: Long = 2000L, combine: Boolean = true): T {
+    return Proxy.newProxyInstance(this::class.java.classLoader, this::class.java.interfaces,
+        object : InvocationHandler {
+
+            private val map = HashMap<Method?, Long>()
+
+            override fun invoke(proxy: Any, method: Method, args: Array<out Any>?): Any? {
+                val current = System.currentTimeMillis()
+                return if (current - (map[if (combine) null else method] ?: 0) > during) {
+                    map[if (combine) null else method] = current
+                    method.invoke(this@throttle, *args.orEmpty())
+                } else {
+                    resolveDefaultReturnValue(method)
+                }
+
+            }
+
+        }
+    ) as T
+}
+
+private fun resolveDefaultReturnValue(method: Method): Any? {
+    return when (method.returnType.name.toLowerCase(Locale.US)) {
+        Void::class.java.simpleName.toLowerCase(Locale.US) -> null
+        else -> throw IllegalArgumentException("无法正确对返回值不为空的回调进行节流")
     }
 }
