@@ -3,7 +3,6 @@ package cn.basic.core
 import android.annotation.SuppressLint
 import android.content.Context
 import cn.basic.core.api.CustomError
-import cn.basic.core.config.HawkConfig
 import cn.basic.core.util.LogUtil
 import okhttp3.Interceptor
 import retrofit2.HttpException
@@ -31,7 +30,7 @@ class CoreKtxProvider private constructor() {
         }
     }
 
-    var spName: String = ""
+    var spName: String = "CoreKtxCache"
         private set
 
     var baseUrl: String = ""
@@ -53,7 +52,9 @@ class CoreKtxProvider private constructor() {
 
 
     fun spName(name: String): CoreKtxProvider {
-        spName = name
+        if (name.isNotEmpty()) {
+            spName = name
+        }
         return this
     }
 
@@ -100,11 +101,6 @@ class CoreKtxProvider private constructor() {
 
     fun build(context: Context) {
         mContext = context
-        initHawk()
-    }
-
-    private fun initHawk() {
-        HawkConfig.init(mContext, spName)
     }
 
 

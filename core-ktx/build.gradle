@@ -67,8 +67,6 @@ dependencies {
     api "com.squareup.retrofit2:converter-scalars:$rootProject.ext.retrofit.v"
 
 
-    // local Storage
-    api "com.orhanobut:hawk:2.0.1"
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
