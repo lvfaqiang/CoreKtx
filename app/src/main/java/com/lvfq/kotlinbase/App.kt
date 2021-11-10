@@ -14,6 +14,7 @@ import android.os.Process
 import androidx.multidex.MultiDexApplication
 import cn.basic.core.CoreKtxProvider
 import cn.basic.core.api.CustomError
+import cn.basic.core.ktx.startActivity
 import cn.basic.core.util.LanguageUtil
 import com.lvfq.kotlinbase.cache.AppCache
 import com.lvfq.kotlinbase.views.CustomClassicsFooter
@@ -133,6 +134,8 @@ object AppLifecycle : Application.ActivityLifecycleCallbacks {
 
     private var activityCount = 0
 
+    private var backGroundTime = 0L
+
     private fun add(activity: Activity?) = activity?.let { activitys.add(it) }
 
     private fun remove(activity: Activity?) = activity?.let { activitys.remove(it) }
@@ -162,6 +165,11 @@ object AppLifecycle : Application.ActivityLifecycleCallbacks {
         //To change body of created functions use File | Settings | File Templates.
         if (!isForeground) {
             isForeground = true
+            val curTime = System.currentTimeMillis()
+            if (backGroundTime != 0L && curTime - backGroundTime > 3000) {
+                backGroundTime = 0
+                // 应用再后台停留3秒以上，回来执行某些操作，
+            }
         }
         activityCount++
     }

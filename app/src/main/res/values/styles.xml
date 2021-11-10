@@ -19,6 +19,14 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="AppTheme_Splash" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:background">@drawable/splash</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
     <!--水平线-->
     <style name="line_hor_ee">
         <item name="android:layout_width">match_parent</item>
