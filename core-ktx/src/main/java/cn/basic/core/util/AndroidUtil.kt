@@ -12,19 +12,26 @@ import android.net.Uri
  */
 object AndroidUtil {
 
+    /**
+     * Android 11 上需要添加  <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/> 权限
+     */
     fun checkPackage(context: Context, packageName: String, needToStore: Boolean = false): Boolean {
         val manager = context.packageManager
         try {
-            val info =
-                manager.getApplicationInfo(packageName, PackageManager.GET_UNINSTALLED_PACKAGES)
-            return true
-        } catch (e: Exception) {
-            if (needToStore) {
-                //手机未安装，跳转到应用商店下载，并返回false
-                toMarket(context, packageName)
+            val pkgs =
+                manager.getInstalledPackages(0)
+            val app = pkgs.firstOrNull { it.packageName.equals(packageName) }
+            if (app != null) {
+                return true
             }
-            return false
+        } catch (e: Exception) {
         }
+
+        if (needToStore) {
+            //手机未安装，跳转到应用商店下载，并返回false
+            toMarket(context, packageName)
+        }
+        return false
     }
 
     fun toMarket(ctx: Context, packageName: String, noMarket: () -> Unit = {}) {
