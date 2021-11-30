@@ -5,6 +5,7 @@ import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.util.TypedValue
 import android.widget.LinearLayout
+import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.viewpager.widget.ViewPager
 import cn.basic.core.ktx.getColorById
@@ -75,8 +76,18 @@ class MagicBuilder private constructor(private val context: Context) {
         return this
     }
 
+    fun setTitleNorColorInt(@ColorInt color: Int): MagicBuilder {
+        titleNorColor = color
+        return this
+    }
+
     fun setTitleSelColor(@ColorRes color: Int): MagicBuilder {
         titleSelColor = context.getColorById(color)
+        return this
+    }
+
+    fun setTitleSelColorInt(@ColorInt color: Int): MagicBuilder {
+        titleSelColor = color
         return this
     }
 
@@ -92,6 +103,11 @@ class MagicBuilder private constructor(private val context: Context) {
 
     fun setIndicatorColor(@ColorRes color: Int): MagicBuilder {
         indicatorColor = context.getColorById(color)
+        return this
+    }
+
+    fun setIndicatorColorInt(@ColorInt color: Int): MagicBuilder {
+        indicatorColor = color
         return this
     }
 
