@@ -10,19 +10,19 @@ ext {
     ]
 
     coreKtx = [
-            v: '1.3.2'
+            v: '1.7.0'
     ]
     appcompat = [
-            v: "1.3.0"
+            v: "1.4.0"
     ]
     constraintlayout = [
-            v: "2.0.4"
+            v: "2.1.2"
     ]
     googleMaterial = [
-            v: "1.3.0"
+            v: "1.4.0"
     ]
     coroutines = [
-            v: "1.3.9"
+            v: "1.4.2"
     ]
 
     navigation = [
@@ -35,7 +35,7 @@ ext {
 
     lifecycle = [
             lifecycleExt: "2.2.0",
-            liveDataKtx : "2.3.1"
+            liveDataKtx : "2.4.0"
     ]
 
     retrofit = [
@@ -43,16 +43,46 @@ ext {
     ]
 
     adapter = [
-            v: "3.0.0"
+            v: "3.0.4"
     ]
 
     glide = [
-            v: "4.11.0"
+            v: "4.12.0"
     ]
 
     permission = [
             v: "3.0.0"
     ]
 
+    gson = [
+            v: "2.8.6"
+    ]
 
+    eventbus = [
+            v: "3.2.0"
+    ]
+
+    easyPhotos = [
+            v: "3.1.3"
+    ]
+
+    xpopup = [
+            v: "2.2.23"
+    ]
+
+    joda = [
+            v: "2.10.9.1"
+    ]
+
+    coreKtxFq = [
+            v: "2.0.6"
+    ]
+
+    multidex = [
+            v: "2.0.1"
+    ]
+
+    backgroundLibrary = [
+            v: "1.7.2"
+    ]
 }
