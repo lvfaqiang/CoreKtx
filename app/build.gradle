@@ -137,8 +137,8 @@ dependencies {
     implementation "com.google.android.material:material:$rootProject.ext.googleMaterial.v"
 
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintlayout.v"
-    implementation "androidx.navigation:navigation-fragment:$rootProject.ext.navigation.v"
-    implementation "androidx.navigation:navigation-ui:$rootProject.ext.navigation.v"
+    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.ext.navigation.v"
+    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.ext.navigation.v"
     implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.ext.navigation.v"
     implementation "androidx.navigation:navigation-ui-ktx:$rootProject.ext.navigation.v"
     /**
