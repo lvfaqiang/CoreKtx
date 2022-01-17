@@ -9,7 +9,7 @@ import cn.basic.core.tablayout.listener.CustomTabEntity
 import cn.basic.core.tablayout.listener.OnTabSelectListener
 import cn.basic.core.util.LogUtil
 import cn.basic.core.util.StatusBarUtil
-import com.example.basic.ui.home.HomeFragment
+import com.lvfq.kotlinbase.feature.main.home.HomeFragment
 import com.lvfq.kotlinbase.R
 import com.lvfq.kotlinbase.cache.AppCache
 import com.lvfq.kotlinbase.databinding.ActivityTabMainBinding

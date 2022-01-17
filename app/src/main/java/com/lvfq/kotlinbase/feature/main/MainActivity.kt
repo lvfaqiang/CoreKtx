@@ -3,7 +3,7 @@ package com.lvfq.kotlinbase.feature.main
 import android.os.Bundle
 import cn.basic.core.ktx.view.click
 import cn.basic.core.util.StatusBarUtil
-import com.example.basic.ui.home.HomeFragment
+import com.lvfq.kotlinbase.feature.main.home.HomeFragment
 import com.lvfq.kotlinbase.R
 import com.lvfq.kotlinbase.base.BaseVMActivity
 import com.lvfq.kotlinbase.databinding.ActivityMainBinding
