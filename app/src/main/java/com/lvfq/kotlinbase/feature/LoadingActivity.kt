@@ -1,11 +1,11 @@
 package com.lvfq.kotlinbase.feature
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.lvfq.kotlinbase.feature.main.TabMainActivity
 import cn.basic.core.ktx.launchUI
 import cn.basic.core.ktx.startActivity
+import com.lvfq.kotlinbase.base.BaseEmptyActivity
+import com.lvfq.kotlinbase.feature.main.TabMainActivity
 import kotlinx.coroutines.delay
 
 /**
@@ -14,7 +14,7 @@ import kotlinx.coroutines.delay
  * @desc :
  *
  */
-class LoadingActivity : AppCompatActivity() {
+class LoadingActivity : BaseEmptyActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
