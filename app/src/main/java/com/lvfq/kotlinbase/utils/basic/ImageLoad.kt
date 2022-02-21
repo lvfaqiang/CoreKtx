@@ -6,6 +6,7 @@ import android.net.Uri
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.lvfq.kotlinbase.GlideApp
@@ -94,14 +95,20 @@ fun loadBuild(
     if (error != 0) {
         glide = glide.error(error)
     }
-    if (roundCorner != 0 && !isCircle) {
-        glide = glide.transform(RoundedCorners(roundCorner))
-    }
-    if (isCircle) {
-        glide = glide.transform(CircleCrop())
-    }
-    if (isCenterCrop) {
-        glide = glide.centerCrop()
+    glide = if (isCircle) {
+        if (isCenterCrop) {
+            glide.transform(CircleCrop(), CenterCrop())
+        } else {
+            glide.transform(CircleCrop())
+        }
+    } else if (roundCorner > 0) {
+        if (isCenterCrop) {
+            glide.transform(RoundedCorners(roundCorner), CenterCrop())
+        } else {
+            glide.transform(RoundedCorners(roundCorner))
+        }
+    } else {
+        glide.transform(CenterCrop())
     }
     glide.into(imageView)
 }

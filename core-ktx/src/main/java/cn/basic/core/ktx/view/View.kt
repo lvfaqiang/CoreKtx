@@ -24,7 +24,7 @@ import kotlin.collections.HashMap
  * @param block: (T) -> Unit 函数
  * @return Unit
  */
-fun View?.click(during: Long = 2000L, l: (View) -> Unit = {}) {
+fun View?.click(during: Long = 0L, l: (View) -> Unit = {}) {
     this?.setOnClickListener(
         View.OnClickListener {
             l(it)
