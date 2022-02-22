@@ -108,7 +108,11 @@ fun loadBuild(
             glide.transform(RoundedCorners(roundCorner))
         }
     } else {
-        glide.transform(CenterCrop())
+        if (isCenterCrop) {
+            glide.transform(CenterCrop())
+        } else {
+            glide
+        }
     }
     glide.into(imageView)
 }
