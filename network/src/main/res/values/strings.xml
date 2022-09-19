@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="unknown_exception">An unexpected error occurred. Please try again.</string>
+    <string name="request_timeout">Request Timed Out</string>
+    <string name="connect_exception">Abnormal Network Connection</string>
+    <string name="parse_exception">Data Parsing Exception</string>
+</resources>
