@@ -47,9 +47,9 @@ inline val Context.versionCode: Long
  * @param dpValue The value of dp.
  * @return value of px
  */
-fun Context.dp2px(dpValue: Float): Int {
+fun Context.dp2px(dpValue: Float): Float {
     val scale = this.appDisplayMetrics.density
-    return (dpValue * scale + 0.5f).toInt()
+    return dpValue * scale + 0.5f
 }
 
 /**
@@ -76,25 +76,14 @@ fun Context.sp2px(spValue: Float): Float {
 }
 
 /**
- * Value of dp to value of px.
- *
- * @param dpValue The value of dp.
- * @return value of px
- */
-fun Context.dp2pxF(dpValue: Float): Float {
-    val scale = this.appDisplayMetrics.density
-    return dpValue * scale + 0.5f
-}
-
-/**
  * Value of px to value of sp.
  *
  * @param pxValue The value of px.
  * @return value of sp
  */
-fun Context.px2sp(pxValue: Float): Int {
+fun Context.px2sp(pxValue: Float): Float {
     val fontScale = this.appDisplayMetrics.density
-    return (pxValue / fontScale + 0.5f).toInt()
+    return pxValue / fontScale + 0.5f
 }
 
 fun Context.getColorById(@ColorRes id: Int): Int {
