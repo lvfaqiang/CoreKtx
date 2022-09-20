@@ -64,10 +64,17 @@
     ```
 
 ### ApiLauncher
+    接口调用执行
+    - launchCommon
     ```
-    接口调用执行，
-    ```
-- launchCommon
-    ```
-    该方法默认是直接返回 Api 请求的所有数据，如果需要依据某些通用配置来进行处理成功或失败，可参照 launchDemo 方法.
+    // 该方法默认是直接返回 Api 请求的所有数据，如果需要依据某些通用配置来进行处理成功或失败，可参照 launchDemo 方法.
+    launchUI {
+        val result = ApiLauncher.launchCommon {
+            Apiservice.instance.userInfo()
+        }
+        if(result is Success) {
+        }
+        if(result is Failure) {
+        }
+    }
     ```
