@@ -6,6 +6,8 @@ import android.os.Process
 import androidx.multidex.MultiDexApplication
 import com.tencent.mmkv.MMKV
 import io.douwan.basic.core.LogUtil
+import io.douwan.basic.core.ktx.i
+import io.douwan.network.NetworkProvider
 
 /**
  * MyApp2022/9/14 19:40
@@ -30,5 +32,12 @@ class MyApp : MultiDexApplication() {
         MMKV.initialize(this)
         LogUtil.setLogEnable(true)
         registerActivityLifecycleCallbacks(AppLifecycle)
+
+        NetworkProvider.get()
+            .withContext(this)
+            .baseUrl("apiUrl")
+            .configApiLog {
+                it?.i("HTTP")
+            }.setApiInterceptors()
     }
 }

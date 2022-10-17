@@ -39,7 +39,7 @@ class NetworkProvider private constructor() {
         private set
 
 
-    fun init(context: Context): NetworkProvider {
+    fun withContext(context: Context): NetworkProvider {
         mContext = context
         return this
     }

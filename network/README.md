@@ -2,10 +2,11 @@
 在 Application 中调用
 ```
         NetworkProvider.get()
+            .withContext(Context)
             .baseUrl("")
             .configApiLog {
                 it?.d("HTTP")
-            }.init(this)
+            }
 ```
 ### NetworkProvider 相关配置说明
 
