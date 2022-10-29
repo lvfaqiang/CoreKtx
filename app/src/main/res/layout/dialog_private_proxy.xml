@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    app:bl_solid_color="@color/white"
+    app:bl_corners_radius="@dimen/dp_8"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_marginTop="@dimen/dp_24"
+            android:textSize="@dimen/sp_18"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:text="欢迎来到喵喵存钱"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tvContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_12"
+            android:textColor="#999999"
+            android:layout_marginHorizontal="@dimen/dp_37"
+            android:layout_marginTop="@dimen/dp_17" />
+
+        <View
+            android:layout_marginTop="@dimen/dp_47"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:background="#17000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40">
+
+            <TextView
+                android:id="@+id/tvCancel"
+                android:layout_width="0dp"
+                android:text="不同意"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textSize="@dimen/sp_14"
+                android:textStyle="bold"
+                android:textColor="#595959"
+                android:layout_weight="1" />
+
+            <com.noober.background.view.BLTextView
+                app:bl_solid_color="#597c9d"
+                app:bl_corners_bottomRightRadius="@dimen/dp_8"
+                android:id="@+id/tvNext"
+                android:text="同意并进入"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textSize="@dimen/sp_14"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_weight="1" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</FrameLayout>

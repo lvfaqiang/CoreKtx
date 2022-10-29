@@ -103,4 +103,10 @@ dependencies {
 
     implementation 'androidx.work:work-runtime-ktx:2.7.1'
 
+    /**
+     * https://github.com/iwgang/SimplifySpan
+     * Set SpannableString.
+     */
+    implementation "com.github.iwgang:simplifyspan:2.2"
+
 }
