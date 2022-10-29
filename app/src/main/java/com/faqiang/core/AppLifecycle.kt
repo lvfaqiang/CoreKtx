@@ -76,11 +76,10 @@ object AppLifecycle : Application.ActivityLifecycleCallbacks {
     }
 
     override fun onActivityPaused(p0: Activity) {
-
+        activityCount--
     }
 
     override fun onActivityStopped(p0: Activity) {
-        activityCount--
         if (activityCount == 0) {
             isForeground = false
             backgroundTime = 0
