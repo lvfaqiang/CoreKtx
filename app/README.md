@@ -111,3 +111,57 @@ implementation 'com.tencent:mmkv:1.2.14'
 
 - load
     常规加载图片方法。
+
+### DateUtil
+日期时间处理
+#### 添加依赖
+```
+implementation 'joda-time:joda-time:2.10.9'
+```
+#### 方法说明：
+##### convertDate(String,String,String): String
+
+    param1: 当前时间
+    param2: 当前时间的格式，
+    param3: 目标时间的格式，
+
+    return: 返回目标时间
+
+##### getWeek(date:String)
+
+    获取当前时间为星期几
+
+##### **isBeforeToday (DateTime)**
+
+是否在今天之前，
+```
+isBeforeToday(
+    DateTime.parse(
+        item.dateStr ?: "",
+        DateTimeFormat.forPattern("yyyy.MM.dd")     // forParttern 为传入的时间字符串格式
+    ))
+)
+```
+
+##### isAfterToday (DateTime)
+
+是否在今天之后，传入的 DateTime为：
+```
+isAfterToday(
+    DateTime.parse(
+        item.dateStr ?: "",
+        DateTimeFormat.forPattern("yyyy.MM.dd")     // forParttern 为传入的时间字符串格式
+    ))
+)
+```
+
+##### isToday (DateTime)
+是否是今天
+```
+isToday(
+    DateTime.parse(
+        item.dateStr ?: "",
+        DateTimeFormat.forPattern("yyyy.MM.dd")     // forParttern 为传入的时间字符串格式
+    ))
+)
+```
