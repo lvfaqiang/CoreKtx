@@ -14,18 +14,7 @@ object MMKVUtil {
 
     private val mmkv: MMKV
         get() {
-            try {
-                val context = MyApp.mContext
-                val appInfo = context.packageManager.getApplicationInfo(
-                    context.packageName,
-                    PackageManager.GET_META_DATA
-                )
-                val cryptKey = appInfo.metaData.getString("MMKV_secret", "RunBloxKey")
-                val mmapID = appInfo.metaData.getString("MMKV_mmapId", "RunBloxMapID")
-                return MMKV.mmkvWithID(mmapID, MMKV.SINGLE_PROCESS_MODE, cryptKey)
-            } catch (e: Exception) {
-                return MMKV.defaultMMKV()
-            }
+            return MMKV.defaultMMKV()
         }
 
     fun putString(key: String, value: String?) {

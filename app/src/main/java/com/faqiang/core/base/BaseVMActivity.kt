@@ -1,15 +1,19 @@
 package com.faqiang.core.base
 
 import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.WindowManager
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
+import com.faqiang.core.databinding.LayoutLoadingBinding
 import io.douwan.basic.core.ktx.i
 import io.douwan.basic.core.util.FragmentUtil
 import io.douwan.basic.core.util.LanguageUtil
@@ -105,30 +109,30 @@ abstract class BaseVMActivity<VB : ViewBinding, VM : BaseViewModel> : AppCompatA
 
     open fun showLoading(isCancelable: Boolean = true) {
         "showLoading ---------- thread: ${Thread.currentThread().name} ".i()
-//        if (progressDialog == null) {
-//            progressDialog = AlertDialog.Builder(this)
-//                .setCancelable(isCancelable)
-//                .setView(DialogProgressBinding.inflate(layoutInflater).root)
-//                .create()
-//            val window = progressDialog?.window
-//            if (window != null) {
-//                val layoutParams = WindowManager.LayoutParams()
-//                layoutParams.copyFrom(window.attributes)
-//                layoutParams.width = LinearLayout.LayoutParams.WRAP_CONTENT
-//                layoutParams.height = LinearLayout.LayoutParams.WRAP_CONTENT
-//                window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-//                window.attributes = layoutParams
-//                if (isCancelable) {
-//                    window.setDimAmount(0f)
-//                } else {
-//                    window.setDimAmount(0.3f)
-//                }
-//            }
-//            progressDialog?.show()
-//        }
-//        if (progressDialog != null && progressDialog?.isShowing != true) {
-//            progressDialog?.show()
-//        }
+        if (progressDialog == null) {
+            progressDialog = AlertDialog.Builder(this)
+                .setCancelable(isCancelable)
+                .setView(LayoutLoadingBinding.inflate(layoutInflater).root)
+                .create()
+            val window = progressDialog?.window
+            if (window != null) {
+                val layoutParams = WindowManager.LayoutParams()
+                layoutParams.copyFrom(window.attributes)
+                layoutParams.width = LinearLayout.LayoutParams.WRAP_CONTENT
+                layoutParams.height = LinearLayout.LayoutParams.WRAP_CONTENT
+                window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                window.attributes = layoutParams
+                if (isCancelable) {
+                    window.setDimAmount(0f)
+                } else {
+                    window.setDimAmount(0.3f)
+                }
+            }
+            progressDialog?.show()
+        }
+        if (progressDialog != null && progressDialog?.isShowing != true) {
+            progressDialog?.show()
+        }
 
     }
 
