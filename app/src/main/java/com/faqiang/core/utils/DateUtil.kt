@@ -56,42 +56,61 @@ object DateUtil {
         return "${date.year}-${date.monthOfYear}-$endOfDay"
     }
 
-    fun isBeforeToday(dateTime: DateTime): Boolean {
-        val curDate = DateTime.now().toString("yyyy.MM.dd")
-        val date = dateTime.toString("yyyy.MM.dd")
-        if (date == curDate) {
-            return false
-        }
-        if (DateTime.parse(date, DateTimeFormat.forPattern("yyyy.MM.dd")).millis > DateTime.parse(
-                curDate,
-                DateTimeFormat.forPattern("yyyy.MM.dd")
-            ).millis
-        ) {
-            return true
-        }
-        return false
-    }
-
-    fun isAfterToday(dateTime: DateTime): Boolean {
-        val curDate = DateTime.now().toString("yyyy.MM.dd")
-        val date = dateTime.toString("yyyy.MM.dd")
-        if (date == curDate) {
-            return false
-        }
-        if (DateTime.parse(date, DateTimeFormat.forPattern("yyyy.MM.dd")).millis > DateTime.parse(
-                curDate,
-                DateTimeFormat.forPattern("yyyy.MM.dd")
-            ).millis
-        ) {
-            return true
+    fun isBeforeToday(dateTimeStr: String, targetFormat: String = "yyyy-MM-dd"): Boolean {
+        try {
+            val dateTime = DateTime.parse(dateTimeStr, DateTimeFormat.forPattern(targetFormat))
+            val curDate = DateTime.now().toString(targetFormat)
+            val date = dateTime.toString(targetFormat)
+            if (date == curDate) {
+                return false
+            }
+            if (DateTime.parse(
+                    date,
+                    DateTimeFormat.forPattern(targetFormat)
+                ).millis < DateTime.parse(
+                    curDate,
+                    DateTimeFormat.forPattern(targetFormat)
+                ).millis
+            ) {
+                return true
+            }
+        } catch (e: Exception) {
         }
         return false
     }
 
+    fun isAfterToday(dateTimeStr: String, targetFormat: String = "yyyy-MM-dd"): Boolean {
+        try {
+            val dateTime = DateTime.parse(dateTimeStr, DateTimeFormat.forPattern(targetFormat))
+            val curDate = DateTime.now().toString(targetFormat)
+            val date = dateTime.toString(targetFormat)
+            if (date == curDate) {
+                return false
+            }
+            if (DateTime.parse(
+                    date,
+                    DateTimeFormat.forPattern(targetFormat)
+                ).millis > DateTime.parse(
+                    curDate,
+                    DateTimeFormat.forPattern(targetFormat)
+                ).millis
+            ) {
+                return true
+            }
+        } catch (e: Exception) {
+        }
+        return false
+    }
 
-    fun isToday(dateTime: DateTime): Boolean {
-        val curDate = DateTime.now().toString("yyyy.MM.dd")
-        val date = dateTime.toString("yyyy.MM.dd")
-        return date == curDate
+
+    fun isToday(dateTimeStr: String, targetFormat: String = "yyyy-MM-dd"): Boolean {
+        try {
+            val dateTime = DateTime.parse(dateTimeStr, DateTimeFormat.forPattern(targetFormat))
+            val curDate = DateTime.now().toString(targetFormat)
+            val date = dateTime.toString(targetFormat)
+            return date == curDate
+        } catch (e: Exception) {
+        }
+        return false
     }
 }
