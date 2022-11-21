@@ -79,3 +79,28 @@
         }
     }
     ```
+
+### CallBackData
+   用于Api请求回调
+   - 实现方法 (ViewModel 中)
+   ```
+       fun sendHttpMethod(reqParams: XxxRequest) = flow {
+           emit(CallBackData(ApiLauncher.launch {
+               apiService.getList(reqParams)
+           }))
+       }
+
+   ```
+   - 调用方法 (Activity or Fragment 中)
+   ```
+       lifecycleScope.launchUI {
+           viewModel.sendHttpMethod(XxxRequest).collect {
+               if (it.error != null) {
+                   toastError(it.error?.message)
+                   return@collect
+               }
+               val data = it.data
+               // do success logic  ...
+           }
+       }
+   ```
