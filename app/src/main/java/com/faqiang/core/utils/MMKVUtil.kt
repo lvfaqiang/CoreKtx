@@ -57,7 +57,11 @@ object MMKVUtil {
         return mmkv.decodeDouble(key, defaultValue)
     }
 
-    fun putParcelable(key: String, value: Parcelable) {
+    fun putParcelable(key: String, value: Parcelable?) {
         mmkv.encode(key, value)
+    }
+
+    fun <T : Parcelable> getParcelable(key: String, tClass: Class<T>, defaultValue: T? = null): T? {
+        return mmkv.decodeParcelable(key, tClass, defaultValue)
     }
 }
