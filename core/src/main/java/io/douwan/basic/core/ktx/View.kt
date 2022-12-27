@@ -1,6 +1,7 @@
 package io.douwan.basic.core.ktx
 
 import android.view.View
+import androidx.core.view.isGone
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import java.lang.reflect.InvocationHandler
@@ -142,7 +143,7 @@ inline fun View.setThrottleListener(
         isClickable = false
         postDelayed({
             isClickable = true
-                    }, thresholdMillis)
+        }, thresholdMillis)
         block.invoke()
     }
 }
@@ -151,4 +152,17 @@ fun enables(isEnabled: Boolean, vararg views: View?) {
     for (view in views) {
         view?.isEnabled = isEnabled
     }
+}
+
+
+inline fun View.visible() {
+    this.isVisible = true
+}
+
+inline fun View.gone() {
+    this.isGone = true
+}
+
+inline fun View.inVisible() {
+    this.isInvisible = true
 }
