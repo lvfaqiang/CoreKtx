@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
+import com.gyf.immersionbar.ktx.immersionBar
 import io.douwan.basic.core.util.FragmentUtil
 import org.greenrobot.eventbus.EventBus
 import java.lang.reflect.ParameterizedType
@@ -71,6 +72,17 @@ abstract class BaseVMFragment<VB : ViewBinding, VM : BaseViewModel> : Fragment()
         initData()
         super.onViewCreated(view, savedInstanceState)
     }
+
+    /**
+     * 设置沉浸式状态栏
+     */
+    protected fun setStatusBar(isDarkFont: Boolean = true, view: View) {
+        immersionBar {
+            statusBarDarkFont(isDarkFont, 0.2f)
+            statusBarView(view)
+        }
+    }
+
 
     abstract fun initView()
 

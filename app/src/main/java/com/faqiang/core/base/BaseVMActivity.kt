@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.Toast
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import com.faqiang.core.databinding.LayoutLoadingBinding
+import com.gyf.immersionbar.ktx.immersionBar
 import io.douwan.basic.core.ktx.i
 import io.douwan.basic.core.util.FragmentUtil
 import io.douwan.basic.core.util.LanguageUtil
@@ -78,6 +80,16 @@ abstract class BaseVMActivity<VB : ViewBinding, VM : BaseViewModel> : AppCompatA
 
     abstract fun initView()
     abstract fun initData()
+
+    /**
+     * 设置沉浸式状态栏
+     */
+    protected fun setStatusBar(isDarkFont: Boolean = true, view: View) {
+        immersionBar {
+            statusBarDarkFont(isDarkFont, 0.2f)
+            statusBarView(view)
+        }
+    }
 
 
     private fun initViewModel() {
