@@ -113,4 +113,10 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:4.13.2"
     kapt 'com.github.bumptech.glide:compiler:4.13.2'
 
+    /**
+     * https://github.com/hackware1993/MagicIndicator
+     * TabLayout
+     */
+    implementation "com.github.hackware1993:MagicIndicator:1.7.0"
+
 }
