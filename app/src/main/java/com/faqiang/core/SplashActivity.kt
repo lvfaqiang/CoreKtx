@@ -3,7 +3,6 @@ package com.faqiang.core
 import androidx.lifecycle.lifecycleScope
 import com.faqiang.core.base.BaseActivity
 import com.faqiang.core.databinding.ActivitySplashBinding
-import com.gyf.immersionbar.ktx.immersionBar
 import io.douwan.basic.core.ktx.launchUI
 import io.douwan.basic.core.ktx.startActivity
 import kotlinx.coroutines.delay
@@ -14,11 +13,9 @@ import kotlinx.coroutines.delay
  *
  */
 class SplashActivity : BaseActivity<ActivitySplashBinding>() {
+
     override fun initView() {
-        immersionBar {
-            statusBarDarkFont(true, 0.2f)
-            statusBarView(binding.statusBarView)
-        }
+        setStatusBar(true, binding.statusBarView)
     }
 
     override fun initData() {

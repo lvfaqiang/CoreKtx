@@ -30,14 +30,14 @@ class MyApp : MultiDexApplication() {
         super.onCreate()
         mContext = this
         MMKV.initialize(this)
-        LogUtil.setLogEnable(true)
+        LogUtil.setLogEnable(BuildConfig.DEBUG)
         registerActivityLifecycleCallbacks(AppLifecycle)
 
         NetworkProvider.get()
             .withContext(this)
-            .baseUrl("apiUrl")
+            .baseUrl("https://www.baidu.com/")  // 这里必须要配置一个 Http 或者 https 的链接
             .configApiLog {
                 it?.i("HTTP")
-            }.setApiInterceptors()
+            }
     }
 }

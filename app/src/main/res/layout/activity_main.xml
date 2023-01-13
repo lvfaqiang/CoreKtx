@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -13,94 +14,80 @@
     <LinearLayout
         android:id="@+id/bottomLayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_58"
-        android:orientation="horizontal">
+        app:bl_solid_color="@color/white"
+        app:bl_corners_topRightRadius="@dimen/dp_12"
+        app:bl_corners_topLeftRadius="@dimen/dp_12"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
 
         <LinearLayout
             android:id="@+id/homeLayout"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            style="@style/main_tab_item">
 
             <ImageView
-                android:src="@drawable/draw_tab_main_icon"
-                android:layout_width="@dimen/dp_30"
-                android:layout_height="@dimen/dp_30" />
+                app:bl_selected_drawable="@drawable/ic_main_tab_checked"
+                app:bl_unSelected_drawable="@drawable/ic_main_tab_uncheck"
+                style="@style/main_tab_icon" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_10"
                 android:text="首页"
-                android:textColor="@color/color_main_tab_text" />
+                style="@style/main_tab_text"
+                app:bl_selected_textColor="@color/c_111e38"
+                app:bl_unSelected_textColor="@color/c_cfd2d7" />
+
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/marketLayout"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:id="@+id/dinnerLayout"
+            style="@style/main_tab_item">
 
             <ImageView
-                android:src="@drawable/draw_tab_main_icon"
-                android:layout_width="@dimen/dp_30"
-                android:layout_height="@dimen/dp_30" />
+                app:bl_selected_drawable="@drawable/ic_main_tab_checked"
+                app:bl_unSelected_drawable="@drawable/ic_main_tab_uncheck"
+                style="@style/main_tab_icon" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_10"
-                android:text="商城"
-                android:textColor="@color/color_main_tab_text" />
+                android:text="首页"
+                style="@style/main_tab_text"
+                app:bl_selected_textColor="@color/c_111e38"
+                app:bl_unSelected_textColor="@color/c_cfd2d7" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/futuresLayout"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:id="@+id/videoLayout"
+            style="@style/main_tab_item">
 
             <ImageView
-                android:src="@drawable/draw_tab_main_icon"
-                android:layout_width="@dimen/dp_30"
-                android:layout_height="@dimen/dp_30" />
+                app:bl_selected_drawable="@drawable/ic_main_tab_checked"
+                app:bl_unSelected_drawable="@drawable/ic_main_tab_uncheck"
+                style="@style/main_tab_icon" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_10"
-                android:text="发现"
-                android:textColor="@color/color_main_tab_text" />
+                android:text="首页"
+                style="@style/main_tab_text"
+                app:bl_selected_textColor="@color/c_111e38"
+                app:bl_unSelected_textColor="@color/c_cfd2d7" />
+
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/walletLayout"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:id="@+id/blessLayout"
+            style="@style/main_tab_item">
 
             <ImageView
-                android:src="@drawable/draw_tab_main_icon"
-                android:layout_width="@dimen/dp_30"
-                android:layout_height="@dimen/dp_30" />
+                app:bl_selected_drawable="@drawable/ic_main_tab_checked"
+                app:bl_unSelected_drawable="@drawable/ic_main_tab_uncheck"
+                style="@style/main_tab_icon" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_10"
-                android:text="我的"
-                android:textColor="@color/color_main_tab_text" />
+                android:text="首页"
+                style="@style/main_tab_text"
+                app:bl_selected_textColor="@color/c_111e38"
+                app:bl_unSelected_textColor="@color/c_cfd2d7" />
 
         </LinearLayout>
     </LinearLayout>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--    Weight  400 -->
+<!--    <style name="font_regular_400">-->
+<!--        <item name="android:fontFamily">@font/alibabapuhuiti_regular</item>-->
+<!--        <item name="android:includeFontPadding">false</item>-->
+<!--        <item name="android:lineSpacingMultiplier">1</item>-->
+<!--    </style>-->
+
+    <!--    Weight  700 -->
+<!--    <style name="font_bold_700">-->
+<!--        <item name="android:fontFamily">@font/alibabapuhuiti_bold</item>-->
+<!--        <item name="android:includeFontPadding">false</item>-->
+<!--        <item name="android:lineSpacingMultiplier">1</item>-->
+<!--    </style>-->
+
+    <!--    Weight  900 -->
+<!--    <style name="font_heavy_900">-->
+<!--        <item name="android:fontFamily">@font/alibabapuhuiti_heavy</item>-->
+<!--        <item name="android:includeFontPadding">false</item>-->
+<!--        <item name="android:lineSpacingMultiplier">1</item>-->
+<!--    </style>-->
+
+
+    <style name="main_tab_item">
+        <item name="android:layout_width">@dimen/dp_74</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingTop">@dimen/dp_8</item>
+    </style>
+
+    <style name="main_tab_icon">
+        <item name="android:layout_width">@dimen/dp_26</item>
+        <item name="android:layout_height">@dimen/dp_26</item>
+    </style>
+
+<!--    <style name="main_tab_text" parent="font_bold_700">-->
+    <style name="main_tab_text">
+        <item name="android:layout_marginTop">@dimen/dp_2</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/sp_12</item>
+    </style>
+</resources>
