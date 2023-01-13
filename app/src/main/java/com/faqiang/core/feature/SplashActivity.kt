@@ -1,8 +1,9 @@
-package com.faqiang.core
+package com.faqiang.core.feature
 
 import androidx.lifecycle.lifecycleScope
 import com.faqiang.core.base.BaseActivity
 import com.faqiang.core.databinding.ActivitySplashBinding
+import com.faqiang.core.feature.MainActivity
 import io.douwan.basic.core.ktx.launchUI
 import io.douwan.basic.core.ktx.startActivity
 import kotlinx.coroutines.delay

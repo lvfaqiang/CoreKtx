@@ -1,11 +1,17 @@
-package com.faqiang.core
+package com.faqiang.core.feature
 
-import com.faqiang.core.base.BaseActivity
+import androidx.lifecycle.lifecycleScope
+import com.faqiang.core.R
+import com.faqiang.core.base.BaseVMActivity
 import com.faqiang.core.databinding.ActivityMainBinding
 import com.faqiang.core.feature.main.HomeFragment
 import io.douwan.basic.core.ktx.click
+import io.douwan.basic.core.ktx.launchUI
 
-class MainActivity : BaseActivity<ActivityMainBinding>() {
+class MainActivity : BaseVMActivity<ActivityMainBinding, MainViewModel>() {
+
+    override val viewModelClass: Class<MainViewModel>
+        get() = MainViewModel::class.java
 
     companion object {
         const val HOME = 0
@@ -56,4 +62,21 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
         fragmentUtil.showFragment(fragments[pos], R.id.rootLayout)
     }
+
+
+    //    APi 演示
+
+    private fun loadData() {
+        lifecycleScope.launchUI {
+            viewModel.getDatas().collect { data ->
+                if (data.error != null) {
+                    toastError(data.error?.message)
+                    return@collect
+                }
+                // handle logic
+                val result = data.data?.data
+            }
+        }
+    }
+
 }
