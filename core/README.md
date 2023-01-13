@@ -107,6 +107,27 @@
     - saveToAlbum
         保存Bitmap到相册的Pictures文件夹
 
+    ```
+    示例用法
+    private fun saveImage(bitmap: Bitmap) {
+            lifecycleScope.launchUI {
+                val ioResult = withContext(Dispatchers.IO) {
+                    val uri = bitmap.saveToAlbum(
+                        context,
+                        "${System.currentTimeMillis()}.png"
+                    )
+                    uri != null
+                }
+
+                if (ioResult) {
+                    toastSuccess("保存成功")
+                } else {
+                    toastSuccess("保存失败")
+                }
+            }
+        }
+    ```
+
 #### Log
     - String.i(String)      info 日志打印，用法： "message".i("tag")
     - String.d(String)      debug 日志打印，用法： "message".d("tag")
@@ -238,3 +259,12 @@
     - dp_1 - dp_375    有 1dp 到 375dp 的常用整数配置
     - sp_1 - sp_50      1sp 到 50sp 常用整数配置
     - px_1 - px_375     1px 到 375px 常用整数配置
+
+#### FileUtil
+    - convertBase64ToPic        Base64 转换为 Bitmap
+    - convertBitmapToBase64     Bitmap 转换为 Base64
+    - saveViewAsBitmap(View)    保存 View 内容为 Bitmap
+
+#### ShareUtil
+    - shareText         分享文本
+    - shareImage        分享图片
