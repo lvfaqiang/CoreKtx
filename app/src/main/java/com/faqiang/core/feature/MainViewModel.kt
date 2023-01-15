@@ -1,6 +1,7 @@
 package com.faqiang.core.feature
 
 import com.faqiang.core.base.BaseViewModel
+import com.faqiang.core.ext.launch
 import io.douwan.network.ApiLauncher
 import io.douwan.network.CallBackData
 import kotlinx.coroutines.flow.flow
@@ -12,9 +13,9 @@ import kotlinx.coroutines.flow.flow
  */
 class MainViewModel : BaseViewModel() {
 
-    fun getDatas() = flow{
+    fun getDatas() = flow {
         emit(CallBackData(
-            ApiLauncher.launchCommon {
+            ApiLauncher.launch {
                 apiService.getDemoDatas()
             }
         ))
