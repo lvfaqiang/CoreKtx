@@ -84,7 +84,7 @@ abstract class BaseVMActivity<VB : ViewBinding, VM : BaseViewModel> : AppCompatA
     /**
      * 设置沉浸式状态栏
      */
-    protected fun setStatusBar(isDarkFont: Boolean = true, view: View) {
+    protected fun setStatusBar(view: View, isDarkFont: Boolean = true) {
         immersionBar {
             statusBarDarkFont(isDarkFont, 0.2f)
             statusBarView(view)
