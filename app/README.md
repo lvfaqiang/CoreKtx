@@ -165,3 +165,6 @@ isToday(
     ))
 )
 ```
+
+### QRUtil
+解决二维码内容不填满ImageView 的问题
